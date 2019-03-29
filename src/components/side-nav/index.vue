@@ -1,12 +1,11 @@
 <template>
   <div id="tp-side-nav">
     <el-menu
-      default-active="1"
-      class="el-menu-vertical-demo">
-      <template v-for="(item, index) in menu">
-        <el-menu-item :key="item.value" :index="index">
+      default-active="home">
+      <template v-for="item in NavList">
+        <el-menu-item :key="item.value" :index="item.value">
           <i class="el-icon-menu"></i>
-          <span slot="title">{{ item.label }}</span>
+          <router-link :to="item.url">{{ item.label }}</router-link>
         </el-menu-item>
       </template>
     </el-menu>
@@ -14,18 +13,28 @@
 </template>
 
 <script>
-  import { href } from '@/lib/config/Navigation.js'
+import { NavList } from '@/lib/config/Navigation.js'
 
 export default {
   name: 'tp-side-nav',
   data () {
-    return {}
+    return {
+      NavList: NavList
+    }
   }
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   #tp-side-nav {
     background-color: silver;
+    width: 150px;
+    position: fixed;
+    .el-menu-item {
+      display: -webkit-box;
+      a {
+        text-decoration: none;
+      }
+    }
   }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="tp-header">
+  <div id="tp-header">
     <div class="logo"></div>
     <div class="content">
       <div class="network"></div>
@@ -23,13 +23,16 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .tp-header {
+  #tp-header {
+    height: 40px;
     background-color: aqua;
     display: flex;
     flex: auto;
-    justify-content: flex-end;
+    justify-content: flex-start;
     & > .logo {
       min-width: 100px;
+      /*background: url("~@/assets/images/colorful/svg/notepad.svg") no-repeat;*/
+      background-size: 40px;
     }
     & > .content {
     }

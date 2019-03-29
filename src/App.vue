@@ -1,12 +1,30 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <tp-header></tp-header>
+    <div class="container">
+      <tp-side-nav></tp-side-nav>
+      <section>
+        <router-view></router-view>
+      </section>
     </div>
-    <router-view></router-view>
   </div>
 </template>
+
+<script>
+import TpHeader from '@/components/header/index.vue'
+import TpSideNav from '@/components/side-nav/index.vue'
+
+export default {
+  name: 'takeaway-platform',
+  components: {
+    TpHeader,
+    TpSideNav
+  },
+  data () {
+    return {}
+  }
+}
+</script>
 
 <style lang="less">
 #app {
@@ -15,15 +33,5 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
