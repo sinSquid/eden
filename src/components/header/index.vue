@@ -5,7 +5,9 @@
       <div class="network"></div>
       <div class="user">
         <div class="avatar"></div>
-        <div class="username"></div>
+        <div class="username">
+          <span>temo</span>
+        </div>
       </div>
       <div class="sign-out"></div>
     </div>
@@ -24,17 +26,52 @@ export default {
 
 <style lang="less" scoped>
   #tp-header {
+    position: fixed;
+    width: 100%;
     height: 40px;
-    background-color: aqua;
+    background-color: #dcdcdc;
     display: flex;
     flex: auto;
-    justify-content: flex-start;
-    & > .logo {
-      min-width: 100px;
-      /*background: url("~@/assets/images/colorful/svg/notepad.svg") no-repeat;*/
+    justify-content: flex-end;
+    z-index: 1;
+    .logo {
+      width: -webkit-fill-available;
+      height: 40px;
+      margin-left: 24px;
+      background: url("~@/assets/images/logos/vimeo.svg") no-repeat;
       background-size: 40px;
     }
-    & > .content {
+    .content {
+      width: 320px;
+      max-width: 320px;
+      margin-right: 10px;
+      display: flex;
+      flex: auto;
+      .network {
+        width: 40px;
+        background: url("~@/assets/images/logos/deviantart.svg") no-repeat;
+        background-size: 40px;
+      }
+      .user {
+        margin-left: 10px;
+        width: 100px;
+        display: flex;
+        .avatar {
+          width: 40px;
+          background: url("~@/assets/images/logos/vine.svg") no-repeat;
+          background-size: 40px;
+        }
+        .username {
+          margin-left: 10px;
+          position: relative;
+          span {
+            position:absolute;
+            bottom:0;
+            padding:0;
+            margin:0;
+          }
+        }
+      }
     }
   }
 </style>
