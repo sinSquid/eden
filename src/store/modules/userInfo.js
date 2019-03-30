@@ -2,6 +2,7 @@
 import { originUserInfo } from '@/lib/config/userInfo.js'
 
 export default {
+  namespaced: true,
   state: {
     userInfo: Object.assign({}, originUserInfo),
     status: 0 // 0未登录， 1登录

@@ -5,7 +5,9 @@
       <tp-side-nav></tp-side-nav>
       <div class="container-shell">
         <tp-tabs></tp-tabs>
-        <router-view></router-view>
+        <div class="container-content">
+          <router-view></router-view>
+        </div>
       </div>
     </div>
   </div>
@@ -35,19 +37,40 @@ h5, h6, hr, input, li, ol, p, pre, td, textarea, th, ul {
   margin: 0;
   padding: 0;
 }
+body {
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: silver;
+    border-radius: 10px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #a8e0e0;
+    -webkit-box-shadow: silver;
+  }
+  &::-webkit-scrollbar-thumb:window-inactive {
+    background: #ffc0cb;
+  }
+}
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  min-width: 1366px;
   .container {
-    position: relative;
+    overflow: hidden;
+    height: 600px;
     .container-shell {
       position: relative;
+      height: -webkit-fill-available;
       left: 150px;
       top: 40px;
+      .container-content {
+        height: 800px;
+      }
     }
   }
 }
