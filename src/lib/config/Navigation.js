@@ -2,7 +2,7 @@ const NavList = [
   {
     label: '首页',
     value: 'home',
-    url: 'home',
+    url: '/',
     icon: 'icon1'
   },
   {

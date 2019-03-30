@@ -9,11 +9,10 @@ export default new Vuex.Store({
     activeTabsName: ''// 激活的tabs，无子项时默认空
   },
   mutations: {
-
-  },
-  actions: {
     setActiveTabsName (state, payload) {
       state.activeTabsName = payload.name
     }
+  },
+  actions: {
   }
 })

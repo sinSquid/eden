@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="activeTabsName" @tab-click="handleClick">
+  <el-tabs v-model="tabsName" @tab-click="handleClick">
     <el-tab-pane v-for="tab in tpTabs" :key="tab.value" :label="tab.label" :name="tab.value">
       {{ tab.label }}
     </el-tab-pane>
@@ -16,7 +16,16 @@ export default {
     }
   },
   computed: {
-    ...mapState(['tpTabs', 'activeTabsName'])
+    ...mapState(['tpTabs', 'activeTabsName']),
+
+    tabsName: {
+      get () {
+        return this.activeTabsName
+      },
+      set (val) {
+        this.setActiveTabsName({ name: val })
+      }
+    }
   },
   methods: {
     ...mapMutations(['setActiveTabsName']),
