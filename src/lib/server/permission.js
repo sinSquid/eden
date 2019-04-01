@@ -5,7 +5,7 @@ import { getToken } from './token.js'
 
 const whiteList = ['/login'] // 不定向白名单
 
-router.forEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
   if (getToken()) { // 已登录，cookie可查
     if (to.path === '/login') {
       next()
@@ -17,7 +17,8 @@ router.forEach((to, from, next) => {
           }
         }).catch(err => {
           store.dispatch('userInfo/failLogOut').then(() => {
-            // 错误警告
+            // 错误警告走全局vuex
+            store.commit('setGlobalMessage', { message: err, type: 'error' })
             next({ path: '/home' })
           })
         })
