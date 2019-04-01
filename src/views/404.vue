@@ -4,7 +4,7 @@
       <div></div>
     </div>
     <div class="mess-404">
-      <a @click="">返回首页</a>
+      <a>返回首页</a>
     </div>
   </div>
 </template>

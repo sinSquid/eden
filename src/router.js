@@ -1,17 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import Home from '../views/Home.vue'
+import framework from '@/views/index.vue'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
-    {
-      path: '/404',
-      name: '404',
-      hidden: true,
-      component: () => import('@/views/404.vue')
-    },
     {
       path: '/login',
       name: 'login',
@@ -19,9 +13,20 @@ export default new Router({
       component: () => import('@/views/login/index.vue')
     },
     {
-      path: '/home',
+      path: '/404',
+      name: '404',
+      hidden: true,
+      component: () => import('@/views/404.vue')
+    },
+    {
+      path: '/',
       name: 'home',
-      component: () => import('@/views/Home.vue')
+      redirect: '/home',
+      component: framework,
+      children: [{
+        path: 'home',
+        component: () => import('@/views/Home.vue')
+      }]
     },
     {
       path: '/about',
