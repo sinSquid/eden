@@ -5,8 +5,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  name: 'takeaway-platform'
+  name: 'takeaway-platform',
+  computed: {
+    ...mapState(['globalMessage'])
+  },
+  watch: {
+    globalMessage (val) {
+      if (val.message === '') { return }
+      this.$message(val)
+    }
+  }
 }
 </script>
 
