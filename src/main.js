@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+import App from '@/App.vue'
+import router from '@/router.js'
+import store from '@/store/store.js'
+
 import 'element-ui/lib/theme-chalk/index.css'
-import App from './App.vue'
-import router from './router/router.js'
-import store from './store/store.js'
+import '@/styles/index.less'
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)

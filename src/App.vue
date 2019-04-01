@@ -62,7 +62,7 @@ body {
   color: #2c3e50;
   .container {
     overflow: hidden;
-    height: 600px;
+    height: 100%;
     .container-shell {
       position: relative;
       height: -webkit-fill-available;
