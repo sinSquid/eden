@@ -3,21 +3,21 @@ const NavList = [
     label: '首页',
     value: 'home',
     url: '/',
-    icon: 'icon1'
+    icon: 'icon1',
   },
   {
     label: '资讯',
     value: 'message',
     url: 'message',
-    icon: 'icon2'
+    icon: 'icon2',
   },
   {
     label: '用户信息',
     value: 'userInfo',
     url: 'userInfo',
-    icon: 'icon3'
-  }
-]
+    icon: 'icon3',
+  },
+];
 export {
-  NavList
-}
+  NavList,
+};

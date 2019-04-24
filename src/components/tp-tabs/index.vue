@@ -7,34 +7,35 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex';
+
 export default {
   name: 'tp-tabs',
-  data () {
+  data() {
     return {
 
-    }
+    };
   },
   computed: {
     ...mapState(['tpTabs', 'activeTabsName']),
 
     tabsName: {
-      get () {
-        return this.activeTabsName
+      get() {
+        return this.activeTabsName;
       },
-      set (val) {
-        this.setActiveTabsName({ name: val })
-      }
-    }
+      set(val) {
+        this.setActiveTabsName({ name: val });
+      },
+    },
   },
   methods: {
     ...mapMutations(['setActiveTabsName']),
 
-    handleClick (tab) {
-      this.setActiveTabsName({ name: tab })
-    }
-  }
-}
+    handleClick(tab) {
+      this.setActiveTabsName({ name: tab });
+    },
+  },
+};
 </script>
 
 <style scoped>

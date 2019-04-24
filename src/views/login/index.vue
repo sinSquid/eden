@@ -14,17 +14,18 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+
 export default {
   name: 'tp-login',
-  data () {
+  data() {
     return {
-    }
+    };
   },
   computed: {
-    ...mapState('userInfo', ['userInfo'])
-  }
-}
+    ...mapState('userInfo', ['userInfo']),
+  },
+};
 </script>
 
 <style lang="less" scoped>

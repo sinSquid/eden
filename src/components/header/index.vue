@@ -18,10 +18,10 @@
 export default {
   name: 'tp-header',
   computed: {},
-  data () {
-    return {}
-  }
-}
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="less" scoped>

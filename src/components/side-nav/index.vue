@@ -13,16 +13,16 @@
 </template>
 
 <script>
-import { NavList } from '@/lib/config/Navigation.js'
+import { NavList } from '@/lib/config/Navigation.js';
 
 export default {
   name: 'tp-side-nav',
-  data () {
+  data() {
     return {
-      NavList: NavList
-    }
-  }
-}
+      NavList,
+    };
+  },
+};
 </script>
 
 <style lang="less">

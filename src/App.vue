@@ -5,19 +5,20 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState } from 'vuex';
+
 export default {
   name: 'takeaway-platform',
   computed: {
-    ...mapState(['globalMessage'])
+    ...mapState(['globalMessage']),
   },
   watch: {
-    globalMessage (val) {
-      if (val.message === '') { return }
-      this.$message(val)
-    }
-  }
-}
+    globalMessage(val) {
+      if (val.message === '') { return; }
+      this.$message(val);
+    },
+  },
+};
 </script>
 
 <style lang="less">

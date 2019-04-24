@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import framework from '@/views/index.vue'
+import Vue from 'vue';
+import Router from 'vue-router';
+import framework from '@/views/index.vue';
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
@@ -10,13 +10,13 @@ export default new Router({
       path: '/login',
       name: 'login',
       hidden: true,
-      component: () => import('@/views/login/index.vue')
+      component: () => import('@/views/login/index.vue'),
     },
     {
       path: '/404',
       name: '404',
       hidden: true,
-      component: () => import('@/views/404.vue')
+      component: () => import('@/views/404.vue'),
     },
     {
       path: '/',
@@ -25,13 +25,13 @@ export default new Router({
       component: framework,
       children: [{
         path: 'home',
-        component: () => import('@/views/Home.vue')
-      }]
+        component: () => import('@/views/Home.vue'),
+      }],
     },
     {
       path: '/about',
       name: 'about',
-      component: () => import('@/views/About.vue')
-    }
-  ]
-})
+      component: () => import('@/views/About.vue'),
+    },
+  ],
+});

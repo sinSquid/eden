@@ -14,21 +14,21 @@
 </template>
 
 <script>
-import TpHeader from '@/components/header/index.vue'
-import TpSideNav from '@/components/side-nav/index.vue'
-import TpTabs from '@/components/tp-tabs/index.vue'
+import TpHeader from '@/components/header/index.vue';
+import TpSideNav from '@/components/side-nav/index.vue';
+import TpTabs from '@/components/tp-tabs/index.vue';
 
 export default {
   name: 'takeaway-platform',
   components: {
     TpHeader,
     TpSideNav,
-    TpTabs
+    TpTabs,
   },
-  data () {
-    return {}
-  }
-}
+  data() {
+    return {};
+  },
+};
 </script>
 
 <style lang="less" scoped>
