@@ -1,7 +1,7 @@
 // 仿写登录过程
-import router from '@/router.js';
-import store from '@/store/store.js';
-import { getToken } from './token.js';
+import router from '@/router';
+import store from '@/store/store';
+import { getToken } from './token';
 
 const whiteList = ['/login']; // 不定向白名单
 

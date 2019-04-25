@@ -1,5 +1,5 @@
 // 用户信息模块
-import { originUserInfo } from '@/lib/config/userInfo.js';
+import { originUserInfo } from '@/lib/config/userInfo';
 
 export default {
   namespaced: true,

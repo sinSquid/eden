@@ -2,10 +2,10 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 // 引入modules
-import userInfo from '@/store/modules/userInfo.js';
+import userInfo from '@/store/modules/userInfo/userInfo';
 
 // 引入elementUI配置文件
-import { originMessageOptions } from '@/lib/element/config.js';
+import { originMessageOptions } from '@/lib/element/config';
 
 Vue.use(Vuex);
 
