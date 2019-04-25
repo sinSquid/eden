@@ -1,8 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import getters from '@/store/getters';
+import mutations from '@/store/mutations';
+import actions from '@/store/actions';
 
 // 引入modules
-import userInfo from '@/store/modules/userInfo/userInfo';
+import userInfo from '@/store/modules/userInfo/index';
 
 // 引入elementUI配置文件
 import { originMessageOptions } from '@/lib/element/config';
@@ -18,19 +21,7 @@ export default new Vuex.Store({
     activeTabsName: '', // 激活的tabs，无子项时默认空
     globalMessage: Object.assign({}, originMessageOptions), // 全局通知，基于elementUI的message
   },
-  mutations: {
-    setActiveTabsName(state, payload) {
-      state.activeTabsName = payload.name;
-    },
-    setGlobalMessage(state, payload) {
-      const keys = Object.keys(payload.options);
-      if (keys.length > 0) {
-        keys.forEach((key) => {
-          state.globalMessage.options[key] = payload[key];
-        });
-      }
-    },
-  },
-  actions: {
-  },
+  getters,
+  mutations,
+  actions,
 });
