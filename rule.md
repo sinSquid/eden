@@ -8,4 +8,5 @@
 ### store（vuex，不同的大模块请创建modules）
 ### style（less样式，只放置具备极高通用性的样式）
 ### views（页面内容）
+### style/variable(定义less常量)
 

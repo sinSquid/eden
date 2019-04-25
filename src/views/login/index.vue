@@ -8,6 +8,7 @@
         <el-form-item label="密码">
           <el-input type="password" v-model="userInfo.password" autocomplete="off"></el-input>
         </el-form-item>
+        <el-button type="warning" loading="true">登 录</el-button>
       </el-form>
     </div>
   </div>
@@ -30,11 +31,13 @@ export default {
 
 <style lang="less" scoped>
 .login-back {
-  background: url("~@/assets/images/background/background.svg") 10% -180px no-repeat;
-  background-size: 80%;
+  position: absolute;
+  background: url("~@/assets/images/background/background.svg") 50% no-repeat;
+  background-size: 100%;
   height: 100%;
+  width: 100%;
   .login-container {
-    width: 320px;
+    width: 360px;
     height: 240px;
     position: absolute;
     left: 50%;
