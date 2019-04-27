@@ -1,6 +1,6 @@
 import axios from '@/lib/axios/index';
 
 export default {
-  signIn: data => axios.get('', data),
+  signIn: params => axios.get('', params),
   signOut: () => axios.post(''),
 };

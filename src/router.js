@@ -5,6 +5,8 @@ import framework from '@/views/index.vue';
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
       path: '/login',

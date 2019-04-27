@@ -8,7 +8,7 @@ import actions from '@/store/actions';
 import userInfo from '@/store/modules/userInfo/index';
 
 // 引入elementUI配置文件
-import { originMessageOptions } from '@/lib/element/config';
+import originMessageOptions from '@/lib/element/config';
 
 Vue.use(Vuex);
 

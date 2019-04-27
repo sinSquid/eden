@@ -2,7 +2,7 @@
 
 function createProxyConfig() { // 代理，预留配置
   return {
-    target: '',
+    target: 'https://192.168.0.37:8075/',
     changeOrigin: true,
     ws: true,
   };

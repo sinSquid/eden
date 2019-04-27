@@ -9,6 +9,8 @@ import '@/styles/index.less';
 
 import '@/lib/server/permission';
 
+window._ = require('lodash');
+
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 
