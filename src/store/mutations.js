@@ -3,10 +3,10 @@ const mutations = {
     state.activeTabsName = payload.name;
   },
   setGlobalMessage(state, payload) {
-    const keys = Object.keys(payload.options);
+    const keys = Object.keys(payload);
     if (keys.length > 0) {
       keys.forEach((key) => {
-        state.globalMessage.options[key] = payload[key];
+        state.globalMessage[key] = payload[key];
       });
     }
   },

@@ -4,6 +4,7 @@ const originUserInfo = {
   avatar: '', // 头像
   role: '', // 角色
   remark: '', // 备注
+  status: 0, // 状态-默认初始化离线
 };
 
 const roleMapping = [

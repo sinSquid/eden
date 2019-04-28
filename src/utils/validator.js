@@ -15,11 +15,14 @@ import tpRegular from '@/lib/regular';
 * @Params: 传入规则、校检值、回调函数
 * @Return: 错误提示、回调函数
 */
+
+/**
+ * 用户名校检
+ * @param rule {Object} 规则
+ * @param value
+ * @param callback
+ */
 function validateUserName(rule, value, callback) {
-  if (!value) {
-    callback();
-    return;
-  }
   const reg = tpRegular.username;
   if (!reg.test(value)) {
     callback(new Error(rule.message));
@@ -35,11 +38,14 @@ function validateUserName(rule, value, callback) {
 * @Params: 传入规则、校检值、回调函数
 * @Return: 错误提示、回调函数
 */
+
+/**
+ * 密码校检
+ * @param rule {Object} 规则
+ * @param value
+ * @param callback
+ */
 function validatePassword(rule, value, callback) {
-  if (!value) {
-    callback();
-    return;
-  }
   const reg = tpRegular.password;
   if (!reg.test(value)) {
     callback(new Error(rule.message));
@@ -48,7 +54,7 @@ function validatePassword(rule, value, callback) {
   }
 }
 
-export default {
+export {
   validateUserName,
   validatePassword,
 };

@@ -1,4 +1,4 @@
-const existStaff = [
+const existUser = [
   {
     username: '9527', // 用户名
     password: '9527v5', // 密码
@@ -8,6 +8,4 @@ const existStaff = [
   },
 ];
 
-export default {
-  existStaff,
-};
+export default existUser;

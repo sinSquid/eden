@@ -2,53 +2,83 @@
   <div class="login-back">
     <div class="login-container">
       <el-form :model="userInfo" ref="loginForm" :rules="ruleValidate"
-        label-width="60px" class="login-form">
+        label-width="80px" class="login-form">
         <el-form-item label="用户名" prop="username">
           <el-input v-model="userInfo.username" autocomplete="off"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="userInfo.password" autocomplete="off"></el-input>
         </el-form-item>
-        <el-button type="warning" loading="true">登 录</el-button>
+        <el-button type="warning" :loading="isSignIn"
+          :disabled="isSignIn" @click="SignIn">
+          登 录
+        </el-button>
       </el-form>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutatios } from 'vuex';
+import moduleUserManage from '@/store/modules/user-manage';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import { validateUserName, validatePassword } from '@/utils/validator';
 
 export default {
   name: 'tp-login',
   data() {
     return {
+      isSignIn: false,
       ruleValidate: {
         username: [
-          {required: true, type: 'string', trigger: 'blur', validator: }
+          {
+            required: true, type: 'string', trigger: 'blur', message: '请输入账号',
+          },
+          {
+            type: 'string', trigger: 'blur', message: '账号不合法', validator: validateUserName,
+          },
         ],
-        password: [],
+        password: [
+          {
+            required: true, type: 'string', trigger: 'blur', message: '请输入密码',
+          },
+          {
+            type: 'string', trigger: 'blur', message: '密码不合法', validator: validatePassword,
+          },
+        ],
       },
     };
   },
   computed: {
-    ...mapState('userInfo', ['userInfo', 'existStaff']),
+    ...mapState('moduleUserManage', ['userInfo', 'existUser']),
   },
   methods: {
-    ...mapMutatios(['setGlobalMessage']),
-    ...mapMutatios('userInfo', ['setUserInfo']),
-    signIn() {
-      if (this.existStaff.map(e => e.user).indexOf(this.userInfo.username)) {
-        const fund = this.existStaff.filter(e => e.username === this.userInfo.username);
-        if (fund.length > 0) {
-          this.$router.push({ path: '/' });
-        } else {
-          this.setGlobalMessage({ message: '密码错误', type: 'error' });
-        }
-      } else {
-        this.setGlobalMessage({ message: '账号不存在', type: 'error' });
-      }
+    ...mapMutations(['setGlobalMessage']),
+    ...mapMutations('moduleUserManage', ['setUserInfo']),
+    ...mapActions('moduleUserManage', ['signIn']),
+    /**
+    * @Description: 登录函数，后期会更换三方网站auth token验证
+    * @Author: sinSquid
+    * @date: 2019/4/28
+    * @Params:  null
+    * @Return: null
+    */
+    SignIn() {
+      this.isSignIn = true;
+      setTimeout(() => {
+        this.isSignIn = false;
+        this.signIn(this.userInfo).then(() => {
+          console.log('can push');
+          this.$router.push({ patch: '/home' });
+        });
+      }, 5 * 1000);
     },
+  },
+  // 在每个模块的入口视图动态注册对应的 store
+  beforeCreate() {
+    this.$store.registerModule(moduleUserManage.name, moduleUserManage);
+  },
+  beforeDestroy() {
+    this.$store.unregisterModule(moduleUserManage.name);
   },
 };
 </script>
