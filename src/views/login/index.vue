@@ -95,9 +95,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@_img: '~@/assets/images';
 .login-back {
+  min-height: 766px;
   position: absolute;
-  background: url("~@/assets/images/background/background.svg") 50% no-repeat;
+  background: url("@{_img}/bg/bg.svg") 50% no-repeat;
   background-size: 100%;
   height: 100%;
   width: 100%;
