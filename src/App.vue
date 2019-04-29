@@ -11,11 +11,22 @@ export default {
   name: 'takeaway-platform',
   computed: {
     ...mapState(['globalMessage']),
+    globalMessageTip() {
+      return this.globalMessage.message;
+    },
   },
   watch: {
-    globalMessage(val) {
-      if (val.message === '') { return; }
-      this.$message(val);
+    /**
+    * @Description: 监控全局message通知，禁止在使用的地方this.$message，
+     * 使用commit提交修改globalMessage
+    * @Author: sinSquid
+    * @date: 2019/4/29
+    * @Params: message
+    * @Return: null
+    */
+    globalMessageTip(val) {
+      if (val === '') { return; }
+      this.$message(this.globalMessage);
     },
   },
 };

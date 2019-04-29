@@ -1,17 +1,15 @@
 import Cookie from 'js-cookie';
 
-const LocalToken = 'admin';
-
-function getToken() {
-  return Cookie.get(LocalToken);
+function getToken(token) {
+  return Cookie.get(token);
 }
 
-function setToken(token) {
-  Cookie.set(LocalToken, token);
+function setToken(token, value) {
+  Cookie.set(token, value);
 }
 
-function removeToken() {
-  Cookie.remove(LocalToken);
+function removeToken(token) {
+  Cookie.remove(token);
 }
 
 export {

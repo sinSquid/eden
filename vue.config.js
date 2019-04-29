@@ -10,7 +10,7 @@ function createProxyConfig() { // 代理，预留配置
 
 module.exports = {
   // 后续配置
-  publicPath: '/takeaway/',
+  publicPath: '',
   css: {
     loaderOptions: {
       less: {

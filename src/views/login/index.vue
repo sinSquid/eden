@@ -64,13 +64,24 @@ export default {
     */
     SignIn() {
       this.isSignIn = true;
-      setTimeout(() => {
-        this.isSignIn = false;
-        this.signIn(this.userInfo).then(() => {
-          console.log('can push');
-          this.$router.push({ patch: '/home' });
-        });
-      }, 5 * 1000);
+      this.$refs.loginForm.validate((valid) => {
+        if (!valid) {
+          this.isSignIn = false;
+          return;
+        }
+        setTimeout(() => {
+          this.isSignIn = false;
+          this.signIn(this.userInfo)
+            .then(() => {
+              this.$router.push({ path: '/' });
+            })
+            .catch((error) => {
+              const mess = error.message === 'errorPassword' ? { message: '密码错误', type: 'error' }
+                : { message: '账号不存在', type: 'error' };
+              this.setGlobalMessage(mess);
+            });
+        }, 5 * 1000);
+      });
     },
   },
   // 在每个模块的入口视图动态注册对应的 store

@@ -5,7 +5,7 @@ import mutations from '@/store/mutations';
 import actions from '@/store/actions';
 
 // 引入elementUI配置文件
-import originMessageOptions from '@/lib/element/config';
+import { originMessageOptions } from '@/lib/element/config';
 
 Vue.use(Vuex);
 

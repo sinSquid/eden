@@ -7,6 +7,10 @@ const originMessageOptions = {
   center: false, // 文字是否居中，boolean
 };
 
-export default {
+const test = {
+  name: '',
+};
+export {
   originMessageOptions,
+  test,
 };
