@@ -10,5 +10,11 @@ const mutations = {
       });
     }
   },
+  openLoading(state, payload) {
+    state.loading = payload;
+  },
+  closeLoading(state, payload) {
+    state.loading = payload;
+  },
 };
 export default mutations;

@@ -10,6 +10,7 @@ import '@/styles/index.less';
 // import '@/lib/server/permission';
 
 window._ = require('lodash');
+window.axios = require('axios');
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
