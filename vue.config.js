@@ -1,13 +1,5 @@
 // vue.config.js
 
-function createProxyConfig() { // 代理，预留配置
-  return {
-    target: 'https://192.168.0.37:8075/',
-    changeOrigin: true,
-    ws: true,
-  };
-}
-
 module.exports = {
   // 后续配置
   publicPath: '',
@@ -20,7 +12,13 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/api': createProxyConfig(),
+      '/api': {
+        target: 'http://localhost:3000/', // koa2默认启动3000
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '/',
+        },
+      },
     },
   },
 };
