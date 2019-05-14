@@ -4,6 +4,8 @@ import { originUserInfo } from '@/lib/config/userInfo';
 import existUser from '@/lib/config/existUser';
 // token库
 import { getToken, setToken } from '@/lib/server/token';
+// 全局api
+import api from './api';
 
 // 枚举
 const userStatus = { // 0未登录，1登录，2隐匿
@@ -20,7 +22,7 @@ export default {
     existUser,
     userStatus,
     status: userStatus.quit,
-    token: 'app_token',
+    token: '',
   },
   getters: {
     userToken(state) {
@@ -28,22 +30,9 @@ export default {
     },
   },
   actions: {
-    signIn({ state, rootGetters, commit }, params) {
-      return new Promise((resolve, reject) => {
-        const username = params.username.trim();
-        if (state.existUser.map(e => e.username).indexOf(username) !== -1) {
-          const fund = state.existUser.filter(e => e.username === username);
-          if (fund.length > 0 && fund[0].password === params.password) {
-            commit('setUserInfo', fund[0]);
-            commit('setUserToken', { token: rootGetters.currentTime });
-            resolve();
-          } else {
-            reject(new Error('errorPassword'));
-          }
-        } else {
-          reject(new Error('errorNotExist'));
-        }
-      });
+    signIn({ commit }, params) {
+      const info = api.signIn(params);
+      commit('setUserInfo', info.data);
     },
   },
   mutations: {
