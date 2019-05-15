@@ -11,7 +11,7 @@ const actions = {
       commit('setUserInfo', data);
       const usertoken = { token };
       commit('setUserToken', usertoken);
-      router.push({ path: '/home' });
+      router.push({ path: '/' });
     } else if (code === 1000) {
       const mess = { message, type: 'error' };
       commit('setGlobalMessage', mess);

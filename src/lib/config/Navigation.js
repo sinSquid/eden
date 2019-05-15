@@ -17,6 +17,12 @@ const NavList = [
     url: 'userInfo',
     icon: 'icon3',
   },
+  {
+    label: '动物世界',
+    value: 'animals',
+    url: 'animals',
+    icon: 'icon4',
+  },
 ];
 export {
   NavList,

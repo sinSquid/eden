@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import framework from '@/views/index.vue';
+import layout from '@/views/index.vue';
 
 Vue.use(Router);
 
@@ -24,10 +24,22 @@ export default new Router({
       path: '/',
       name: 'home',
       redirect: '/home',
-      component: framework,
+      component: layout,
       children: [{
         path: 'home',
         component: () => import('@/views/Home.vue'),
+      }],
+    },
+    {
+      path: '/animals',
+      name: 'animals',
+      redirect: '/animals/dog',
+      component: layout,
+      children: [{
+        path: 'dog',
+        name: 'dog',
+        component: () => import('@/views/animals/dog/index.vue'),
+        meta: { title: 'dog', icon: 'dog', noCache: true },
       }],
     },
     {
