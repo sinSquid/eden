@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import moduleUserManage from '@/store/modules/user-manage';
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { validateUserName, validatePassword } from '@/utils/validator';
 
@@ -49,12 +48,11 @@ export default {
     };
   },
   computed: {
-    ...mapState('moduleUserManage', ['userInfo', 'existUser']),
+    ...mapState(['userInfo']),
   },
   methods: {
-    ...mapMutations(['setGlobalMessage']),
-    ...mapMutations('moduleUserManage', ['setUserInfo']),
-    ...mapActions('moduleUserManage', ['signIn']),
+    ...mapMutations(['setGlobalMessage', 'setUserInfo']),
+    ...mapActions(['signIn']),
     /**
     * @Description: 登录函数，后期会更换三方网站auth token验证
     * @Author: sinSquid
@@ -83,13 +81,6 @@ export default {
         }, 5 * 1000);
       });
     },
-  },
-  // 在每个模块的入口视图动态注册对应的 store
-  beforeCreate() {
-    this.$store.registerModule(moduleUserManage.name, moduleUserManage);
-  },
-  beforeDestroy() {
-    this.$store.unregisterModule(moduleUserManage.name);
   },
 };
 </script>

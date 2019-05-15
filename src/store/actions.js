@@ -1,10 +1,9 @@
 import api from '@/store/api';
 
 const actions = {
-  signOut({ state }, params) {
-    api.signOut(params).then(() => {
-      window.location.href = `${state.requestPrefix}/user/login`;
-    });
+  signIn({ commit }, params) {
+    const info = api.signIn(params);
+    commit('setUserInfo', info.data);
   },
 };
 export default actions;
