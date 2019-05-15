@@ -17,6 +17,7 @@ const mutations = {
     state.loading = payload;
   },
   setUserInfo(state, payload) {
+    console.log(payload);
     state.userInfo = Object.assign({}, payload);
   },
   setUserToken(state, payload) {

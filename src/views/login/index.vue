@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import { validateUserName, validatePassword } from '@/utils/validator';
 
 export default {
@@ -51,13 +51,12 @@ export default {
     ...mapState(['userInfo']),
   },
   methods: {
-    ...mapMutations(['setGlobalMessage', 'setUserInfo']),
     ...mapActions(['signIn']),
     /**
     * @Description: 登录函数，后期会更换三方网站auth token验证
     * @Author: sinSquid
     * @date: 2019/4/28
-    * @Params:  null
+    * @Params:  formData
     * @Return: null
     */
     SignIn() {
@@ -69,16 +68,8 @@ export default {
         }
         setTimeout(() => {
           this.isSignIn = false;
-          this.signIn(this.userInfo)
-            .then(() => {
-              this.$router.push({ path: '/' });
-            })
-            .catch((error) => {
-              const mess = error.message === 'errorPassword' ? { message: '密码错误', type: 'error' }
-                : { message: '账号不存在', type: 'error' };
-              this.setGlobalMessage(mess);
-            });
-        }, 5 * 1000);
+          this.signIn(this.userInfo);
+        }, 1000);
       });
     },
   },

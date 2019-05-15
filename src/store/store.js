@@ -16,6 +16,8 @@ const userStatus = { // 0未登录，1登录，2隐匿
   hidden: 2,
 };
 
+const netWorkError = { message: '网络错误,请稍后再试', type: 'error' };
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -25,6 +27,7 @@ export default new Vuex.Store({
     globalMessage: Object.assign({}, originMessageOptions), // 全局通知，基于elementUI的message
     userInfo: Object.assign({}, originUserInfo),
     userStatus,
+    netWorkError,
     token: '',
   },
   getters,
