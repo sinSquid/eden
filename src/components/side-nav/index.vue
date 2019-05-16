@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { NavList } from '@/lib/config/Navigation.js';
+import { NavList } from '@/lib/config/Navigation';
 
 export default {
   name: 'tp-side-nav',

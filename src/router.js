@@ -30,6 +30,16 @@ export default new Router({
           component: () => import('@/views/Home.vue'),
         },
         {
+          path: '/message',
+          name: 'message',
+          component: () => import('@/views/message/index.vue'),
+        },
+        {
+          path: '/user',
+          name: 'user',
+          component: () => import('@/views/user/index.vue'),
+        },
+        {
           path: '/animals',
           name: 'animals',
           component: () => import('@/views/animals/index.vue'),
