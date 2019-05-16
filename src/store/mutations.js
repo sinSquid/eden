@@ -23,5 +23,8 @@ const mutations = {
   setUserToken(state, payload) {
     state.token = payload.token;
   },
+  setCurrentSideRoutePath(state, payload) {
+    state.currentSideRoutePath = payload.path;
+  },
 };
 export default mutations;

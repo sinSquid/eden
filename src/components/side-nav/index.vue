@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import { mapState, mapMutations } from 'vuex';
 import { NavList } from '@/lib/config/Navigation';
 
 export default {
@@ -21,6 +22,39 @@ export default {
     return {
       NavList,
     };
+  },
+  computed: {
+    ...mapState(['currentSideRoutePath']),
+
+    /* sideRoute: {
+      get() {
+        return this.currentSideRoutePath;
+      },
+      set(val) {
+        this.setCurrentSideRoutePath({ path: val });
+      },
+    },
+    route() {
+      return this.$route;
+    },
+    currentRoutes() {
+      const { path } = this.$route;
+      return path.split('/').filter(e => e);
+    }, */
+  },
+  watch: {
+    /* currentRoutes(val){
+      this.setCurrentSideRoutePath({path: val[0]});
+    }, */
+  },
+  methods: {
+    ...mapMutations(['setActiveTabsName', 'setCurrentSideRoutePath']),
+
+    syncOperation() {
+      if (this.tpTab) {
+        this.setActiveTabsName({ name: this.tpTab });
+      }
+    },
   },
 };
 </script>

@@ -24,6 +24,7 @@ export default new Vuex.Store({
   state: {
     tpTabs: [], // tabs菜单
     activeTabsName: '', // 激活的tabs，无子项时默认空
+    currentSideRoutePath: '', // 菜单路由
     globalMessage: Object.assign({}, originMessageOptions), // 全局通知，基于elementUI的message
     userInfo: Object.assign({}, originUserInfo),
     userStatus,
