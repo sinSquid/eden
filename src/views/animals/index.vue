@@ -1,13 +1,9 @@
 <template>
-  <div>dog</div>
+  <router-view></router-view>
 </template>
 
 <script>
 export default {
-  name: 'ani-dog',
+  name: 'animals',
 };
 </script>
-
-<style scoped>
-
-</style>

@@ -2,7 +2,7 @@
 
 module.exports = {
   // 后续配置
-  publicPath: '',
+  publicPath: '/',
   css: {
     loaderOptions: {
       less: {

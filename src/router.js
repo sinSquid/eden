@@ -1,11 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import layout from '@/views/index.vue';
 
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  // mode: 'history',
   scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
@@ -24,23 +23,30 @@ export default new Router({
       path: '/',
       name: 'home',
       redirect: '/home',
-      component: layout,
-      children: [{
-        path: 'home',
-        component: () => import('@/views/Home.vue'),
-      }],
-    },
-    {
-      path: '/animals',
-      name: 'animals',
-      redirect: '/animals/dog',
-      component: layout,
-      children: [{
-        path: 'dog',
-        name: 'dog',
-        component: () => import('@/views/animals/dog/index.vue'),
-        meta: { title: 'dog', icon: 'dog', noCache: true },
-      }],
+      component: () => import('@/views/index.vue'),
+      children: [
+        {
+          path: 'home',
+          component: () => import('@/views/Home.vue'),
+        },
+        {
+          path: '/animals',
+          name: 'animals',
+          component: () => import('@/views/animals/index.vue'),
+          redirect: '/animals/dog',
+          children: [{
+            path: 'dog',
+            name: 'dog',
+            component: () => import('@/views/animals/dog/index.vue'),
+            meta: { title: 'dog', icon: 'dog', noCache: true },
+          }, {
+            path: 'cat',
+            name: 'cat',
+            component: () => import('@/views/animals/cat/index.vue'),
+            meta: { title: 'cat', icon: 'cat', noCache: true },
+          }],
+        },
+      ],
     },
     {
       path: '/about',

@@ -1,10 +1,10 @@
 <template>
-  <div>dog</div>
+ <div>cat</div>
 </template>
 
 <script>
 export default {
-  name: 'ani-dog',
+  name: 'ani-cat',
 };
 </script>
 
