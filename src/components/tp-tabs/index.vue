@@ -1,7 +1,10 @@
 <template>
-  <el-tabs v-model="tabsName" @tab-click="handleClick">
-    <el-tab-pane v-for="tab in tpTabs" :key="tab.value" :label="tab.label" :name="tab.value">
-      {{ tab.label }}
+  <el-tabs v-model="tabsName"
+    @tab-click="updateRoute">
+    <el-tab-pane v-for="tab in tpTabs"
+      :key="tab.value"
+      :label="tab.label"
+      :name="tab.value">
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -31,8 +34,8 @@ export default {
   methods: {
     ...mapMutations(['setActiveTabsName']),
 
-    handleClick(tab) {
-      this.setActiveTabsName({ name: tab });
+    updateRoute() {
+      this.$router.push({ path: `${this.activeTabsName}` });
     },
   },
 };

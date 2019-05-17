@@ -1,7 +1,4 @@
 const mutations = {
-  setActiveTabsName(state, payload) {
-    state.activeTabsName = payload.name;
-  },
   setGlobalMessage(state, payload) {
     const keys = Object.keys(payload);
     if (keys.length > 0) {
@@ -23,8 +20,14 @@ const mutations = {
   setUserToken(state, payload) {
     state.token = payload.token;
   },
+  setActiveTabsName(state, payload) {
+    state.activeTabsName = payload.name;
+  },
   setCurrentSideRoutePath(state, payload) {
     state.currentSideRoutePath = payload.path;
+  },
+  setTpTabs(state, payload) {
+    state.tpTabs = payload;
   },
 };
 export default mutations;

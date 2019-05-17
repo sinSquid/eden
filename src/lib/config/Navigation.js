@@ -28,12 +28,6 @@ const mainRoute = [
   {
     value: 'home',
     label: 'home',
-    children: [
-      {
-        value: 'home',
-        label: 'home',
-      },
-    ],
   }, {
     value: 'message',
     label: 'message',
@@ -48,8 +42,8 @@ const mainRoute = [
         value: 'dog',
         label: 'dog',
       }, {
-        value: 'dog',
-        label: 'dog',
+        value: 'cat',
+        label: 'cat',
       },
     ],
   },

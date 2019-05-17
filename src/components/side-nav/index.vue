@@ -3,10 +3,12 @@
     <el-menu
       default-active="home">
       <template v-for="item in NavList">
-        <el-menu-item :key="item.value" :index="item.value">
-          <i class="el-icon-menu"></i>
-          <router-link :to="item.url">{{ item.label }}</router-link>
-        </el-menu-item>
+        <router-link :to="item.url" :key="item.value">
+          <el-menu-item :index="item.value">
+            <i class="el-icon-menu"></i>
+            <span>{{ item.label }}</span>
+          </el-menu-item>
+        </router-link>
       </template>
     </el-menu>
   </div>
@@ -14,7 +16,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import { NavList } from '@/lib/config/Navigation';
+import { NavList, mainRoute } from '@/lib/config/Navigation';
 
 export default {
   name: 'tp-side-nav',
@@ -26,35 +28,34 @@ export default {
   computed: {
     ...mapState(['currentSideRoutePath']),
 
-    /* sideRoute: {
-      get() {
-        return this.currentSideRoutePath;
-      },
-      set(val) {
-        this.setCurrentSideRoutePath({ path: val });
-      },
-    },
-    route() {
-      return this.$route;
-    },
     currentRoutes() {
       const { path } = this.$route;
       return path.split('/').filter(e => e);
-    }, */
+    },
   },
   watch: {
-    /* currentRoutes(val){
-      this.setCurrentSideRoutePath({path: val[0]});
-    }, */
+    currentRoutes(val) { // 手动点击以及地址栏输入均可监听
+      this.syncRouteOperation(val);
+    },
   },
   methods: {
-    ...mapMutations(['setActiveTabsName', 'setCurrentSideRoutePath']),
+    ...mapMutations([
+      'setActiveTabsName',
+      'setCurrentSideRoutePath',
+      'setTpTabs',
+    ]),
 
-    syncOperation() {
-      if (this.tpTab) {
-        this.setActiveTabsName({ name: this.tpTab });
-      }
+    syncRouteOperation(val) {
+      this.setCurrentSideRoutePath({ path: val[0] });
+      const name = val[1] || '';
+      this.setActiveTabsName({ name });
+      const index = mainRoute.findIndex(e => e.value === val[0]);
+      const tabs = mainRoute[index].children || [];
+      this.setTpTabs(tabs);
     },
+  },
+  mounted() {
+    this.syncRouteOperation(this.currentRoutes);
   },
 };
 </script>
