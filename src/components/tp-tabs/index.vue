@@ -41,6 +41,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
+<style lang="less">
+  .el-tabs__nav-wrap {
+    padding-left: 15px;
+  }
 </style>

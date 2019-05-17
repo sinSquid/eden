@@ -1,7 +1,7 @@
 <template>
   <div id="tp-side-nav">
     <el-menu
-      default-active="home">
+      :default-active="defaultMenu">
       <template v-for="item in NavList">
         <router-link :to="item.url" :key="item.value">
           <el-menu-item :index="item.value">
@@ -31,6 +31,9 @@ export default {
     currentRoutes() {
       const { path } = this.$route;
       return path.split('/').filter(e => e);
+    },
+    defaultMenu() {
+      return this.currentRoutes[0];
     },
   },
   watch: {
