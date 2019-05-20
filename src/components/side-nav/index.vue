@@ -1,5 +1,5 @@
 <template>
-  <div id="tp-side-nav">
+  <div class="tp-side-nav">
     <el-menu
       :default-active="defaultMenu">
       <template v-for="item in NavList">
@@ -64,7 +64,7 @@ export default {
 </script>
 
 <style lang="less">
-  #tp-side-nav {
+  .tp-side-nav {
     background-color: silver;
     width: 150px;
     position: fixed;

@@ -1,6 +1,63 @@
 //global样式，禁止详细定义
+@import './variable/color.less';
+
+// 基本间距 s xm m xl l
+@spaces: 10, 20, 30;
+
 a {
+  cursor: pointer;
   text-decoration: none;
 }
 
-@_img: '~@/assets/images'; // 图片地址
+button,
+input {
+  outline: none;
+}
+
+li {
+  list-style: none;
+}
+
+.ui-ta-c {
+  text-align: center;
+}
+
+.ui-ta-l {
+  text-align: left;
+}
+
+.ui-ta-r {
+  text-align: right;
+}
+
+.ui-p-r {
+  position: relative;
+}
+
+// 生成 margin/padding 各个方面的各种常用间距
+each(@spaces, {
+  .ui-mt-@{value} {
+    margin-top: (@value + 0px);
+  }
+  .ui-mr-@{value} {
+    margin-right: (@value + 0px);
+  }
+  .ui-mb-@{value} {
+    margin-bottom: (@value + 0px);
+  }
+  .ui-ml-@{value} {
+    margin-left: (@value + 0px);
+  }
+  .ui-pt-@{value} {
+    padding-top: (@value + 0px);
+  }
+  .ui-pr-@{value} {
+    padding-right: (@value + 0px);
+  }
+  .ui-pb-@{value} {
+    padding-bottom: (@value + 0px);
+  }
+  .ui-pl-@{value} {
+    padding-left: (@value + 0px);
+  }
+});

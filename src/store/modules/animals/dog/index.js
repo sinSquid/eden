@@ -6,6 +6,7 @@ export default {
   state: {
     breeds: {},
     existBreeds: [],
+    cascadeOptions: [], // 级联配置
   },
   actions: {
     async getListBreeds({ rootState, commit }) {
@@ -14,6 +15,7 @@ export default {
       if (result.status === 200 && status === 'success') {
         commit('setDogBreeds', message);
         commit('setExistBreeds', message);
+        commit('setCascadeOptions', message);
       } else {
         commit('setGlobalMessage',
           { type: 'error', message: message || rootState.netWorkError },
@@ -31,10 +33,29 @@ export default {
       state.breeds = payload;
     },
     setExistBreeds(state, payload) {
-      Object.keys(payload).forEach((key) => {
+      _.keys(payload).forEach((key) => {
         _.concat(state.existBreeds, payload[key]);
       });
       _.uniq(state.existBreeds);
+    },
+    setCascadeOptions(state, payload) {
+      _.keys(payload).forEach((key) => {
+        const aims = payload[key];
+        if (aims.length) {
+          const obj = {
+            value: key,
+            label: key,
+            children: [],
+          };
+          aims.forEach((e) => {
+            obj.children.push({
+              value: e,
+              label: e,
+            });
+          });
+          state.cascadeOptions.push(obj);
+        }
+      });
     },
   },
 };
