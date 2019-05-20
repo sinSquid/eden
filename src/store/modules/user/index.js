@@ -1,7 +1,5 @@
 // 用户信息模块
 import { originUserInfo } from '@/lib/config/userInfo';
-// 引入人员列表
-import existUser from '@/lib/config/existUser';
 // token库
 import { getToken, setToken } from '@/lib/server/token';
 // 全局api
@@ -15,11 +13,10 @@ const userStatus = { // 0未登录，1登录，2隐匿
 };
 
 export default {
-  name: 'moduleUserManage',
+  name: 'moduleUser',
   namespaced: true,
   state: {
     userInfo: Object.assign({}, originUserInfo),
-    existUser,
     userStatus,
     status: userStatus.quit,
     token: '',

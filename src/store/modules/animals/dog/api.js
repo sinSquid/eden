@@ -13,4 +13,5 @@ import axios from '@/lib/axios/index';
 export default {
   // 获取所有狗子品种
   getListBreeds: () => axios.get('https://dog.ceo/api/breeds/list/all'),
+  getRandomDog: () => axios.get('https://dog.ceo/api/breeds/image/random'),
 };

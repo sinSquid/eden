@@ -1,6 +1,5 @@
 import axios from 'axios';
 import store from '@/store/store';
-import { getToken } from '@/lib/server/token';
 
 // 创建axios实例
 const instance = axios.create({
@@ -15,10 +14,6 @@ const instance = axios.create({
 let onLoading = false; // 标记当前是否有请求
 // request拦截器
 instance.interceptors.request.use((config) => {
-  const token = getToken();
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
   if (config.isLoading) { // 当前无请求发起请求需要加载loading效果
     onLoading = true;
     store.commit('openLoading');
