@@ -1,25 +1,26 @@
 import api from '@/store/api';
 import router from '@/router';
 import { setToken } from '@/lib/server/token';
+import proCall from '@/utils/standard/action-util';
 
 const actions = {
-  async signIn({ state, commit }, params) {
+  async signIn({ commit }, params) {
     const result = await api.signIn(params);
-    const {
-      status, code, data, token, message,
-    } = result;
-    if (status === 200 && code === 0) {
-      commit('setUserInfo', data);
-      const userToken = { token };
-      commit('setUserToken', userToken);
-      setToken(token);
-      router.push({ path: '/' });
-    } else if (code === 1000) {
-      const mess = { message, type: 'error' };
-      commit('setGlobalMessage', mess);
-    } else {
-      commit('setGlobalMessage', state.netWorkError);
-    }
+    const proResult = proCall(result);
+    proResult.then(({
+      code, data, token, message, timestamp,
+    }) => {
+      if (code === 0) {
+        commit('setUserInfo', data);
+        commit('setUserToken', { token });
+        setToken(token);
+        router.push({ path: '/' });
+      } else {
+        commit('setGlobalMessage', { message, type: 'error', timestamp });
+      }
+    }).catch(({ message, timestamp }) => {
+      commit('setGlobalMessage', { message, type: 'error', timestamp });
+    });
   },
 };
 export default actions;

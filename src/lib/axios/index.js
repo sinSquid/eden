@@ -12,41 +12,34 @@ const instance = axios.create({
   withCredentials: false,
 });
 
-// let onLoading = false; // 标记当前是否有请求
+let onLoading = false; // 标记当前是否有请求
 // request拦截器
 instance.interceptors.request.use((config) => {
-  if (store.getters.token) {
-    config.headers.Authorization = `Bearer ${getToken()}`;
+  const token = getToken();
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
   }
-  /* if (!config.isLoading) { // 当前无请求发起请求需要加载loading效果
+  if (config.isLoading) { // 当前无请求发起请求需要加载loading效果
     onLoading = true;
     store.commit('openLoading');
-  } */
+  }
   return config;
 }, (error) => {
-  /* if (onLoading) { // 请求错误时关闭loading加载
+  if (onLoading) { // 请求错误时关闭loading加载
     onLoading = false;
     store.commit('closeLoading');
-  } */
-  Promise.reject(error);
+  }
+  return Promise.reject(error);
 });
 
 // respone拦截器
 instance.interceptors.response.use(
   (response) => {
-    const res = response.data;
-    /* if (onLoading) {
+    if (onLoading) {
       onLoading = false;
       store.commit('closeLoading');
-    } */
-    if (res.code !== 0) {
-      /* this.$Message({
-        message: res.message,
-        type: 'error',
-        duration: 5 * 1000,
-      }); */
     }
-    return res;
+    return response;
   },
   (error) => {
     if (onLoading) {

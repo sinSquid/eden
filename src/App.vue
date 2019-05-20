@@ -11,8 +11,8 @@ export default {
   name: 'takeaway-platform',
   computed: {
     ...mapState(['globalMessage']),
-    globalMessageTip() {
-      return this.globalMessage.message;
+    timestamp() {
+      return this.globalMessage.timestamp;
     },
   },
   watch: {
@@ -24,9 +24,9 @@ export default {
     * @Params: message
     * @Return: null
     */
-    globalMessageTip(val) {
-      if (val === '') { return; }
-      this.$message(this.globalMessage);
+    timestamp() {
+      const options = _.cloneDeep(this.globalMessage);
+      this.$message(options);
     },
   },
 };

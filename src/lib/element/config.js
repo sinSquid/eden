@@ -5,6 +5,7 @@ const originMessageOptions = {
   duration: 3000, // 显示时间,毫秒。设为0则不会自动关闭，类型number
   showClose: false, // 是否显示关闭按钮，boolean
   center: false, // 文字是否居中，boolean
+  timestamp: 0, // 时间戳
 };
 
 const test = {
