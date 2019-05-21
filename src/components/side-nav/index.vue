@@ -38,12 +38,8 @@ export default {
     background-color: silver;
     width: 150px;
     position: fixed;
-    margin-top: 40px;
     .el-menu-item {
       display: -webkit-box;
-      a {
-        text-decoration: none;
-      }
     }
   }
 </style>

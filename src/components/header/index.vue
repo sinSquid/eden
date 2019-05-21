@@ -1,5 +1,5 @@
 <template>
-  <div id="tp-header">
+  <div class="tp-header">
     <div class="logo"></div>
     <div class="content">
       <div class="network"></div>
@@ -25,7 +25,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  #tp-header {
+  @_logo:'~@/assets/images/logos';
+  .tp-header {
     position: fixed;
     width: 100%;
     height: 40px;
@@ -35,10 +36,10 @@ export default {
     justify-content: flex-end;
     z-index: 1;
     .logo {
-      width: -webkit-fill-available;
+      width: inherit;
       height: 40px;
       margin-left: 24px;
-      background: url("~@/assets/images/logos/vimeo.svg") no-repeat;
+      background: url("@{_logo}/vimeo.svg") no-repeat;
       background-size: 40px;
     }
     .content {
@@ -49,7 +50,7 @@ export default {
       flex: auto;
       .network {
         width: 40px;
-        background: url("~@/assets/images/logos/deviantart.svg") no-repeat;
+        background: url("@{_logo}/deviantart.svg") no-repeat;
         background-size: 40px;
       }
       .user {
@@ -58,7 +59,7 @@ export default {
         display: flex;
         .avatar {
           width: 40px;
-          background: url("~@/assets/images/logos/vine.svg") no-repeat;
+          background: url("@{_logo}/vine.svg") no-repeat;
           background-size: 40px;
         }
         .username {

@@ -1,15 +1,19 @@
 <template>
-  <div class="view">
-    <tp-header></tp-header>
-    <div class="container">
-      <tp-side-nav></tp-side-nav>
-      <div class="container-shell">
-        <div class="container-content">
+  <el-container>
+    <el-header height="40px">
+      <tp-header></tp-header>
+    </el-header>
+    <el-container>
+      <el-aside width="150px">
+        <tp-side-nav></tp-side-nav>
+      </el-aside>
+      <el-container>
+        <el-main class="container-shell ui-bar">
           <router-view></router-view>
-        </div>
-      </div>
-    </div>
-  </div>
+        </el-main>
+      </el-container>
+    </el-container>
+  </el-container>
 </template>
 
 <script>
@@ -28,20 +32,12 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-  .view {
-    .container {
-      overflow: hidden;
-      height: 100%;
-      .container-shell {
-        position: relative;
-        height: -webkit-fill-available;
-        left: 150px;
-        top: 40px;
-        .container-content {
-          height: 800px;
-        }
-      }
-    }
+<style lang="less">
+  .el-header {
+    padding: 0;
+  }
+  .container-shell {
+    height: 600px;
+    overflow-y: auto;
   }
 </style>
