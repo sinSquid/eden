@@ -15,8 +15,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-import { NavList, mainRoute } from '@/lib/config/Navigation';
+import { mainRoute, NavList } from '@/lib/config/Navigation';
 
 export default {
   name: 'tp-side-nav',
@@ -26,39 +25,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(['currentSideRoutePath']),
-
-    currentRoutes() {
-      const { path } = this.$route;
-      return path.split('/').filter(e => e);
-    },
     defaultMenu() {
-      return this.currentRoutes[0];
+      const { path } = this.$route;
+      return mainRoute.find(e => path.includes(e.value)).value;
     },
-  },
-  watch: {
-    currentRoutes(val) { // 手动点击以及地址栏输入均可监听
-      this.syncRouteOperation(val);
-    },
-  },
-  methods: {
-    ...mapMutations([
-      'setActiveTabsName',
-      'setCurrentSideRoutePath',
-      'setTpTabs',
-    ]),
-
-    syncRouteOperation(val) {
-      this.setCurrentSideRoutePath({ path: val[0] });
-      const name = val[1] || '';
-      this.setActiveTabsName({ name });
-      const index = mainRoute.findIndex(e => e.value === val[0]);
-      const tabs = mainRoute[index].children || [];
-      this.setTpTabs(tabs);
-    },
-  },
-  mounted() {
-    this.syncRouteOperation(this.currentRoutes);
   },
 };
 </script>

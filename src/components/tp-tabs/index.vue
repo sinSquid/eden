@@ -1,5 +1,5 @@
 <template>
-  <el-tabs v-model="tabsName"
+  <el-tabs v-model="activeTab"
     @tab-click="updateRoute">
     <el-tab-pane v-for="tab in tpTabs"
       :key="tab.value"
@@ -10,33 +10,27 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
-
 export default {
   name: 'tp-tabs',
+  props: {
+    tpTabs: {
+      required: true,
+      type: Array,
+      default: () => [],
+    },
+  },
   data() {
     return {
-
+      activeTab: '',
     };
   },
-  computed: {
-    ...mapState(['tpTabs', 'activeTabsName']),
-
-    tabsName: {
-      get() {
-        return this.activeTabsName;
-      },
-      set(val) {
-        this.setActiveTabsName({ name: val });
-      },
+  methods: {
+    updateRoute() {
+      this.$router.push({ path: `${this.activeTab}` });
     },
   },
-  methods: {
-    ...mapMutations(['setActiveTabsName']),
-
-    updateRoute() {
-      this.$router.push({ path: `${this.activeTabsName}` });
-    },
+  mounted() {
+    this.activeTab = this.tpTabs.find(e => e.path === this.$route.path).value;
   },
 };
 </script>

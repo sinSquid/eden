@@ -5,7 +5,6 @@ export default {
   name: 'moduleAnimals',
   namespaced: true,
   state: {
-    name: 'test',
   },
   getters: {
 

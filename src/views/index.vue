@@ -4,7 +4,6 @@
     <div class="container">
       <tp-side-nav></tp-side-nav>
       <div class="container-shell">
-        <tp-tabs></tp-tabs>
         <div class="container-content">
           <router-view></router-view>
         </div>
@@ -16,14 +15,12 @@
 <script>
 import TpHeader from '@/components/header/index.vue';
 import TpSideNav from '@/components/side-nav/index.vue';
-import TpTabs from '@/components/tp-tabs/index.vue';
 
 export default {
   name: 'takeaway-platform',
   components: {
     TpHeader,
     TpSideNav,
-    TpTabs,
   },
   data() {
     return {};
