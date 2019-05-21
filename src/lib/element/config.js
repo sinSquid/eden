@@ -8,10 +8,9 @@ const originMessageOptions = {
   timestamp: 0, // 时间戳
 };
 
-const test = {
-  name: '',
-};
+const tagTypes = ['', 'success', 'info', 'warning', 'danger'];
+
 export {
   originMessageOptions,
-  test,
+  tagTypes,
 };

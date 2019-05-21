@@ -13,9 +13,7 @@ export default {
       const result = await api.getListBreeds();
       const { status, message } = result.data || {};
       if (result.status === 200 && status === 'success') {
-        commit('setDogBreeds', message);
-        commit('setExistBreeds', message);
-        commit('setCascadeOptions', message);
+        commit('initializeBreeds', message);
       } else {
         commit('setGlobalMessage',
           { type: 'error', message: message || rootState.netWorkError },
@@ -29,19 +27,19 @@ export default {
     },
   },
   mutations: {
-    setDogBreeds(state, payload) {
+    // 初始化数据，一次commit提交，减少记录
+    initializeBreeds(state, payload) {
+      // 种类源数据
       state.breeds = payload;
-    },
-    setExistBreeds(state, payload) {
-      _.keys(payload).forEach((key) => {
-        _.concat(state.existBreeds, payload[key]);
-      });
-      _.uniq(state.existBreeds);
-    },
-    setCascadeOptions(state, payload) {
+
       _.keys(payload).forEach((key) => {
         const aims = payload[key];
+
+        // 级联数据
         if (aims.length) {
+          // 存在的品种
+          state.existBreeds = _.concat(state.existBreeds, aims);
+
           const obj = {
             value: key,
             label: key,
@@ -56,6 +54,9 @@ export default {
           state.cascadeOptions.push(obj);
         }
       });
+      // 去重排序
+      state.existBreeds = _.uniq(state.existBreeds);
+      state.existBreeds.sort((a, b) => (a <= b ? -1 : 1));
     },
   },
 };

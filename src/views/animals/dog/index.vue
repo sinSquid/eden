@@ -1,38 +1,29 @@
 <template>
   <div>
-    <div class="block">
-      <span class="demonstration">hover 触发子菜单</span>
-      <el-cascader
-        expand-trigger="hover"
-        :options="cascadeOptions"
-        v-model="selectedOptions"
-        @change="handleChange">
-      </el-cascader>
-    </div>
-    <span>Dog</span>
+    <el-divider content-position="left">种类标签</el-divider>
+    <breeds-tag></breeds-tag>
+    <cascade-view></cascade-view>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapActions } from 'vuex';
+import breedsTag from './breedsTag.vue';
+import cascadeView from './cascadeView.vue';
 
 export default {
   name: 'ani-dog',
   data() {
     return {
-      url: '',
-      selectedOptions: [],
     };
   },
-  computed: {
-    ...mapState('moduleAnimals/dog', ['cascadeOptions']),
+  components: {
+    breedsTag,
+    cascadeView,
   },
   methods: {
-    ...mapActions('moduleAnimals/dog', ['getListBreeds', 'getRandomDog']),
+    ...mapActions('moduleAnimals/dog', ['getListBreeds']),
 
-    handleChange() {
-      console.log('pika');
-    },
   },
   created() {
     this.getListBreeds();
