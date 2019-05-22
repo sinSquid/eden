@@ -9,6 +9,17 @@
       class="ui-mr-10 ui-mb-10">
       {{ eb.value }}
     </el-tag>
+    <el-divider content-position="right">charts</el-divider>
+    <el-divider content-position="left">
+      <el-button
+        type="warning"
+        size="small"
+        icon="el-icon-refresh"
+        @click="changeType">
+        change charts
+      </el-button>
+    </el-divider>
+    <ve-chart :data="chartData" :settings="chartSettings"></ve-chart>
   </div>
 </template>
 
@@ -17,13 +28,16 @@ import { mapState } from 'vuex';
 import { tagTypes } from '@/lib/element/config';
 import dividerCollapse from '@/components/divider-collapse/index.vue';
 
+const chartTypes = ['line', 'histogram', 'pie'];
+
 export default {
-  name: 'breedsTag',
+  name: 'dogBreeds',
   components: {
     dividerCollapse,
   },
   data() {
     return {
+      chartTypes,
       dividerCollapse: {
         divider: {
           title: 'color tag',
@@ -33,10 +47,11 @@ export default {
           content: '此处包含https://dog.ceo/dog-api/已存在dog的种类',
         }],
       },
+      chartSettings: { type: 'line' },
     };
   },
   computed: {
-    ...mapState('moduleAnimals/dog', ['existBreeds']),
+    ...mapState('moduleAnimals/dog', ['breeds', 'existBreeds']),
 
     displayTags() {
       const tags = [];
@@ -48,6 +63,26 @@ export default {
         });
       });
       return tags;
+    },
+    chartData() {
+      const data = {
+        columns: ['breed', 'volume'],
+        rows: [],
+      };
+      const aims = this.breeds;
+      _.keys(aims).forEach((key) => {
+        const len = aims[key].length;
+        if (len) {
+          data.rows.push({ breed: key, volume: len });
+        }
+      });
+      return data;
+    },
+  },
+  methods: {
+    changeType() {
+      const index = chartTypes.findIndex(e => e === this.chartSettings.type);
+      this.chartSettings = { type: chartTypes[(index + 1) % 3] };
     },
   },
 };

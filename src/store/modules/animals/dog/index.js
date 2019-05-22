@@ -25,6 +25,10 @@ export default {
       const result = await api.getRandomDog();
       return proCall(result);
     },
+    async getRandomDogInBreed(data) {
+      const result = await api.getRandomDogInBreed(data);
+      return proCall(result);
+    },
   },
   mutations: {
     // 初始化数据，一次commit提交，减少记录

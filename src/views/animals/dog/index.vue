@@ -1,13 +1,13 @@
 <template>
   <div>
-    <breeds-tag></breeds-tag>
+    <dog-breeds></dog-breeds>
     <cascade-view></cascade-view>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
-import breedsTag from './breedsTag.vue';
+import dogBreeds from './dogBreeds.vue';
 import cascadeView from './cascadeView.vue';
 
 export default {
@@ -17,7 +17,7 @@ export default {
     };
   },
   components: {
-    breedsTag,
+    dogBreeds,
     cascadeView,
   },
   methods: {
