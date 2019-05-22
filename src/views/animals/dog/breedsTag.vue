@@ -1,5 +1,7 @@
 <template>
-  <div>
+  <div class="ui-ml-20 ui-mr-20">
+    <divider-collapse :data="dividerCollapse">
+    </divider-collapse>
     <el-tag
       v-for="eb in displayTags"
       :key="eb.value"
@@ -13,9 +15,26 @@
 <script>
 import { mapState } from 'vuex';
 import { tagTypes } from '@/lib/element/config';
+import dividerCollapse from '@/components/divider-collapse/index.vue';
 
 export default {
   name: 'breedsTag',
+  components: {
+    dividerCollapse,
+  },
+  data() {
+    return {
+      dividerCollapse: {
+        divider: {
+          title: 'color tag',
+        },
+        collapse: [{
+          title: 'tag内容介绍',
+          content: '此处包含https://dog.ceo/dog-api/已存在dog的种类',
+        }],
+      },
+    };
+  },
   computed: {
     ...mapState('moduleAnimals/dog', ['existBreeds']),
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <el-divider content-position="left">种类标签</el-divider>
     <breeds-tag></breeds-tag>
     <cascade-view></cascade-view>
   </div>
