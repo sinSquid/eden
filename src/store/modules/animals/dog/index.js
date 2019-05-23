@@ -4,8 +4,7 @@ import proCall from '@/utils/standard/action-util';
 export default {
   namespaced: true,
   state: {
-    breeds: {},
-    existBreeds: [],
+    originBreeds: {},
     cascadeOptions: [], // 级联配置
   },
   actions: {
@@ -25,8 +24,8 @@ export default {
       const result = await api.getRandomDog();
       return proCall(result);
     },
-    async getRandomDogInBreed(data) {
-      const result = await api.getRandomDogInBreed(data);
+    async getRandomDogByBreed(store, params) {
+      const result = await api.getRandomDogByBreed(params);
       return proCall(result);
     },
   },
@@ -34,33 +33,25 @@ export default {
     // 初始化数据，一次commit提交，减少记录
     initializeBreeds(state, payload) {
       // 种类源数据
-      state.breeds = payload;
+      state.originBreeds = payload;
 
       _.keys(payload).forEach((key) => {
-        const aims = payload[key];
-
-        // 级联数据
-        if (aims.length) {
-          // 存在的品种
-          state.existBreeds = _.concat(state.existBreeds, aims);
-
-          const obj = {
-            value: key,
-            label: key,
-            children: [],
-          };
-          aims.forEach((e) => {
+        const obj = {
+          value: key,
+          label: key,
+        };
+        const child = payload[key];
+        if (child.length) {
+          obj.children = [];
+          child.forEach((e) => {
             obj.children.push({
               value: e,
               label: e,
             });
           });
-          state.cascadeOptions.push(obj);
         }
+        state.cascadeOptions.push(obj);
       });
-      // 去重排序
-      state.existBreeds = _.uniq(state.existBreeds);
-      state.existBreeds.sort((a, b) => (a <= b ? -1 : 1));
     },
   },
 };

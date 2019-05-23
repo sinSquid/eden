@@ -1,14 +1,23 @@
 <template>
-  <div class="ui-div-coll-wh">
+  <div>
     <el-divider :content-position="data.divider.position || 'left'">
       <i class="el-icon-platform-eleme">{{ data.divider.title }}</i>
     </el-divider>
-    <el-collapse accordion class="ui-ml-20">
+    <el-collapse accordion class="ui-ml-20 ui-div-coll-wh">
       <el-collapse-item v-for="col in data.collapse" :key="col.title">
         <template slot="title">
           {{ col.title }}<i class="el-icon-s-promotion"></i>
         </template>
         <div class="ui-ta-l">{{ col.content }}</div>
+        <div class="ui-ta-l" v-if="col.link">
+          <el-link
+            type="warning"
+            :href="col.link"
+            target="_blank"
+            icon="el-icon-paperclip">
+            {{ `${col.link}` }}
+          </el-link>
+        </div>
       </el-collapse-item>
     </el-collapse>
   </div>
