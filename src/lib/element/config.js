@@ -1,4 +1,4 @@
-const originMessageOptions = {
+const elMessageOptions = {
   message: '', // 消息文字——string，不建议用官网VNode
   type: 'info', // 主题——string，分别为：success，warning，info，error，default-info
   customClass: '', // 自定义类名string
@@ -8,9 +8,19 @@ const originMessageOptions = {
   timestamp: 0, // 时间戳
 };
 
-const tagTypes = ['', 'success', 'info', 'warning', 'danger'];
+const elTagTypes = ['', 'success', 'info', 'warning', 'danger'];
+
+const elLoadingOptions = {
+  loading: false,
+  target: 'document.body',
+  lock: false,
+  text: 'loading...',
+  spinner: 'el-icon-loading',
+  background: 'rgba(220,220,220,0.6)',
+};
 
 export {
-  originMessageOptions,
-  tagTypes,
+  elMessageOptions,
+  elTagTypes,
+  elLoadingOptions,
 };

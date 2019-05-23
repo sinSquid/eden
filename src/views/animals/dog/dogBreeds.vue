@@ -25,7 +25,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { tagTypes } from '@/lib/element/config';
+import { elTagTypes } from '@/lib/element/config';
 
 const chartTypes = ['line', 'histogram', 'pie'];
 
@@ -46,7 +46,7 @@ export default {
       _.keys(origin).forEach((key) => {
         const index = Math.floor(key.codePointAt(key.length - 1) % 5);
         tags.push({
-          type: tagTypes[index],
+          type: elTagTypes[index],
           value: key,
         });
       });

@@ -6,13 +6,23 @@
 
 <script>
 import { mapState } from 'vuex';
+import { Loading } from 'element-ui';
+import { elLoadingOptions } from '@/lib/element/config';
 
 export default {
   name: 'takeaway-platform',
+  data() {
+    return {
+      loading: '',
+    };
+  },
   computed: {
-    ...mapState(['globalMessage']),
-    timestamp() {
+    ...mapState(['globalMessage', 'globalLoading']),
+    messTimestamp() { // 全局通知时间戳
       return this.globalMessage.timestamp;
+    },
+    loadingShow() {
+      return this.globalLoading.loading;
     },
   },
   watch: {
@@ -24,9 +34,16 @@ export default {
     * @Params: message
     * @Return: null
     */
-    timestamp() {
+    messTimestamp() {
       const options = _.cloneDeep(this.globalMessage);
       this.$message(options);
+    },
+    loadingShow(val) {
+      if (val) {
+        this.loading = Loading.service(this.globalLoading);
+      } else {
+        this.loading.close();
+      }
     },
   },
 };

@@ -11,18 +11,19 @@ const instance = axios.create({
   withCredentials: false,
 });
 
-let onLoading = false; // 标记当前是否有请求
+let loading = false; // 标记当前是否有loading请求
 // request拦截器
 instance.interceptors.request.use((config) => {
-  if (config.isLoading) { // 当前无请求发起请求需要加载loading效果
-    onLoading = true;
-    store.commit('openLoading');
+  console.log(config);
+  if (config.loading) { // 当前无请求发起请求需要加载loading效果
+    loading = true;
+    store.commit('setGlobalLoading', { loading: true });
   }
   return config;
 }, (error) => {
-  if (onLoading) { // 请求错误时关闭loading加载
-    onLoading = false;
-    store.commit('closeLoading');
+  if (loading) { // 请求错误时关闭loading加载
+    loading = false;
+    store.commit('setGlobalLoading', { loading: false });
   }
   return Promise.reject(error);
 });
@@ -30,16 +31,16 @@ instance.interceptors.request.use((config) => {
 // respone拦截器
 instance.interceptors.response.use(
   (response) => {
-    if (onLoading) {
-      onLoading = false;
-      store.commit('closeLoading');
+    if (loading) {
+      loading = false;
+      store.commit('setGlobalLoading', { loading: false });
     }
     return response;
   },
   (error) => {
-    if (onLoading) {
-      onLoading = false;
-      store.commit('closeLoading');
+    if (loading) {
+      loading = false;
+      store.commit('setGlobalLoading', { loading: false });
     }
     return Promise.reject(error);
   },

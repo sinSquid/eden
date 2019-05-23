@@ -7,7 +7,7 @@ import actions from '@/store/actions';
 // 用户信息模块
 import { originUserInfo } from '@/lib/config/userInfo';
 // 引入elementUI配置文件
-import { originMessageOptions } from '@/lib/element/config';
+import { elMessageOptions, elLoadingOptions } from '@/lib/element/config';
 
 // 登录状态枚举
 const userStatus = { // 0未登录，1登录，2隐匿
@@ -22,14 +22,11 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    tpTabs: [], // tabs菜单
-    activeTabsName: '', // 激活的tabs，无子项时默认空
-    currentSideRoutePath: '', // 菜单路由
-    globalMessage: Object.assign({}, originMessageOptions), // 全局通知，基于elementUI的message
+    globalMessage: Object.assign({}, elMessageOptions), // 全局通知，基于elementUI的message
     userInfo: Object.assign({}, originUserInfo),
     userStatus,
     netWorkError,
-    token: '',
+    globalLoading: Object.assign({}, elLoadingOptions),
   },
   getters,
   mutations,

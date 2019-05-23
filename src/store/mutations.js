@@ -8,8 +8,11 @@ const mutations = {
   closeLoading(state, payload) {
     state.loading = payload;
   },
+  setGlobalLoading(state, payload) {
+    Object.assign(state.globalLoading, payload);
+  },
   setUserInfo(state, payload) {
-    state.userInfo = Object.assign({}, payload);
+    Object.assign(state.userInfo, payload);
   },
   setUserToken(state, payload) {
     state.token = payload.token;
