@@ -19,7 +19,8 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
+import { getTimestamp } from '@/utils/date/extend-dayjs';
 import { validateUserName, validatePassword } from '@/utils/validator';
 
 export default {
@@ -48,9 +49,10 @@ export default {
     };
   },
   computed: {
-    ...mapState(['userInfo']),
+    ...mapState(['userInfo', 'netWorkError']),
   },
   methods: {
+    ...mapMutations(['setGlobalMessage']),
     ...mapActions(['signIn']),
     /**
     * @Description: 登录函数，后期会更换三方网站auth token验证
@@ -68,7 +70,12 @@ export default {
         }
         setTimeout(() => {
           this.isSignIn = false;
-          this.signIn(this.userInfo);
+          this.signIn(this.userInfo)
+            .catch(() => {
+              const timestamp = getTimestamp();
+              const mess = _.assign({}, this.netWorkError, { timestamp });
+              this.setGlobalMessage(mess);
+            });
         }, 1000);
       });
     },
