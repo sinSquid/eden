@@ -28,6 +28,10 @@ export default {
       const result = await api.getRandomDogByBreed(params);
       return proCall(result);
     },
+    async getRandomDogsLimit(store, params) {
+      const result = await api.getRandomDogsLimit(params);
+      return proCall(result);
+    },
   },
   mutations: {
     // 初始化数据，一次commit提交，减少记录

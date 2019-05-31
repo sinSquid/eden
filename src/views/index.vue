@@ -37,7 +37,7 @@ export default {
     padding: 0;
   }
   .container-shell {
-    height: 600px;
+    max-height: 940px;
     overflow-y: auto;
   }
 </style>
