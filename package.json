@@ -37,5 +37,8 @@
     "less-loader": "^4.1.0",
     "vue-template-compiler": "^2.6.10",
     "webpack": "^4.32.0"
+  },
+  "gitHooks": {
+    "pre-push": "cross-env NODE_ENV=production npm run lint"
   }
 }

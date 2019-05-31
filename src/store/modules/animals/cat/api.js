@@ -1,4 +1,3 @@
-import qs from 'qs';
 // dog api
 import axios from '@/lib/axios/index';
 

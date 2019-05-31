@@ -14,7 +14,6 @@ const instance = axios.create({
 let loading = false; // 标记当前是否有loading请求
 // request拦截器
 instance.interceptors.request.use((config) => {
-  console.log(config);
   if (config.loading) { // 当前无请求发起请求需要加载loading效果
     loading = true;
     store.commit('setGlobalLoading', { loading: true });

@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import _ from 'lodash';
 import ElementUI from 'element-ui';
 import VCharts from 'v-charts';
 import App from '@/App.vue';
@@ -10,8 +11,7 @@ import '@/styles/index.less';
 
 import '@/lib/server/permission';
 
-window._ = require('lodash');
-window.axios = require('axios');
+window._ = _;
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);

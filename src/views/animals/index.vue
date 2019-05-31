@@ -1,5 +1,5 @@
 <template>
- <div>
+ <div id="animals">
    <tp-tabs :tp-tabs="aniTabs"></tp-tabs>
    <keep-alive>
      <router-view></router-view>
@@ -10,6 +10,7 @@
 <script>
 import moduleAnimals from '@/store/modules/animals';
 import TpTabs from '@/components/tp-tabs/index.vue';
+import '@/styles/animals/index.less';
 
 const aniTabs = [{
   value: 'dog',

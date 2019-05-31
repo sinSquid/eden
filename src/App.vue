@@ -7,7 +7,6 @@
 <script>
 import { mapState } from 'vuex';
 import { Loading } from 'element-ui';
-import { elLoadingOptions } from '@/lib/element/config';
 
 export default {
   name: 'takeaway-platform',
@@ -42,7 +41,9 @@ export default {
       if (val) {
         this.loading = Loading.service(this.globalLoading);
       } else {
-        this.loading.close();
+        this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
+          this.loading.close();
+        });
       }
     },
   },

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="ani-dog">
     <divider-collapse :data="dividerCollapse[0]"></divider-collapse>
     <dog-breeds></dog-breeds>
     <divider-collapse :data="dividerCollapse[1]"></divider-collapse>
@@ -52,7 +52,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>
