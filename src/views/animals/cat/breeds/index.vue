@@ -46,7 +46,6 @@ export default {
   methods: {
     say() {
       const data = this.$refs;
-      console.log(data);
     },
   },
 };
