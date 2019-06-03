@@ -1,19 +1,32 @@
 import api from './api';
+import proCall from '@/utils/standard/action-util';
 
 export default {
   namespaced: true,
   state: {
-    breeds: [],
+    originData: [],
   },
   actions: {
-    async getListBreeds() {
+    async getListBreeds({ rootState, commit }) {
       const result = await api.getListBreeds();
-      return result;
+      const { status, data } = result || { status: 404, data: [] };
+      if (status === 200 && data.length) {
+        commit('setOriginData', data);
+      } else {
+        commit('setGlobalMessage',
+          { type: 'error', message: rootState.netWorkError },
+          { root: true });
+      }
+      return proCall(result);
+    },
+    async getFilterBreeds() {
+      const result = await api.getFilterBreeds();
+      return proCall(result);
     },
   },
   mutations: {
-    setDogBreeds(state, payload) {
-      state.breeds = payload;
+    setOriginData(state, payload) {
+      state.originData = payload;
     },
   },
 };

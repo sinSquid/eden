@@ -31,6 +31,7 @@ li {
 * {
   &::-webkit-scrollbar {
     width: 10px;
+    height: 12px;
   }
   &::-webkit-scrollbar-track {
     -webkit-box-shadow: silver;
@@ -87,5 +88,15 @@ each(@spaces, {
   }
   .ui-pl-@{value} {
     padding-left: (@value + 0px);
+  }
+});
+
+@over: 100, 120, 160, 180, 240, 300;
+each(@over, {
+  .text-ellipsis-@{value} {
+    width: (@value + 0px);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 });
