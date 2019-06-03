@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     say() {
-      const data = this.$refs;
+      // const data = this.$refs;
     },
   },
 };
