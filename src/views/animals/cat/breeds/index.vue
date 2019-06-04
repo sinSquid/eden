@@ -16,22 +16,37 @@
           </el-button>
         </div>
         <div class="content">
-          <divider-collapse :data="dividerCollapse[0]"></divider-collapse>
+          <divider-collapse :data="chartCollapse[0]"></divider-collapse>
           <ve-line v-if="chartVisible" :data="chartData"></ve-line>
-          <divider-collapse :data="dividerCollapse[1]"></divider-collapse>
+          <divider-collapse :data="chartCollapse[1]"></divider-collapse>
           <ve-histogram v-if="chartVisible" :data="chartData"></ve-histogram>
-          <divider-collapse :data="dividerCollapse[2]"></divider-collapse>
+          <divider-collapse :data="chartCollapse[2]"></divider-collapse>
           <ve-scatter v-if="chartVisible" :data="chartData"></ve-scatter>
-          <divider-collapse :data="dividerCollapse[3]"></divider-collapse>
+          <divider-collapse :data="chartCollapse[3]"></divider-collapse>
           <ve-radar v-if="chartVisible" :data="chartData"></ve-radar>
         </div>
       </el-col>
     </el-row>
+    <divider-collapse class="ui-mt-20" :data="searchCollapse[0]"></divider-collapse>
+    <el-input
+      :maxlength="20"
+      clearable
+      class="search-btn"
+      v-model="search"
+      :disabled="searchable"
+      prefix-icon="el-icon-connection"
+      suffix-icon="el-icon-search"
+      placeholder="输入喵喵种类查询"
+      @keyup.enter.native="searchBreeds">
+    </el-input>
+    <div style="height: 600px;">
+      <ve-liquidfill :data="liquidData" :settings="liquidSettings"></ve-liquidfill>
+    </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import { getTimestamp } from '@/utils/date/extend-dayjs';
 import catTable from './cat-table.vue';
 import dividerCollapse from '@/components/divider-collapse/index.vue';
@@ -47,6 +62,15 @@ const chart = [
   { key: 'radar', label: '雷达' },
 ];
 
+const liquidSettings = {
+  wave: [0.6, 0.3, 0.1],
+  seriesMap: {
+    search: {
+      color: ['red', 'green', 'yellow'],
+    },
+  },
+};
+
 export default {
   name: 'catBreeds',
   components: {
@@ -60,10 +84,30 @@ export default {
         columns,
         rows: [],
       },
-      dividerCollapse: [],
+      chartCollapse: [],
+      search: '',
+      searchable: false,
+      searchCollapse: [{
+        divider: {
+          title: 'cat&search',
+        },
+        collapse: [{
+          title: 'search内容介绍',
+          content: '检索输入关键词可检索到的喵喵种类',
+        }],
+      }],
+      liquidData: {
+        columns: ['breed', 'percent'],
+        rows: [{
+          breed: 'search',
+          percent: 0,
+        }],
+      },
+      liquidSettings,
     };
   },
   computed: {
+    ...mapState(['netWorkError']),
     ...mapState('moduleAnimals/cat', ['originData']),
     chartVisible() {
       return this.chartData.rows.length;
@@ -71,6 +115,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setGlobalMessage']),
+    ...mapActions('moduleAnimals/cat', ['getFilterBreeds']),
     drawCharts() {
       if (this.select.length > 10) {
         const timestamp = getTimestamp();
@@ -99,7 +144,30 @@ export default {
         };
         arr.push(obj);
       });
-      this.dividerCollapse = arr;
+      this.chartCollapse = arr;
+    },
+    searchBreeds() {
+      if (!this.search) {
+        return;
+      }
+      this.searchable = true;
+      const query = { q: this.search };
+      this.getFilterBreeds(query)
+        .then((response) => {
+          this.searchable = false;
+          this.liquidData.rows[0].percent = Number(response.length / this.originData.length)
+            .toFixed(2);
+        })
+        .catch((error) => {
+          this.searchable = false;
+          const timestamp = getTimestamp();
+          const mess = {
+            message: error.message || this.netWorkError.message,
+            type: 'error',
+            timestamp,
+          };
+          this.setGlobalMessage(mess);
+        });
     },
   },
   created() {

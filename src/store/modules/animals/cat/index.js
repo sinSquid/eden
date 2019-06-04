@@ -19,8 +19,8 @@ export default {
       }
       return proCall(result);
     },
-    async getFilterBreeds() {
-      const result = await api.getFilterBreeds();
+    async getFilterBreeds(store, params) {
+      const result = await api.getFilterBreeds(params);
       return proCall(result);
     },
   },

@@ -18,5 +18,5 @@ export default {
   // 获取所有喵喵品种
   getListBreeds: params => link.get('https://api.thecatapi.com/v1/breeds', params),
   // 筛选喵喵
-  getFilterBreeds: params => link.get('https://api.thecatapi.com/v1/breeds/search', params),
+  getFilterBreeds: params => link.get('https://api.thecatapi.com/v1/breeds/search', { params }),
 };

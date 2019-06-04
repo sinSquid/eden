@@ -3,6 +3,10 @@
     <el-table
       ref="catBreedsTable"
       :max-height="720"
+      v-loading="loading"
+      element-loading-text="loading"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(153, 169, 191, 0.6)"
       stripe
       :fit="false"
       tooltip-effect="light"
@@ -99,7 +103,15 @@ export default {
     return {
       columns,
       expand,
+      loading: true,
     };
+  },
+  watch: {
+    data(val) {
+      if (val.length) {
+        this.loading = false;
+      }
+    },
   },
   methods: {
     updateSelect(val) {
