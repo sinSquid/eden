@@ -2,18 +2,18 @@
   <div class="cat-table">
     <el-table
       ref="catBreedsTable"
-      :max-height="600"
+      :max-height="720"
       stripe
       :fit="false"
       tooltip-effect="light"
       size="small"
-      style="min-width: 600px;"
+      @selection-change="updateSelect"
       :data="data">
       <el-table-column
         type="selection"
         width="50">
       </el-table-column>
-      <el-table-column type="expand">
+      <el-table-column type="expand" width="30">
         <template slot-scope="props">
           <el-form label-position="right" inline class="table-expand">
             <el-form-item
@@ -61,7 +61,7 @@
 // 表格列
 const columns = [
   {
-    key: 'name', label: '名称', width: 140, sort: true, fixed: true,
+    key: 'name', label: '名称', width: 140, sort: true,
   },
   {
     key: 'origin', label: '产地', width: 80, sort: true,
@@ -89,12 +89,22 @@ export default {
       type: Array,
       default: () => [],
     },
+    select: {
+      required: true,
+      type: Array,
+      default: () => [],
+    },
   },
   data() {
     return {
       columns,
       expand,
     };
+  },
+  methods: {
+    updateSelect(val) {
+      this.$emit('update:select', val);
+    },
   },
 };
 </script>

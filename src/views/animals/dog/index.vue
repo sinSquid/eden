@@ -4,7 +4,7 @@
     <dog-breeds></dog-breeds>
     <divider-collapse :data="dividerCollapse[1]"></divider-collapse>
     <dog-views></dog-views>
-    <divider-collapse :data="dividerCollapse[1]"></divider-collapse>
+    <divider-collapse :data="dividerCollapse[2]"></divider-collapse>
     <dog-photos></dog-photos>
   </div>
 </template>

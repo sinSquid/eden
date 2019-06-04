@@ -20,6 +20,24 @@
   }
   #ani-cat {
     .cat-breeds {
+      min-width: 1300px;
+      .table {
+        min-width: 600px;
+      }
+      .chart {
+        min-width: 700px;
+        max-height: 720px;
+        overflow: auto;
+        .title {
+          position: absolute;
+          z-index: 1;
+          display: flex;
+          flex: 1;
+        }
+        .content {
+          margin-top: 50px;
+        }
+      }
     }
   }
 }
