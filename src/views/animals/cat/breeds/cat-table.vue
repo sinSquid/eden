@@ -16,8 +16,11 @@
       <el-table-column type="expand">
         <template slot-scope="props">
           <el-form label-position="right" inline class="table-expand">
-            <el-form-item label="商品名称">
-              <span>{{ props.row.experimental }}</span>
+            <el-form-item
+              v-for="ex in expand"
+              :key="props.row.id + ex.key"
+              :label="ex.label">
+              <span>{{ props.row[ex.key] }}</span>
             </el-form-item>
           </el-form>
         </template>
@@ -38,7 +41,7 @@
           <el-popover
             trigger="hover"
             :content="scope.row.description"
-            :width="200"
+            :width="240"
             popper-class="popover"
             :offset="100"
             :open-delay="200"
@@ -67,7 +70,7 @@ const columns = [
   { key: 'life_span', label: '寿命(Y)', width: 80 },
   { key: 'temperament', label: '特点', width: 180 },
 ];
-// expand
+// expand特性枚举
 const expand = [
   { key: 'experimental', label: '实验的' },
   { key: 'hairless', label: '无毛的' },
@@ -99,20 +102,19 @@ export default {
 <style lang="less">
   .cat-table {
     .table-expand {
-      font-size: 0;
+      font-size: 12px;
     }
     .table-expand label {
       width: 90px;
       color: #99a9bf;
     }
     .table-expand .el-form-item {
-      margin-right: 0;
-      margin-bottom: 0;
+      margin: 0;
       width: 50%;
     }
   }
   .popover {
-    color: rgba(255, 108, 2, 0.8);
+    color: black;
   }
   .cat-desc {
     cursor: pointer;

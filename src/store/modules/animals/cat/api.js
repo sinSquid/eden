@@ -1,4 +1,4 @@
-// dog api
+// cat api
 import axios from '@/lib/axios/index';
 import { apiKey } from '@/lib/auth/catapi';
 
@@ -11,12 +11,12 @@ import { apiKey } from '@/lib/auth/catapi';
  */
 
 // catapi需要key认证，不能和其他axios共用，需要拷贝一份独立axios
-const catAxios = _.cloneDeep(axios);
-axios.defaults.headers.common['x-api-key'] = apiKey;
+const link = _.cloneDeep(axios);
+link.defaults.headers.common['x-api-key'] = apiKey;
 
 export default {
   // 获取所有喵喵品种
-  getListBreeds: params => catAxios.get('https://api.thecatapi.com/v1/breeds', params),
+  getListBreeds: params => link.get('https://api.thecatapi.com/v1/breeds', params),
   // 筛选喵喵
-  getFilterBreeds: params => catAxios.get('https://api.thecatapi.com/v1/breeds/search', params),
+  getFilterBreeds: params => link.get('https://api.thecatapi.com/v1/breeds/search', params),
 };
