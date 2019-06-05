@@ -1,5 +1,6 @@
 import api from './api';
 import proCall from '@/utils/standard/action-util';
+import { getTimestamp } from '@/utils/date/extend-dayjs';
 
 export default {
   namespaced: true,
@@ -13,14 +14,23 @@ export default {
       if (status === 200 && data.length) {
         commit('setOriginData', data);
       } else {
+        const timestamp = getTimestamp();
         commit('setGlobalMessage',
-          { type: 'error', message: rootState.netWorkError },
+          { type: 'error', message: rootState.netWorkError.message, timestamp },
           { root: true });
       }
       return proCall(result);
     },
     async getFilterBreeds(store, params) {
       const result = await api.getFilterBreeds(params);
+      return proCall(result);
+    },
+    async getCategories() {
+      const result = await api.getCategories();
+      return proCall(result);
+    },
+    async getAllVotes(store, params) {
+      const result = await api.getAllVotes(params);
       return proCall(result);
     },
   },

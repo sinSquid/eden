@@ -39,9 +39,7 @@
       placeholder="输入喵喵种类查询"
       @keyup.enter.native="searchBreeds">
     </el-input>
-    <div style="height: 600px;">
-      <ve-liquidfill :data="liquidData" :settings="liquidSettings"></ve-liquidfill>
-    </div>
+    <ve-liquidfill :data="liquidData" :settings="liquidSettings"></ve-liquidfill>
   </div>
 </template>
 
@@ -66,7 +64,7 @@ const liquidSettings = {
   wave: [0.75, 0.4, 0.15],
   seriesMap: {
     search: {
-      color: ['#67C23A', '#E6A23C', '#DCDFE6'],
+      color: ['#67C23A', '#f37c26', '#DCDFE6'],
     },
   },
 };

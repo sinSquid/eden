@@ -86,7 +86,7 @@ const expand = [
   { key: 'hypoallergenic', label: '防过敏的' },
 ];
 export default {
-  name: 'cat-table',
+  name: 'catTable',
   props: {
     data: {
       required: true,
