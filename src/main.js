@@ -13,7 +13,7 @@ import '@/styles/index.less';
 import '@/lib/server/permission';
 
 window._ = _;
-window.big = BigNumber;
+window.Big = BigNumber;
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);

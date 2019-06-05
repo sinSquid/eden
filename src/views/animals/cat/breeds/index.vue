@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapActions } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 import { getTimestamp } from '@/utils/date/extend-dayjs';
 import catTable from './cat-table.vue';
 import dividerCollapse from '@/components/divider-collapse/index.vue';
@@ -63,10 +63,10 @@ const chart = [
 ];
 
 const liquidSettings = {
-  wave: [0.6, 0.3, 0.1],
+  wave: [0.75, 0.4, 0.15],
   seriesMap: {
     search: {
-      color: ['red', 'green', 'yellow'],
+      color: ['#67C23A', '#E6A23C', '#DCDFE6'],
     },
   },
 };
@@ -155,7 +155,7 @@ export default {
       this.getFilterBreeds(query)
         .then((response) => {
           this.searchable = false;
-          this.liquidData.rows[0].percent = Number(response.length / this.originData.length)
+          this.liquidData.rows[0].percent = Big(response.length / this.originData.length)
             .toFixed(2);
         })
         .catch((error) => {
