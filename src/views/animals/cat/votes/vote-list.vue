@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 import { getTimestamp } from '@/utils/date/extend-dayjs';
 
 const vote = [{
@@ -60,6 +60,9 @@ export default {
       carousel: vote,
     };
   },
+  computed: {
+    ...mapState(['netWorkError']),
+  },
   methods: {
     ...mapMutations(['setGlobalMessage']),
     ...mapActions('moduleAnimals/cat', ['getAllVotes']),
@@ -76,7 +79,7 @@ export default {
         })
         .catch((error) => {
           const timestamp = getTimestamp();
-          const mess = { message: error.message || '当前用户不存在vote数据', type: 'warning', timestamp };
+          const mess = { message: error.message || this.netWorkError.message, type: 'error', timestamp };
           this.setGlobalMessage(mess);
         });
     },

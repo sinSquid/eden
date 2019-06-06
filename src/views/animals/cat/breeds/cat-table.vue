@@ -6,7 +6,7 @@
       v-loading="loading"
       element-loading-text="loading"
       element-loading-spinner="el-icon-loading"
-      element-loading-background="rgba(153, 169, 191, 0.6)"
+      element-loading-background="rgba(153, 169, 191, 0.3)"
       stripe
       :fit="false"
       tooltip-effect="light"
@@ -98,20 +98,17 @@ export default {
       type: Array,
       default: () => [],
     },
+    loading: {
+      required: true,
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
       columns,
       expand,
-      loading: true,
     };
-  },
-  watch: {
-    data(val) {
-      if (val.length) {
-        this.loading = false;
-      }
-    },
   },
   methods: {
     updateSelect(val) {

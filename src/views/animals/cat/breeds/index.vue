@@ -2,7 +2,11 @@
   <div class="cat-breeds">
     <el-row type="flex" justify="start" :gutter="20">
       <el-col :span="12" class="table">
-        <cat-table :data="originData" :select.sync="select"></cat-table>
+        <cat-table
+          :data="originData"
+          :loading="loading"
+          :select.sync="select">
+        </cat-table>
       </el-col>
       <el-col :span="12" class="chart">
         <div class="title">
@@ -78,6 +82,7 @@ export default {
   data() {
     return {
       select: [],
+      loading: true,
       chartData: {
         columns,
         rows: [],
@@ -113,7 +118,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setGlobalMessage']),
-    ...mapActions('moduleAnimals/cat', ['getFilterBreeds']),
+    ...mapActions('moduleAnimals/cat', ['getListBreeds', 'getFilterBreeds']),
     drawCharts() {
       if (this.select.length > 10) {
         const timestamp = getTimestamp();
@@ -169,6 +174,13 @@ export default {
     },
   },
   created() {
+    this.getListBreeds()
+      .then(() => {
+        this.loading = false;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
     this.initCollapse();
   },
 };

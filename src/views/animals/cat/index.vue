@@ -44,10 +44,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions('moduleAnimals/cat', ['getFilterBreeds', 'getListBreeds']),
-  },
-  mounted() {
-    this.getListBreeds();
+    ...mapActions('moduleAnimals/cat', ['getFilterBreeds']),
   },
 };
 </script>
