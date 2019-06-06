@@ -9,7 +9,7 @@ import { mapState } from 'vuex';
 import { Loading } from 'element-ui';
 
 export default {
-  name: 'takeaway-platform',
+  name: 'app',
   data() {
     return {
       loading: '',

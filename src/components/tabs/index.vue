@@ -1,7 +1,7 @@
 <template>
   <el-tabs v-model="activeTab"
     @tab-click="updateRoute">
-    <el-tab-pane v-for="tab in tpTabs"
+    <el-tab-pane v-for="tab in tabs"
       :key="tab.value"
       :label="tab.label"
       :name="tab.value">
@@ -11,9 +11,9 @@
 
 <script>
 export default {
-  name: 'tp-tabs',
+  name: 'tabs',
   props: {
-    tpTabs: {
+    tabs: {
       required: true,
       type: Array,
       default: () => [],
@@ -30,7 +30,7 @@ export default {
     },
   },
   mounted() {
-    this.activeTab = this.tpTabs.find(e => e.path === this.$route.path).value;
+    this.activeTab = this.tabs.find(e => e.path === this.$route.path).value;
   },
 };
 </script>

@@ -24,7 +24,7 @@ import { getTimestamp } from '@/utils/date/extend-dayjs';
 import { validateUserName, validatePassword } from '@/utils/validator';
 
 export default {
-  name: 'tp-login',
+  name: 'eden-login',
   data() {
     return {
       isSignIn: false,

@@ -1,4 +1,4 @@
-# takeaway-platform
+# eden
 
 ## Project setup
 ```

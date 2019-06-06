@@ -1,5 +1,5 @@
 <template>
-  <div class="tp-header">
+  <div class="eden-header">
     <div class="logo"></div>
     <div class="content">
       <div class="network"></div>
@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'tp-header',
+  name: 'eden-header',
   computed: {},
   data() {
     return {};
@@ -26,7 +26,7 @@ export default {
 
 <style lang="less" scoped>
   @_logo:'~@/assets/images/logos';
-  .tp-header {
+  .eden-header {
     position: fixed;
     width: 100%;
     height: 40px;

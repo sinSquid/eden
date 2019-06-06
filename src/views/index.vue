@@ -1,11 +1,11 @@
 <template>
   <el-container>
     <el-header height="40px">
-      <tp-header></tp-header>
+      <eden-header></eden-header>
     </el-header>
     <el-container>
       <el-aside width="150px">
-        <tp-side-nav></tp-side-nav>
+        <eden-side-nav></eden-side-nav>
       </el-aside>
       <el-container>
         <el-main class="container-shell ui-bar">
@@ -17,14 +17,14 @@
 </template>
 
 <script>
-import TpHeader from '@/components/header/index.vue';
-import TpSideNav from '@/components/side-nav/index.vue';
+import edenHeader from '@/components/header/index.vue';
+import edenSideNav from '@/components/side-nav/index.vue';
 
 export default {
-  name: 'takeaway-platform',
+  name: 'eden',
   components: {
-    TpHeader,
-    TpSideNav,
+    edenHeader,
+    edenSideNav,
   },
   data() {
     return {};

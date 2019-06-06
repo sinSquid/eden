@@ -1,6 +1,6 @@
 <template>
  <div id="animals">
-   <tp-tabs :tp-tabs="aniTabs"></tp-tabs>
+   <eden-tabs :tabs="aniTabs"></eden-tabs>
    <keep-alive>
      <router-view></router-view>
    </keep-alive>
@@ -9,7 +9,7 @@
 
 <script>
 import moduleAnimals from '@/store/modules/animals';
-import TpTabs from '@/components/tp-tabs/index.vue';
+import edenTabs from '@/components/tabs/index.vue';
 import '@/styles/animals/index.less';
 
 const aniTabs = [{
@@ -25,7 +25,7 @@ const aniTabs = [{
 export default {
   name: 'animals',
   components: {
-    TpTabs,
+    edenTabs,
   },
   data() {
     return {

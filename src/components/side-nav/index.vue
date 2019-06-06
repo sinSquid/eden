@@ -1,5 +1,5 @@
 <template>
-  <div class="tp-side-nav">
+  <div class="eden-side-nav">
     <el-menu
       :default-active="defaultMenu">
       <template v-for="item in NavList">
@@ -18,7 +18,7 @@
 import { mainRoute, NavList } from '@/lib/config/Navigation';
 
 export default {
-  name: 'tp-side-nav',
+  name: 'eden-side-nav',
   data() {
     return {
       NavList,
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style lang="less">
-  .tp-side-nav {
+  .eden-side-nav {
     background-color: silver;
     width: 150px;
     position: fixed;
