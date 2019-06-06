@@ -4,13 +4,23 @@
       <el-form :model="userInfo" ref="loginForm" :rules="ruleValidate"
         label-width="80px" class="login-form">
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="userInfo.username" autocomplete="off"></el-input>
+          <el-input
+            v-model="userInfo.username"
+            autocomplete="off">
+          </el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
-          <el-input type="password" v-model="userInfo.password" autocomplete="off"></el-input>
+          <el-input
+            type="password"
+            v-model="userInfo.password"
+            @keyup.enter.native="lazyEnterSign"
+            autocomplete="off"></el-input>
         </el-form-item>
-        <el-button type="warning" :loading="isSignIn"
-          :disabled="isSignIn" @click="SignIn">
+        <el-button
+          type="warning"
+          :loading="isSignIn"
+          :disabled="isSignIn"
+          @click="SignIn">
           登 录
         </el-button>
       </el-form>
@@ -77,6 +87,17 @@ export default {
               this.setGlobalMessage(mess);
             });
         }, 1000);
+      });
+    },
+    lazyEnterSign() {
+      this.$refs.loginForm.validate((validate) => {
+        if (!validate) {
+          return;
+        }
+        const lazy = _.debounce(() => {
+          this.SignIn();
+        }, 300);
+        lazy();
       });
     },
   },

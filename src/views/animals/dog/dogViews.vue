@@ -3,7 +3,7 @@
     <el-row type="flex" justify="start">
       <el-col :span="4">
         <el-cascader
-          expand-trigger="hover"
+          :props="config"
           filterable
           placeholder="请选择你的狗子"
           :options="cascadeOptions"
@@ -57,6 +57,9 @@ export default {
       breedDogUrl: '',
       randomDogUrl: '',
       loading: true,
+      config: {
+        expandTrigger: 'hover',
+      },
     };
   },
   computed: {
