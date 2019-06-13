@@ -5,6 +5,7 @@ export default {
   namespaced: true,
   state: {
     originData: [],
+    originImages: [],
   },
   actions: {
     async getListBreeds({ commit }) {
@@ -27,10 +28,25 @@ export default {
       const result = await api.getAllVotes(params);
       return proCall(result);
     },
+    async getPublicImages({ commit }, params) {
+      const result = await api.getPublicImages(params);
+      const { status, data } = result || { status: 404, data: [] };
+      if (status === 200) {
+        commit('setOriginImages', data);
+      }
+      return proCall(result);
+    },
+    async createVote(store, params) {
+      const result = await api.createVote(params);
+      return proCall(result);
+    },
   },
   mutations: {
     setOriginData(state, payload) {
       state.originData = payload;
+    },
+    setOriginImages(state, payload) {
+      state.originImages = payload;
     },
   },
 };

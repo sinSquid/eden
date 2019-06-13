@@ -1,37 +1,28 @@
 <template>
   <div style="height: 800px;">
-    <el-row type="flex" justify="start" class="ui-mt-20">
-      <el-col :span="4">
-        <el-switch
-          class="ui-mt-40"
-          v-model="filter.value"
-          :active-text="filter.active"
-          :inactive-text="filter.inactive">
-        </el-switch>
-      </el-col>
-      <el-col :span="2">
-        <el-button
-          icon="el-icon-search"
-          class="ui-mt-30"
-          circle
-          @click="innerGetAllVotes">
-        </el-button>
-      </el-col>
-      <el-col :span="12" :offset="1">
-        <el-carousel
-          :interval="6000"
-          type="card"
-          height="200px"
-          indicator-position="none">
-          <el-carousel-item v-for="(cs, index) in carousel" :key="cs.id">
-            <p class="car-end">{{`${(index + 1)} / ${carousel.length}`}}</p>
-            <h4>{{ `image:${cs.image_id}` }}</h4>
-            <i :class="[cs.value ? 'el-icon-star-on' : 'el-icon-star-off', 'icon-start']"></i>
-            <p class="car-end">{{`NO:${cs.id}  at:${cs.created_at}`}}</p>
-          </el-carousel-item>
-        </el-carousel>
-      </el-col>
-    </el-row>
+    <el-input
+      v-model="search"
+      :maxlength="15"
+      placeholder="输入过滤内容"
+      show-word-limit
+      class="search-btn ui-mb-40"
+      clearable
+      :disabled="loading"
+      @keyup.enter.native="innerGetAllVotes"
+      suffix="el-icon-search">
+    </el-input>
+    <el-carousel
+      :interval="6000"
+      type="card"
+      height="200px"
+      indicator-position="none">
+      <el-carousel-item v-for="(cs, index) in carousel" :key="cs.id">
+        <p class="car-end">{{`${(index + 1)} / ${carousel.length}`}}</p>
+        <h4>{{ `image:${cs.image_id}` }}</h4>
+        <i :class="[cs.value ? 'el-icon-star-on' : 'el-icon-star-off', 'icon-start']"></i>
+        <p class="car-end">{{`NO:${cs.id}  at:${cs.created_at}`}}</p>
+      </el-carousel-item>
+    </el-carousel>
   </div>
 </template>
 
@@ -52,12 +43,9 @@ export default {
   name: 'voteList',
   data() {
     return {
-      filter: {
-        value: false,
-        active: 'only me',
-        inactive: 'for us',
-      },
+      search: '',
       carousel: vote,
+      loading: false,
     };
   },
   computed: {
@@ -67,7 +55,8 @@ export default {
     ...mapMutations(['setGlobalMessage']),
     ...mapActions('moduleAnimals/cat', ['getAllVotes']),
     innerGetAllVotes() {
-      this.getAllVotes(this.filter.value)
+      const params = { sub_id: this.search };
+      this.getAllVotes(params)
         .then((response) => {
           if (response.length) {
             this.carousel = response;

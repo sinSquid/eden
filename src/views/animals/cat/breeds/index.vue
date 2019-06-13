@@ -1,14 +1,14 @@
 <template>
-  <div class="cat-breeds">
+  <div class="cat-panel">
     <el-row type="flex" justify="start" :gutter="20">
-      <el-col :span="12" class="table">
+      <el-col :span="12" class="left">
         <cat-table
           :data="originData"
           :loading="loading"
           :select.sync="select">
         </cat-table>
       </el-col>
-      <el-col :span="12" class="chart">
+      <el-col :span="12" class="right charts">
         <div class="title">
           <el-button
             type="warning"
@@ -35,6 +35,7 @@
     <el-input
       :maxlength="20"
       clearable
+      @clear="liquidData.rows[0].percent = 0"
       class="search-btn"
       v-model="search"
       :disabled="searchable"
@@ -72,6 +73,8 @@ const liquidSettings = {
     },
   },
 };
+
+const backList = [0, 10];
 
 export default {
   name: 'catBreeds',
@@ -120,9 +123,12 @@ export default {
     ...mapMutations(['setGlobalMessage']),
     ...mapActions('moduleAnimals/cat', ['getListBreeds', 'getFilterBreeds']),
     drawCharts() {
-      if (this.select.length > 10) {
+      const len = this.select.length;
+      if (backList.includes(len)) {
         const timestamp = getTimestamp();
-        const mess = { message: '信息量过大，无法生成图表，最多选择10个', type: 'error', timestamp };
+        const message = len ? '信息量过大，无法生成图表，最多选择10个' : '请勾选左侧提供绘图数据';
+        const type = len ? 'error' : 'info';
+        const mess = { message, type, timestamp };
         this.setGlobalMessage(mess);
         return;
       }

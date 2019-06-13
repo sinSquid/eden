@@ -6,8 +6,9 @@
 * @Return: null
 */
 
-// tpRegular
+// Regular
 export default {
   username: /^[a-z0-9]{3,12}$/, // 3-12为字母、数字集合
   password: /^[a-z0-9_-]{6,18}$/, // 6-18数字、字母含下划线、横线
+  innerHundred: /^(\d{0,2}|100)$/, // 0-100(含null)
 };
