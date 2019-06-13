@@ -74,7 +74,7 @@ const liquidSettings = {
   },
 };
 
-const backList = [0, 10];
+const whiteList = { max: 10, min: 1 };
 
 export default {
   name: 'catBreeds',
@@ -124,10 +124,12 @@ export default {
     ...mapActions('moduleAnimals/cat', ['getListBreeds', 'getFilterBreeds']),
     drawCharts() {
       const len = this.select.length;
-      if (backList.includes(len)) {
+      const gt = len > whiteList.max;
+      const lt = len < whiteList.min;
+      if (gt || lt) {
         const timestamp = getTimestamp();
-        const message = len ? '信息量过大，无法生成图表，最多选择10个' : '请勾选左侧提供绘图数据';
-        const type = len ? 'error' : 'info';
+        const message = gt ? `信息量过大，无法生成图表，最多选择${whiteList.max}个` : '请勾选左侧提供绘图数据';
+        const type = gt ? 'error' : 'info';
         const mess = { message, type, timestamp };
         this.setGlobalMessage(mess);
         return;

@@ -12,7 +12,7 @@ body{
 }
 
 // 基本间距 s xm m xl l
-@spaces: 10, 20, 30, 40;
+@spaces: 5, 10, 15, 20, 25, 30, 35, 40;
 
 a {
   cursor: pointer;
@@ -77,6 +77,9 @@ each(@spaces, {
   .ui-ml-@{value} {
     margin-left: (@value + 0px);
   }
+  .ui-m-@{value} {
+    margin: (@value + 0px);
+  }
   .ui-pt-@{value} {
     padding-top: (@value + 0px);
   }
@@ -88,6 +91,9 @@ each(@spaces, {
   }
   .ui-pl-@{value} {
     padding-left: (@value + 0px);
+  }
+  .ui-p-@{value} {
+    padding: (@value + 0px);
   }
 });
 

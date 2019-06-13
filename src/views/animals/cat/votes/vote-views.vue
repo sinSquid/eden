@@ -221,16 +221,19 @@ export default {
       this.sub.lock = !this.sub.lock;
     },
     innerCreateVote(row) {
+      this.loading = true;
       const value = (row.rate - 1);
       const params = { image_id: row.id, sub_id: this.sub.id, value };
       const index = this.displayData.findIndex(e => e.id === row.id);
       this.createVote(params)
         .then(() => {
+          this.loading = false;
           this.displayData[index].back_rate = (value + 1);
           const timestamp = getTimestamp();
           this.setGlobalMessage({ message: '评分成功', type: 'success', timestamp });
         })
         .catch(() => {
+          this.loading = false;
           this.displayData[index].rate = row.back_rate;
           const timestamp = getTimestamp();
           this.setGlobalMessage({ message: '评分出错，请稍后再试', type: 'error', timestamp });
