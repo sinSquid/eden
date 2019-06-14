@@ -30,7 +30,6 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { getTimestamp } from '@/utils/date/extend-dayjs';
 import { validateUserName, validatePassword } from '@/utils/validator';
 
 export default {
@@ -82,9 +81,7 @@ export default {
           this.isSignIn = false;
           this.signIn(this.userInfo)
             .catch(() => {
-              const timestamp = getTimestamp();
-              const mess = _.assign({}, this.netWorkError, { timestamp });
-              this.setGlobalMessage(mess);
+              this.setGlobalMessage(this.netWorkError);
             });
         }, 1000);
       });

@@ -124,7 +124,6 @@
 <script>
 import { mapState, mapActions, mapMutations } from 'vuex';
 import { validateHundred } from '@/utils/validator';
-import { getTimestamp } from '@/utils/date/extend-dayjs';
 // 表格列
 const columns = [
   {
@@ -229,14 +228,12 @@ export default {
         .then(() => {
           this.loading = false;
           this.displayData[index].back_rate = (value + 1);
-          const timestamp = getTimestamp();
-          this.setGlobalMessage({ message: '评分成功', type: 'success', timestamp });
+          this.setGlobalMessage({ message: '评分成功', type: 'success' });
         })
         .catch(() => {
           this.loading = false;
           this.displayData[index].rate = row.back_rate;
-          const timestamp = getTimestamp();
-          this.setGlobalMessage({ message: '评分出错，请稍后再试', type: 'error', timestamp });
+          this.setGlobalMessage({ message: '评分出错，请稍后再试', type: 'error' });
         });
     },
   },

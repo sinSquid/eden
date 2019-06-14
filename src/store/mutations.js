@@ -1,6 +1,9 @@
+import { getTimestamp } from '@/utils/date/extend-dayjs';
+
 const mutations = {
   setGlobalMessage(state, payload) {
-    Object.assign(state.globalMessage, payload);
+    const timestamp = getTimestamp();
+    _.assign(state.globalMessage, payload, { timestamp });
   },
   openLoading(state, payload) {
     state.loading = payload;
@@ -9,10 +12,10 @@ const mutations = {
     state.loading = payload;
   },
   setGlobalLoading(state, payload) {
-    Object.assign(state.globalLoading, payload);
+    _.assign(state.globalLoading, payload);
   },
   setUserInfo(state, payload) {
-    Object.assign(state.userInfo, payload);
+    _.assign(state.userInfo, payload);
   },
   setUserToken(state, payload) {
     state.token = payload.token;

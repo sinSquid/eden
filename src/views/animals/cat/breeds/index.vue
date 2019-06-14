@@ -50,7 +50,6 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
-import { getTimestamp } from '@/utils/date/extend-dayjs';
 import catTable from './cat-table.vue';
 import dividerCollapse from '@/components/divider-collapse/index.vue';
 
@@ -127,11 +126,9 @@ export default {
       const gt = len > whiteList.max;
       const lt = len < whiteList.min;
       if (gt || lt) {
-        const timestamp = getTimestamp();
         const message = gt ? `信息量过大，无法生成图表，最多选择${whiteList.max}个` : '请勾选左侧提供绘图数据';
         const type = gt ? 'error' : 'info';
-        const mess = { message, type, timestamp };
-        this.setGlobalMessage(mess);
+        this.setGlobalMessage({ message, type });
         return;
       }
       const arr = [];
@@ -171,11 +168,9 @@ export default {
         })
         .catch((error) => {
           this.searchable = false;
-          const timestamp = getTimestamp();
           const mess = {
             message: error.message || this.netWorkError.message,
             type: 'error',
-            timestamp,
           };
           this.setGlobalMessage(mess);
         });

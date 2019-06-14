@@ -37,7 +37,6 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { getTimestamp } from '@/utils/date/extend-dayjs';
 import { elTagTypes } from '@/lib/element/config';
 
 const vote = [{
@@ -76,15 +75,13 @@ export default {
             });
             this.carousel = response;
           } else {
-            const timestamp = getTimestamp();
-            const mess = { message: '当前用户不存在vote数据', type: 'warning', timestamp };
+            const mess = { message: '当前用户不存在vote数据', type: 'warning' };
             this.setGlobalMessage(mess);
           }
         })
         .catch((error) => {
           this.loading = false;
-          const timestamp = getTimestamp();
-          const mess = { message: error.message || this.netWorkError.message, type: 'error', timestamp };
+          const mess = { message: error.message || this.netWorkError.message, type: 'error' };
           this.setGlobalMessage(mess);
         });
     },
@@ -97,13 +94,11 @@ export default {
           this.loading = false;
           const index = this.carousel.findIndex(e => e.id === item.id);
           this.carousel[index].value = value;
-          const timestamp = getTimestamp();
-          this.setGlobalMessage({ message: '更改评分成功', type: 'success', timestamp });
+          this.setGlobalMessage({ message: '更改评分成功', type: 'success' });
         })
         .catch(() => {
           this.loading = false;
-          const timestamp = getTimestamp();
-          this.setGlobalMessage({ message: '更改评分失败', type: 'error', timestamp });
+          this.setGlobalMessage({ message: '更改评分失败', type: 'error' });
         });
     },
     deleteVote() {
@@ -150,7 +145,7 @@ export default {
       margin: 10px;
     }
   }
-  .el-carousel__item:nth-child(2n) {  
+  .el-carousel__item:nth-child(2n) {
     background-color: #99a9bf;
   }
   .el-carousel__item:nth-child(2n+1) {

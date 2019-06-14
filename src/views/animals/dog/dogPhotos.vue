@@ -43,7 +43,6 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
-import { getTimestamp } from '@/utils/date/extend-dayjs';
 
 const volume = {
   value: 1,
@@ -106,9 +105,7 @@ export default {
             }
           })
           .catch(() => {
-            const timestamp = getTimestamp();
-            const mess = _.assign({}, this.netWorkError, { timestamp });
-            this.setGlobalMessage(mess);
+            this.setGlobalMessage(this.netWorkError);
           });
       } else {
         this.displayUrls = [];
