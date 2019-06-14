@@ -40,6 +40,10 @@ export default {
       const result = await api.createVote(params);
       return proCall(result);
     },
+    async deleteVote(store, params) {
+      const result = await api.deleteVote(params);
+      return proCall(result);
+    },
   },
   mutations: {
     setOriginData(state, payload) {

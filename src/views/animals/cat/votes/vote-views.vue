@@ -173,7 +173,7 @@ export default {
       sub: {
         lock: true,
         id: '',
-        tip: '评分时可通过该输入内容建立子用户收藏夹',
+        tip: '评分时可通过该输入内容建立子用户(sub_id)收藏夹',
       },
     };
   },
@@ -230,10 +230,11 @@ export default {
           this.displayData[index].back_rate = (value + 1);
           this.setGlobalMessage({ message: '评分成功', type: 'success' });
         })
-        .catch(() => {
+        .catch((error) => {
           this.loading = false;
           this.displayData[index].rate = row.back_rate;
-          this.setGlobalMessage({ message: '评分出错，请稍后再试', type: 'error' });
+          const mess = { message: error.response.data.message || '评分出错，请稍后再试', type: 'error' };
+          this.setGlobalMessage(mess);
         });
     },
   },

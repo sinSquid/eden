@@ -8,8 +8,7 @@
       class="search-btn ui-mb-40"
       clearable
       :disabled="loading"
-      @keyup.enter.native="innerGetAllVotes"
-      suffix="el-icon-search">
+      @keyup.enter.native="innerGetAllVotes">
     </el-input>
     <el-carousel
       :interval="10 * 1000"
@@ -27,7 +26,7 @@
         <h4>{{ `image:${cs.image_id}` }}</h4>
         <div class="flex bottom">
           <i :class="[cs.value ? 'on' : '', 'el-icon-star-off', 'icon']" @click="chgVote(cs)"></i>
-          <i class="el-icon-delete icon" @click="deleteVote"></i>
+          <i class="el-icon-delete icon" @click="innerDeleteVote(cs.id)"></i>
         </div>
         <p class="car-end">{{`NO:${cs.id}  at:${cs.created_at}`}}</p>
       </el-carousel-item>
@@ -62,7 +61,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setGlobalMessage']),
-    ...mapActions('moduleAnimals/cat', ['getAllVotes', 'createVote']),
+    ...mapActions('moduleAnimals/cat', ['getAllVotes', 'createVote', 'deleteVote']),
     innerGetAllVotes() {
       this.loading = true;
       this.getAllVotes({ sub_id: this.search })
@@ -81,7 +80,10 @@ export default {
         })
         .catch((error) => {
           this.loading = false;
-          const mess = { message: error.message || this.netWorkError.message, type: 'error' };
+          const mess = {
+            message: error.response.data.message || this.netWorkError.message,
+            type: 'error',
+          };
           this.setGlobalMessage(mess);
         });
     },
@@ -101,8 +103,19 @@ export default {
           this.setGlobalMessage({ message: '更改评分失败', type: 'error' });
         });
     },
-    deleteVote() {
-
+    innerDeleteVote(id) {
+      this.loading = true;
+      this.deleteVote(id)
+        .then(() => {
+          const index = this.carousel.findIndex(e => e.id === id);
+          this.carousel.splice(index, 1);
+          this.loading = false;
+          this.setGlobalMessage({ message: '删除成功', type: 'success' });
+        })
+        .catch((error) => {
+          this.loading = false;
+          this.setGlobalMessage({ message: error.response.data.message || '删除失败，请稍后再试', type: 'success' });
+        });
     },
   },
 };

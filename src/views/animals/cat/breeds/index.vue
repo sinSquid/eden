@@ -169,7 +169,7 @@ export default {
         .catch((error) => {
           this.searchable = false;
           const mess = {
-            message: error.message || this.netWorkError.message,
+            message: error.response.data.message || this.netWorkError.message,
             type: 'error',
           };
           this.setGlobalMessage(mess);

@@ -31,4 +31,6 @@ export default {
   // 创建一个评分
   createVote: params => axios.post('https://api.thecatapi.com/v1/votes', params,
     { headers: _.assign({}, headers, json) }),
+  // 删除一个评分
+  deleteVote: params => axios.delete(`https://api.thecatapi.com/v1/votes/${params}`, { headers }),
 };
