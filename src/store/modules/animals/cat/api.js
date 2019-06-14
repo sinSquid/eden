@@ -33,4 +33,12 @@ export default {
     { headers: _.assign({}, headers, json) }),
   // 删除一个评分
   deleteVote: params => axios.delete(`https://api.thecatapi.com/v1/votes/${params}`, { headers }),
+  // 获取喜爱的收藏夹
+  getFavourites: () => axios.get('https://api.thecatapi.com/v1/favourites', { headers }),
+  // 创建一个收藏
+  createFavourite: params => axios.post('https://api.thecatapi.com/v1/favourites', params,
+    { headers: _.assign({}, headers, json) }),
+  // 删除一个收藏
+  deleteFavourite: params => axios.delete(`https://api.thecatapi.com/v1/favourites/${params}`,
+    { headers }),
 };

@@ -7,6 +7,7 @@
       show-word-limit
       class="search-btn ui-mb-40"
       clearable
+      size="medium"
       :disabled="loading"
       @keyup.enter.native="innerGetAllVotes">
     </el-input>
@@ -31,12 +32,14 @@
         <p class="car-end">{{`NO:${cs.id}  at:${cs.created_at}`}}</p>
       </el-carousel-item>
     </el-carousel>
+    <fav-tree></fav-tree>
   </div>
 </template>
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { elTagTypes } from '@/lib/element/config';
+import favTree from './fav-tree.vue';
 
 const vote = [{
   country_code: 'CN',
@@ -49,6 +52,9 @@ const vote = [{
 
 export default {
   name: 'voteList',
+  components: {
+    favTree,
+  },
   data() {
     return {
       search: '',

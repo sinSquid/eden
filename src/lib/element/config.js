@@ -9,6 +9,7 @@ const elMessageOptions = {
 };
 
 const elTagTypes = ['', 'success', 'info', 'warning', 'danger'];
+const elBadgeTypes = ['', 'primary', 'success', 'warning', 'danger', 'info'];
 
 const elLoadingOptions = {
   loading: false,
@@ -23,4 +24,5 @@ export {
   elMessageOptions,
   elTagTypes,
   elLoadingOptions,
+  elBadgeTypes,
 };

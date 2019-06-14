@@ -44,6 +44,18 @@ export default {
       const result = await api.deleteVote(params);
       return proCall(result);
     },
+    async getFavourites() {
+      const result = await api.getFavourites();
+      return proCall(result);
+    },
+    async createFavourite(store, params) {
+      const result = await api.createFavourite(params);
+      return proCall(result);
+    },
+    async deleteFavourite(store, params) {
+      const result = await api.deleteFavourite(params);
+      return proCall(result);
+    },
   },
   mutations: {
     setOriginData(state, payload) {

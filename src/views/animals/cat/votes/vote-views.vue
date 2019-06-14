@@ -82,7 +82,7 @@
       tooltip-effect="light"
       size="small"
       @expand-change="loadImage"
-      :data="displayData">
+      :data="data">
       <el-table-column
         v-for="col in columns"
         :prop="col.key"
@@ -106,7 +106,7 @@
         align="right"
         label="评分"
         :width="80">
-        <template slot-scope=" { row }">
+        <template slot-scope="{ row }">
           <el-rate
             v-model="row.rate"
             :low-threshold="1"
@@ -117,12 +117,22 @@
           </el-rate>
         </template>
       </el-table-column>
+      <el-table-column
+        align="right"
+        label="收藏"
+        :width="60">
+        <template slot-scope="{ row }">
+          <i :class="[row.fav ? 'el-icon-folder-remove' : 'el-icon-folder-add', 'icon off']"
+            @click="chgFavourite(row)">
+          </i>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex';
+import { mapActions, mapMutations, mapState } from 'vuex';
 import { validateHundred } from '@/utils/validator';
 // 表格列
 const columns = [
@@ -169,7 +179,7 @@ export default {
       loading: false,
       sort,
       size,
-      displayData: [],
+      data: [],
       sub: {
         lock: true,
         id: '',
@@ -182,7 +192,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setGlobalMessage']),
-    ...mapActions('moduleAnimals/cat', ['getPublicImages', 'createVote']),
+    ...mapActions('moduleAnimals/cat', ['getPublicImages', 'createVote', 'createFavourite', 'deleteFavourite']),
     searchImages() {
       this.$refs.ctaImagesForm.validate((validate) => {
         if (!validate) {
@@ -198,8 +208,10 @@ export default {
               e.loaded = false;
               e.rate = 0;
               e.back_rate = 0;
+              e.fav = false;
+              e.favid = 0;
             });
-            this.displayData = arr;
+            this.data = arr;
           });
       });
     },
@@ -212,8 +224,8 @@ export default {
       }
     },
     loadedImage(id) {
-      const index = this.displayData.findIndex(e => e.id === id);
-      this.displayData[index].loaded = true;
+      const index = this.data.findIndex(e => e.id === id);
+      this.data[index].loaded = true;
       this.loading = false;
     },
     lockSub() {
@@ -223,18 +235,43 @@ export default {
       this.loading = true;
       const value = (row.rate - 1);
       const params = { image_id: row.id, sub_id: this.sub.id, value };
-      const index = this.displayData.findIndex(e => e.id === row.id);
+      const index = this.data.findIndex(e => e.id === row.id);
       this.createVote(params)
         .then(() => {
           this.loading = false;
-          this.displayData[index].back_rate = (value + 1);
+          this.data[index].back_rate = (value + 1);
           this.setGlobalMessage({ message: '评分成功', type: 'success' });
         })
         .catch((error) => {
           this.loading = false;
-          this.displayData[index].rate = row.back_rate;
+          this.data[index].rate = row.back_rate;
           const mess = { message: error.response.data.message || '评分出错，请稍后再试', type: 'error' };
           this.setGlobalMessage(mess);
+        });
+    },
+    chgFavourite(row) {
+      this.loading = true;
+      const { id, fav, favid } = row;
+      const params = fav ? favid : { image_id: id, sub_id: this.sub_id };
+      const tip = fav ? '删除' : '收藏';
+      const callBack = fav ? this.deleteFavourite(params) : this.createFavourite(params);
+      callBack
+        .then((response) => {
+          if (response.message === 'SUCCESS') {
+            const index = this.data.findIndex(e => e.id === row.id);
+            this.data[index].fav = !fav;
+            if (!fav) {
+              this.data[index].favid = response.id;
+            }
+            this.setGlobalMessage({ message: `${tip}成功`, type: 'success' });
+          }
+        })
+        .catch((error) => {
+          const mess = { message: error.response.data.message || `${tip}出错，请稍后再试`, type: 'error' };
+          this.setGlobalMessage(mess);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
   },
