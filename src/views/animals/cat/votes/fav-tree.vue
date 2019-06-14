@@ -25,7 +25,7 @@
 
 <script>
 import { mapMutations, mapActions } from 'vuex';
-import { elBadgeTypes } from '@/lib/element/config';
+// import { elBadgeTypes } from '@/lib/element/config';
 
 export default {
   name: 'fav-tree',
@@ -44,11 +44,9 @@ export default {
       this.loading = true;
       this.getFavourites({ sub_id: this.search })
         .then((response) => {
-          console.log(response);
           this.formatData(response);
         })
         .catch((error) => {
-          console.log(error);
           this.setGlobalMessage({ message: error.response.data.message || '获取收藏夹失败', type: 'error' });
         })
         .finally(() => {
