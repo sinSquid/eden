@@ -198,6 +198,7 @@ export default {
         if (!validate) {
           return;
         }
+        this.loading = true;
         this.getPublicImages(this.ruleForm)
           .then(() => {
             const arr = _.cloneDeep(this.originImages);
@@ -212,6 +213,9 @@ export default {
               e.favid = 0;
             });
             this.data = arr;
+          })
+          .finally(() => {
+            this.loading = false;
           });
       });
     },
@@ -238,15 +242,16 @@ export default {
       const index = this.data.findIndex(e => e.id === row.id);
       this.createVote(params)
         .then(() => {
-          this.loading = false;
           this.data[index].back_rate = (value + 1);
           this.setGlobalMessage({ message: '评分成功', type: 'success' });
         })
         .catch((error) => {
-          this.loading = false;
           this.data[index].rate = row.back_rate;
           const mess = { message: error.response.data.message || '评分出错，请稍后再试', type: 'error' };
           this.setGlobalMessage(mess);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     chgFavourite(row) {

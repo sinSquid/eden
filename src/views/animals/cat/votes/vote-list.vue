@@ -16,6 +16,7 @@
       type="card"
       height="200px"
       v-loading="loading"
+      element-loading-spinner="el-icon-loading"
       indicator-position="none">
       <el-carousel-item v-for="(cs, index) in carousel" :key="cs.id">
         <div class="flex top">
@@ -72,25 +73,26 @@ export default {
       this.loading = true;
       this.getAllVotes({ sub_id: this.search })
         .then((response) => {
-          this.loading = false;
-          if (response.length) {
+          if (_.isEmpty(response)) {
+            const mess = { message: '当前用户不存在vote数据', type: 'warning' };
+            this.setGlobalMessage(mess);
+          } else {
             response.forEach((e) => {
               const index = _.random((elTagTypes.length - 1));
               e.type = elTagTypes[index];
             });
             this.carousel = response;
-          } else {
-            const mess = { message: '当前用户不存在vote数据', type: 'warning' };
-            this.setGlobalMessage(mess);
           }
         })
         .catch((error) => {
-          this.loading = false;
           const mess = {
             message: error.response.data.message || this.netWorkError.message,
             type: 'error',
           };
           this.setGlobalMessage(mess);
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     chgVote(item) {
@@ -99,14 +101,15 @@ export default {
       const params = { image_id: item.image_id, sub_id: item.sub_id, value };
       this.createVote(params)
         .then(() => {
-          this.loading = false;
           const index = this.carousel.findIndex(e => e.id === item.id);
           this.carousel[index].value = value;
           this.setGlobalMessage({ message: '更改评分成功', type: 'success' });
         })
         .catch(() => {
-          this.loading = false;
           this.setGlobalMessage({ message: '更改评分失败', type: 'error' });
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
     innerDeleteVote(id) {
@@ -115,12 +118,13 @@ export default {
         .then(() => {
           const index = this.carousel.findIndex(e => e.id === id);
           this.carousel.splice(index, 1);
-          this.loading = false;
           this.setGlobalMessage({ message: '删除成功', type: 'success' });
         })
         .catch((error) => {
-          this.loading = false;
           this.setGlobalMessage({ message: error.response.data.message || '删除失败，请稍后再试', type: 'success' });
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
   },

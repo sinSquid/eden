@@ -9,7 +9,7 @@ const elMessageOptions = {
 };
 
 const elTagTypes = ['', 'success', 'info', 'warning', 'danger'];
-const elBadgeTypes = ['', 'primary', 'success', 'warning', 'danger', 'info'];
+const elBadgeTypes = ['primary', 'success', 'warning', 'danger', 'info'];
 
 const elLoadingOptions = {
   loading: false,
