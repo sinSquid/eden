@@ -60,6 +60,14 @@ export default {
       const result = await api.uploadImage(params);
       return proCall(result);
     },
+    async getUploadImages(store, params) {
+      const result = await api.getUploadImages(params);
+      return proCall(result);
+    },
+    async deleteUploadImage(store, params) {
+      const result = await api.deleteUploadImage(params);
+      return proCall(result);
+    },
   },
   mutations: {
     setOriginData(state, payload) {

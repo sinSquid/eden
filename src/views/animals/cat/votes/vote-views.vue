@@ -5,7 +5,7 @@
       :model="ruleForm"
       :rules="rules"
       ref="ctaImagesForm"
-      label="60px">
+      label-width="60px">
       <el-form-item label="Size" prop="size">
         <el-select
           class="item-limit"

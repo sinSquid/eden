@@ -19,7 +19,7 @@ const headers = {
 const json = { 'Content-Type': 'application/json' };
 export default {
   // 获取所有喵喵品种
-  getListBreeds: params => axios.get('https://api.thecatapi.com/v1/breeds', params),
+  getListBreeds: () => axios.get('https://api.thecatapi.com/v1/breeds'),
   // 筛选喵喵
   getFilterBreeds: params => axios.get('https://api.thecatapi.com/v1/breeds/search', { params }),
   // 获取系统中的活动类别
@@ -44,4 +44,9 @@ export default {
   // 上传一张喵喵的图片
   uploadImage: params => axios.post('https://api.thecatapi.com/v1/images/upload', params,
     { headers: _.assign({}, headers, json) }),
+  // 获取该用户上传的图片
+  getUploadImages: params => axios.get('https://api.thecatapi.com/v1/images', { headers, params }),
+  // 删除用户上传的图片
+  deleteUploadImage: params => axios.delete(`https://api.thecatapi.com/v1/images/${params}`,
+    { headers }),
 };
