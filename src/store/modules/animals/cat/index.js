@@ -56,6 +56,10 @@ export default {
       const result = await api.deleteFavourite(params);
       return proCall(result);
     },
+    async uploadImage(store, params) {
+      const result = await api.uploadImage(params);
+      return proCall(result);
+    },
   },
   mutations: {
     setOriginData(state, payload) {

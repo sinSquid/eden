@@ -4,6 +4,8 @@
     <cat-breeds></cat-breeds>
     <divider-collapse :data="dividerCollapse[1]"></divider-collapse>
     <cat-votes></cat-votes>
+    <divider-collapse :data="dividerCollapse[2]"></divider-collapse>
+    <cat-upload></cat-upload>
   </div>
 </template>
 
@@ -12,6 +14,7 @@ import { mapActions } from 'vuex';
 import dividerCollapse from '@/components/divider-collapse/index.vue';
 import catBreeds from './breeds/index.vue';
 import catVotes from './votes/index.vue';
+import catUpload from './upload/index.vue';
 
 export default {
   name: 'aniCat',
@@ -19,6 +22,7 @@ export default {
     catBreeds,
     dividerCollapse,
     catVotes,
+    catUpload,
   },
   data() {
     return {
@@ -40,6 +44,15 @@ export default {
           content: '操作所用账户关于喵喵的投票行为',
           link: 'https://docs.thecatapi.com/api-reference/votes/',
         }],
+      }, {
+        divider: {
+          title: 'cat&upload',
+        },
+        collapse: [{
+          title: 'upload内容介绍',
+          content: '操作所用账户关于喵喵的图片上传行为',
+          link: 'https://docs.thecatapi.com/api-reference/images/',
+        }],
       }],
     };
   },
@@ -48,7 +61,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

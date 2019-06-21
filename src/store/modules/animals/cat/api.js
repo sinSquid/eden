@@ -41,4 +41,7 @@ export default {
   // 删除一个收藏
   deleteFavourite: params => axios.delete(`https://api.thecatapi.com/v1/favourites/${params}`,
     { headers }),
+  // 上传一张喵喵的图片
+  uploadImage: params => axios.post('https://api.thecatapi.com/v1/images/upload', params,
+    { headers: _.assign({}, headers, json) }),
 };

@@ -255,8 +255,12 @@ export default {
         });
     },
     chgFavourite(row) {
-      this.loading = true;
       const { id, fav, favid } = row;
+      if (this.sub.id === 'undefined') {
+        this.setGlobalMessage({ message: '收藏夹默认为undefined，输入禁止该分组', type: 'error' });
+        return;
+      }
+      this.loading = true;
       const params = fav ? favid : { image_id: id, sub_id: this.sub_id };
       const tip = fav ? '删除' : '收藏';
       const callBack = fav ? this.deleteFavourite(params) : this.createFavourite(params);
