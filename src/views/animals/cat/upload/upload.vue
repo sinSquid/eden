@@ -1,25 +1,37 @@
 <template>
-  <el-upload
-    ref="catUpload"
-    action="https://api.thecatapi.com/v1/images/upload/"
-    :multiple="false"
-    :limit="limit"
-    :on-exceed="handleExceed"
-    :accept="accept"
-    :on-error="handleError"
-    :on-success="handleSuccess"
-    :headers="headers"
-    :file-list="fileList"
-    :auto-upload="false">
-    <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-    <el-button
-      style="margin-left: 10px;"
-      size="small" type="success"
-      @click="submitUpload">
-      上传到服务器
-    </el-button>
-    <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
-  </el-upload>
+  <div>
+    <el-input
+      class="search-btn ui-ml-40 ui-mb-20"
+      v-model="sub"
+      placeholder="该用户分组"
+      :maxlength="15"
+      size="small"
+      suffix-icon="el-icon-folder-opened"
+      clearable>
+    </el-input>
+    <el-upload
+      ref="catUpload"
+      action="https://api.thecatapi.com/v1/images/upload/"
+      :multiple="false"
+      :limit="limit"
+      :data="{sub_id: sub}"
+      :on-exceed="handleExceed"
+      :accept="accept"
+      :on-error="handleError"
+      :on-success="handleSuccess"
+      :headers="headers"
+      :file-list="fileList"
+      :auto-upload="false">
+      <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+      <el-button
+        class="ui-ml-20"
+        size="small" type="success"
+        @click="submitUpload">
+        上传到服务器
+      </el-button>
+      <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+    </el-upload>
+  </div>
 </template>
 
 <script>
@@ -36,6 +48,7 @@ export default {
       },
       accept: '.png,.jpg',
       limit: 1,
+      sub: '', // 用户下分组
     };
   },
   methods: {
@@ -62,7 +75,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-
-</style>

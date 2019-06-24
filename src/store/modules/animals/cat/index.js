@@ -66,7 +66,10 @@ export default {
     },
     async deleteUploadImage(store, params) {
       const result = await api.deleteUploadImage(params);
-      return proCall(result);
+      if (result.status === 200 || result.status === 204) {
+        return Promise.resolve(result.data || {});
+      }
+      return Promise.reject(result);
     },
   },
   mutations: {

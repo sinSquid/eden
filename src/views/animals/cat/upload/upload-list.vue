@@ -73,7 +73,7 @@
         label="操作"
         :width="80">
         <template slot-scope="{ row }">
-          <el-button @click="deleteImage(row.id)">delete</el-button>
+          <el-button size="mini" @click="deleteImage(row.id)">delete</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -153,7 +153,7 @@ export default {
         .then(() => {
           const index = this.data.findIndex(e => e.id === id);
           this.data.splice(index, 1);
-          this.setGlobalMessage({ message: '评分成功', type: 'success' });
+          this.setGlobalMessage({ message: '删除上传图片成功', type: 'success' });
         })
         .catch((error) => {
           const { response: { data: { message } } } = error;
