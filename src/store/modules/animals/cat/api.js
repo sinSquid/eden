@@ -49,4 +49,7 @@ export default {
   // 删除用户上传的图片
   deleteUploadImage: params => axios.delete(`https://api.thecatapi.com/v1/images/${params}`,
     { headers }),
+  // 获取上传图片分析结果
+  getImageAnalysis: params => axios.get(`https://api.thecatapi.com/v1/images/${params}/analysis`,
+    { headers }),
 };

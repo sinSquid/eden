@@ -58,6 +58,7 @@
       :fit="false"
       tooltip-effect="light"
       size="small"
+      :row-class-name="rowClassName"
       :data="data">
       <el-table-column
         v-for="col in columns"
@@ -74,6 +75,7 @@
         :width="80">
         <template slot-scope="{ row }">
           <el-button size="mini" @click="deleteImage(row.id)">delete</el-button>
+          <i class="el-icon-data-analysis" @click="analysisImage(row.id)"></i>
         </template>
       </el-table-column>
     </el-table>
@@ -122,7 +124,7 @@ export default {
   },
   methods: {
     ...mapMutations(['setGlobalMessage']),
-    ...mapActions('moduleAnimals/cat', ['getUploadImages', 'deleteUploadImage']),
+    ...mapActions('moduleAnimals/cat', ['getUploadImages', 'deleteUploadImage', 'getImageAnalysis']),
     searchImages() {
       this.$refs.ctaUploadForm.validate((validate) => {
         if (!validate) {
@@ -164,6 +166,28 @@ export default {
           this.loading = false;
         });
     },
+    analysisImage(id) {
+      this.loading = true;
+      this.getImageAnalysis(id)
+        .catch((error) => {
+          const { response: { message } } = error;
+          this.setGlobalMessage({ message, type: 'error' });
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    rowClassName({ rowIndex }) {
+      if (rowIndex % 2 === 1) {
+        return 'success-row';
+      }
+      return '';
+    },
   },
 };
 </script>
+<style lang="less">
+  .el-table .success-row {
+    background-color: #fdf5e6;
+  }
+</style>

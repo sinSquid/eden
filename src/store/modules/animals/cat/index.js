@@ -6,6 +6,7 @@ export default {
   state: {
     originData: [],
     originImages: [],
+    catAnalysis: {},
   },
   actions: {
     async getListBreeds({ commit }) {
@@ -71,6 +72,14 @@ export default {
       }
       return Promise.reject(result);
     },
+    async getImageAnalysis({ commit }, params) {
+      const result = await api.getImageAnalysis(params);
+      const { status, data } = result || { status: 404, data: [] };
+      if (status === 200 && data.length) {
+        commit('setImageAnalysis', data[0] || {});
+      }
+      return proCall(result);
+    },
   },
   mutations: {
     setOriginData(state, payload) {
@@ -78,6 +87,9 @@ export default {
     },
     setOriginImages(state, payload) {
       state.originImages = payload;
+    },
+    setImageAnalysis(state, payload) {
+      state.catAnalysis = payload;
     },
   },
 };
