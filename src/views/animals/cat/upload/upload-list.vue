@@ -72,10 +72,10 @@
       <el-table-column
         align="right"
         label="操作"
-        :width="80">
+        :width="130">
         <template slot-scope="{ row }">
           <el-button size="mini" @click="deleteImage(row.id)">delete</el-button>
-          <i class="el-icon-data-analysis" @click="analysisImage(row.id)"></i>
+          <i class="el-icon-data-analysis cus-icon-18 ui-ml-10" @click="analysisImage(row.id)"></i>
         </template>
       </el-table-column>
     </el-table>
@@ -90,9 +90,9 @@ const columns = [
   {
     key: 'id', label: 'ID', width: 120, sort: true, fixed: true,
   },
-  { key: 'sub_id', label: '所属用户', width: 120 },
-  { key: 'size', label: '尺寸', width: 100 },
-  { key: 'created_at', label: '创建时间', width: 160 },
+  { key: 'sub_id', label: '所属用户', width: 100 },
+  { key: 'size', label: '尺寸', width: 80 },
+  { key: 'created_at', label: '创建时间', width: 170 },
 ];
 const order = ['RANDOM', 'ASC', 'DESC'];
 

@@ -122,7 +122,7 @@
         label="收藏"
         :width="60">
         <template slot-scope="{ row }">
-          <i :class="[row.fav ? 'el-icon-folder-remove' : 'el-icon-folder-add', 'icon off']"
+          <i :class="[row.fav ? 'el-icon-folder-remove' : 'el-icon-folder-add', 'cus-icon-18']"
             @click="chgFavourite(row)">
           </i>
         </template>
@@ -315,15 +315,6 @@ export default {
     }
     .load-image {
       width: 240px;
-    }
-    .icon {
-     cursor: pointer;
-      &.on {
-        font-size: 24px;
-      }
-      &.off {
-        font-size: 20px;
-      }
     }
   }
 </style>
