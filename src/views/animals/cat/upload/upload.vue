@@ -32,6 +32,9 @@
       <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
     </el-upload>
     <ve-radar class="ui-mt-40" :data="chartData"></ve-radar>
+    <span>
+      {{`from:${catAnalysis.vendor || 'Amazon'}  date:${catAnalysis.created_at || '--'}`}}
+    </span>
   </div>
 </template>
 

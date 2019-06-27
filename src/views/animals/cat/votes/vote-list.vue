@@ -1,5 +1,5 @@
 <template>
-  <div style="height: 800px;">
+  <div class="vote-mht">
     <el-input
       v-model="search"
       :maxlength="15"

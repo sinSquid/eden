@@ -72,7 +72,7 @@
       <el-table-column
         align="right"
         label="操作"
-        :width="130">
+        :width="140">
         <template slot-scope="{ row }">
           <el-button size="mini" @click="deleteImage(row.id)">delete</el-button>
           <i class="el-icon-data-analysis cus-icon-18 ui-ml-10" @click="analysisImage(row.id)"></i>
@@ -88,7 +88,7 @@ import { validateHundred } from '@/utils/validator';
 // 表格列
 const columns = [
   {
-    key: 'id', label: 'ID', width: 120, sort: true, fixed: true,
+    key: 'id', label: 'ID', width: 100, sort: true, fixed: true,
   },
   { key: 'sub_id', label: '所属用户', width: 100 },
   { key: 'size', label: '尺寸', width: 80 },

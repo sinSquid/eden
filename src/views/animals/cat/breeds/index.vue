@@ -36,7 +36,7 @@
       :maxlength="20"
       clearable
       @clear="liquidData.rows[0].percent = 0"
-      class="search-btn"
+      class="search-btn ui-mt-10 ui-ml-20"
       v-model="search"
       :disabled="searchable"
       prefix-icon="el-icon-connection"
@@ -97,7 +97,7 @@ export default {
           title: 'cat&search',
         },
         collapse: [{
-          title: 'search内容介绍',
+          title: 'search内容介绍&水球图',
           content: '检索输入关键词可检索到的喵喵种类',
         }],
       }],

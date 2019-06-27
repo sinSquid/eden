@@ -41,5 +41,8 @@ export default {
 <style lang="less" scoped>
 .ui-div-coll-wh {
   width: 480px;
+  border: 1px solid #EBEEF5;
+  border-radius: 5px;
+  padding-left: 10px;
 }
 </style>

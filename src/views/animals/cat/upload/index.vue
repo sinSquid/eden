@@ -1,5 +1,5 @@
 <template>
-  <div class="cat-panel" style="height: 1200px;">
+  <div class="cat-panel upload-mht">
     <el-row type="flex" justify="start">
       <el-col :span="10" :offset="1" class="left">
         <upload-list></upload-list>
