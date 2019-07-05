@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import createPersistedState from 'vuex-persistedstate';
 import getters from '@/store/getters';
 import mutations from '@/store/mutations';
 import actions from '@/store/actions';
@@ -17,6 +18,10 @@ const userStatus = { // 0未登录，1登录，2隐匿
 };
 
 const netWorkError = { message: '网络错误,请稍后再试', type: 'error' };
+const config = {
+  key: 'vuexReset',
+  storage: window.sessionStorage,
+};
 
 Vue.use(Vuex);
 
@@ -31,4 +36,5 @@ export default new Vuex.Store({
   getters,
   mutations,
   actions,
+  plugins: [createPersistedState(config)],
 });
