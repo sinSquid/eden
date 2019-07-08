@@ -29,15 +29,26 @@ export default {
   },
   methods: {
     async signOut() {
+      await removeUserToken();
+      /* if (re) {
+        console.log('ok', re);
+      } else {
+        console.log(re);
+      } */
+      /* if (hasToken) {
+        const t1 = await removeUserToken();
+        const t2 = await sessionStorage.removeItem(this.vuexKey);
+        console.log(t1, t2);
+        this.$router.push({ path: '/login' });
+      } */
+    },
+    async removeStorage() {
       const hasToken = await getUserToken();
       if (hasToken) {
         await removeUserToken();
-        /* localStore.removeItem(this.vuexKey).then(() => {
-          setTimeout(() => {
-            this.$router.push({ path: '/login' });
-          }, 300);
-        }); */
       }
+      const result = await sessionStorage.removeItem(this.vuexKey);
+      return result;
     },
   },
 };

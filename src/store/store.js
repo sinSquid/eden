@@ -33,6 +33,7 @@ export default new Vuex.Store({
     userStatus,
     netWorkError,
     globalLoading: Object.assign({}, elLoadingOptions),
+    vuexKey,
   },
   getters,
   mutations,

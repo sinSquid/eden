@@ -15,6 +15,13 @@ const setUserToken = (val, config) => {
 
 const removeUserToken = () => {
   Cookie.remove(tokenKey);
+  return new Promise((resolve, reject) => {
+    if (getUserToken()) {
+      reject(new Error('removed fail'));
+    } else {
+      setTimeout(() => { resolve('success'); }, 8000);
+    }
+  });
 };
 
 export {
