@@ -1,6 +1,6 @@
 import api from '@/store/api';
 import router from '@/router';
-import { setToken } from '@/lib/server/token';
+import { setUserToken } from '@/lib/store/cookie';
 import proCall from '@/utils/standard/action-util';
 
 const actions = {
@@ -13,7 +13,7 @@ const actions = {
       if (code === 0) {
         commit('setUserInfo', data);
         commit('setUserToken', { token });
-        setToken(token);
+        setUserToken(data.username, token);
         router.push({ path: '/' });
       } else {
         commit('setGlobalMessage', { message, type: 'error', timestamp });

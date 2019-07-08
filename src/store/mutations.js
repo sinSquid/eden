@@ -3,7 +3,7 @@ import { getTimestamp } from '@/utils/date/extend-dayjs';
 const mutations = {
   setGlobalMessage(state, payload) {
     const timestamp = getTimestamp();
-    _.assign(state.globalMessage, payload, { timestamp });
+    _.assign(state.globalMessage, { timestamp }, payload);
   },
   openLoading(state, payload) {
     state.loading = payload;

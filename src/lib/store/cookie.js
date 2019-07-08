@@ -1,23 +1,24 @@
 import Cookie from 'js-cookie';
 
+const tokenKey = 'eden'; // cookie
 /**
  * @Description: js-cookie获取、设置、移除cookie，expires不设置则默认cookie有效期为会话
  * @Author: sinSquid
  * @date: 2019/5/16
  */
 
-const getToken = key => Cookie.get(key);
+const getUserToken = () => Cookie.get(tokenKey);
 
-const setToken = (key, val, config) => {
-  Cookie.set(key, val, config);
+const setUserToken = (val, config) => {
+  Cookie.set(tokenKey, val, config);
 };
 
-const removeToken = (key) => {
-  Cookie.remove(key);
+const removeUserToken = () => {
+  Cookie.remove(tokenKey);
 };
 
 export {
-  getToken,
-  setToken,
-  removeToken,
+  getUserToken,
+  setUserToken,
+  removeUserToken,
 };

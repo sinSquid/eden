@@ -2,30 +2,51 @@
   <div class="eden-header">
     <div class="logo"></div>
     <div class="content">
-      <div class="network"></div>
       <div class="user">
-        <div class="avatar"></div>
+        <div :class="userInfo.avatar"></div>
         <div class="username">
-          <span>temo</span>
+          <span>{{ userInfo.username }}</span>
         </div>
       </div>
-      <div class="sign-out"></div>
+      <i class="el-icon-switch-button cus-icon-24 ui-mt-15"
+        @click="signOut">
+      </i>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+import { getUserToken, removeUserToken } from '@/lib/store/cookie';
+
 export default {
   name: 'eden-header',
-  computed: {},
+  computed: {
+    ...mapState(['userInfo', 'vuexKey']),
+  },
   data() {
     return {};
+  },
+  methods: {
+    async signOut() {
+      const hasToken = await getUserToken();
+      if (hasToken) {
+        await removeUserToken();
+        /* localStore.removeItem(this.vuexKey).then(() => {
+          setTimeout(() => {
+            this.$router.push({ path: '/login' });
+          }, 300);
+        }); */
+      }
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
   @_logo:'~@/assets/images/logos';
+  @avatar:'~@/assets/images/avatar';
+  @index: 1, 2, 3, 4, 5, 6, 7, 8, 9;
   .eden-header {
     position: fixed;
     width: 100%;
@@ -39,37 +60,39 @@ export default {
       width: inherit;
       height: 40px;
       margin-left: 24px;
-      background: url("@{_logo}/vimeo.svg") no-repeat;
+      background: url("@{_logo}/badoo.svg") no-repeat;
       background-size: 40px;
     }
     .content {
       width: 320px;
       max-width: 320px;
-      margin-right: 10px;
+      margin-right: 40px;
       display: flex;
       flex: auto;
-      .network {
-        width: 40px;
-        background: url("@{_logo}/deviantart.svg") no-repeat;
-        background-size: 40px;
-      }
+      justify-content: flex-end;
       .user {
         margin-left: 10px;
         width: 100px;
         display: flex;
-        .avatar {
-          width: 40px;
-          background: url("@{_logo}/vine.svg") no-repeat;
-          background-size: 40px;
-        }
+        each(@index, {
+          .avatar@{value} {
+            cursor: pointer;
+            width: 40px;
+            background: url("@{avatar}/avatar@{value}.svg") no-repeat;
+            background-size: 40px;
+          }
+        })
         .username {
           margin-left: 10px;
-          position: relative;
+          cursor: pointer;
           span {
-            position:absolute;
-            bottom:0;
-            padding:0;
-            margin:0;
+            position: absolute;
+            bottom: 0;
+            padding: 0;
+            margin: 0;
+            &:hover {
+              color: #2db7f5;
+            }
           }
         }
       }
