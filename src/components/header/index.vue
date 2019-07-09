@@ -17,7 +17,7 @@
 
 <script>
 import { mapState } from 'vuex';
-import { getUserToken, removeUserToken } from '@/lib/store/cookie';
+import { removeUserToken } from '@/lib/store/cookie';
 
 export default {
   name: 'eden-header',
@@ -30,25 +30,21 @@ export default {
   methods: {
     async signOut() {
       await removeUserToken();
-      /* if (re) {
-        console.log('ok', re);
-      } else {
-        console.log(re);
-      } */
-      /* if (hasToken) {
-        const t1 = await removeUserToken();
-        const t2 = await sessionStorage.removeItem(this.vuexKey);
-        console.log(t1, t2);
-        this.$router.push({ path: '/login' });
-      } */
+      await this.removeStorage();
+      this.$router.push({ path: '/login' });
     },
-    async removeStorage() {
-      const hasToken = await getUserToken();
-      if (hasToken) {
-        await removeUserToken();
-      }
-      const result = await sessionStorage.removeItem(this.vuexKey);
-      return result;
+    removeStorage() {
+      sessionStorage.removeItem(this.vuexKey);
+      const vuex = sessionStorage.getItem(this.vuexKey);
+      return new Promise((resolve, reject) => {
+        if (vuex) {
+          reject(new Error('vuex preset fail'));
+        } else {
+          setTimeout(() => {
+            resolve('success');
+          }, 1500);
+        }
+      });
     },
   },
 };

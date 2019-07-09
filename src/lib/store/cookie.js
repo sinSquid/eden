@@ -19,7 +19,7 @@ const removeUserToken = () => {
     if (getUserToken()) {
       reject(new Error('removed fail'));
     } else {
-      setTimeout(() => { resolve('success'); }, 8000);
+      resolve('success');
     }
   });
 };

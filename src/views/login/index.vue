@@ -1,18 +1,18 @@
 <template>
   <div class="login-back">
     <div class="login-container">
-      <el-form :model="userInfo" ref="loginForm" :rules="ruleValidate"
+      <el-form :model="user" ref="loginForm" :rules="ruleValidate"
         label-width="80px" class="login-form">
         <el-form-item label="用户名" prop="username">
           <el-input
-            v-model="userInfo.username"
+            v-model="user.username"
             autocomplete="off">
           </el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input
             type="password"
-            v-model="userInfo.password"
+            v-model="user.password"
             @keyup.enter.native="lazyEnterSign"
             autocomplete="off"></el-input>
         </el-form-item>
@@ -55,10 +55,14 @@ export default {
           },
         ],
       },
+      user: {
+        username: '',
+        password: '',
+      },
     };
   },
   computed: {
-    ...mapState(['userInfo', 'netWorkError']),
+    ...mapState(['netWorkError']),
   },
   methods: {
     ...mapMutations(['setGlobalMessage']),
@@ -79,7 +83,7 @@ export default {
         }
         setTimeout(() => {
           this.isSignIn = false;
-          this.signIn(this.userInfo)
+          this.signIn(this.user)
             .catch(() => {
               this.setGlobalMessage(this.netWorkError);
             });

@@ -16,7 +16,7 @@ const userStatus = { // 0未登录，1登录，2隐匿
   online: 1,
   hidden: 2,
 };
-const vuexKey = 'vuexResetForage';
+const vuexKey = 'vuexResetSession';
 
 const netWorkError = { message: '网络错误,请稍后再试', type: 'error' };
 const config = {
