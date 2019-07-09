@@ -21,6 +21,11 @@ const NavList = [
     value: 'animals',
     url: '/animals',
     icon: 'icon4',
+  }, {
+    label: '健康中心',
+    value: 'health',
+    url: '/health',
+    icon: 'icon5',
   },
 ];
 
@@ -44,6 +49,18 @@ const mainRoute = [
       }, {
         value: 'cat',
         label: 'cat',
+      },
+    ],
+  }, {
+    value: 'health',
+    label: 'health',
+    children: [
+      {
+        value: 'doctor',
+        label: 'doctor',
+      }, {
+        value: 'clinical',
+        label: 'clinical',
       },
     ],
   },

@@ -57,6 +57,23 @@ export default new Router({
             meta: { title: 'cat', icon: 'cat', noCache: true },
           }],
         },
+        {
+          path: '/health',
+          name: 'health',
+          component: () => import('@/views/health/index.vue'),
+          redirect: '/health/doctor',
+          children: [{
+            path: 'doctor',
+            name: 'doctor',
+            component: () => import('@/views/health/doctor/index.vue'),
+            meta: { title: 'doctor', noCache: true },
+          }, {
+            path: 'clinical',
+            name: 'clinical',
+            component: () => import('@/views/health/clinical/index.vue'),
+            meta: { title: 'clinical', noCache: true },
+          }],
+        },
       ],
     },
     {
