@@ -108,7 +108,6 @@ export default {
       this.setDoctor(this.ruleForm);
       this.searchDoctors()
         .catch((error) => {
-          console.log(error);
           const { response: { data: { meta: { message } } } } = error;
           this.setGlobalMessage({ message, type: 'error' });
         });
