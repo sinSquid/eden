@@ -20,6 +20,7 @@ module.exports = {
         'e',
       ],
     }],
+    'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
   },
   parserOptions: {
     parser: 'babel-eslint',

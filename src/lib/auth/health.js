@@ -1,5 +1,4 @@
 const app = 'eden';
-const credentials = '8d765548c99fdb980289aee2adbddbcc';
 
 const doctor = {
   name: `${app}'App`,
@@ -8,8 +7,9 @@ const doctor = {
   state: 'live',
 };
 
+const clinical = {};
+
 export {
-  app,
   doctor,
-  credentials,
+  clinical,
 };
