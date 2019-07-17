@@ -15,7 +15,7 @@ export default {
       sort: '',
       fields: '',
       skip: 1,
-      limit: 3,
+      limit: 10,
     },
     origin: {
       data: [],

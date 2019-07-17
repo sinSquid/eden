@@ -1,36 +1,51 @@
 <template>
-  <el-table
-    ref="doctorInfoTable"
-    :max-height="640"
-    v-loading="loading"
-    element-loading-text="loading"
-    element-loading-spinner="el-icon-loading"
-    element-loading-background="rgba(153, 169, 191, 0.1)"
-    stripe
-    tooltip-effect="light"
-    size="small"
-    :data="displayData">
-    <el-table-column
-      v-for="col in columns"
-      :prop="col.key"
-      :key="col.key"
-      :fixed="col.fixed"
-      :sortable="col.sort"
-      :label="col.label"
-      :width="col.width">
-    </el-table-column>
-  </el-table>
+  <div>
+    <el-table
+      ref="doctorInfoTable"
+      :max-height="420"
+      :height="420"
+      v-loading="loading"
+      element-loading-text="loading"
+      element-loading-spinner="el-icon-loading"
+      element-loading-background="rgba(153, 169, 191, 0.1)"
+      stripe
+      tooltip-effect="light"
+      size="small"
+      :data="displayData">
+      <el-table-column
+        v-for="col in columns"
+        :prop="col.key"
+        :key="col.key"
+        :fixed="col.fixed"
+        :sortable="col.sort"
+        :label="col.label"
+        :width="col.width">
+      </el-table-column>
+      <el-table-column
+        label="Info"
+        width="100">
+        <i class="el-icon-user cus-icon-16"></i>
+      </el-table-column>
+    </el-table>
+    <el-pagination
+      small
+      :page-size.sync="pageSize"
+      :current-page.sync="currentPage"
+      :layout="layout"
+      :total="totalPage"
+      :page-sizes="pageScale">
+    </el-pagination>
+  </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations, mapActions } from 'vuex';
 
 const columns = [
   {
     key: 'npi', label: 'Nppess', width: 120, sort: true, fixed: true,
   },
-  { key: 'info', label: 'Info', width: 100 },
-  { key: 'operation', label: 'Operation', width: 120 },
+  { key: 'name', label: 'Name', width: 160 },
 ];
 
 export default {
@@ -39,26 +54,58 @@ export default {
     return {
       columns,
       loading: false,
+      layout: 'total, sizes, prev, pager, next, jumper',
+      pageScale: [10, 20, 30, 40],
     };
   },
   computed: {
-    ...mapState('moduleHealth/doctor', ['origin']),
+    ...mapState('moduleHealth/doctor', ['origin', 'doctor', 'limits']),
 
     displayData() {
       const data = [];
-      this.origin.data.forEach((e) => {
-        const obj = _.pick(e, ['npi', 'profile']);
-        for (const [key, value] of _.toPairs(e)) {
-          if (_.isArray(value)) {
-            obj[key] = value.length;
-          }
-        }
+      for (const source of this.origin.data) {
+        const obj = _.pick(source, ['uid', 'npi', 'profile']);
+        obj.name = source.profile.slug;
         data.push(obj);
-      });
+      }
       return data;
     },
     totalPage() {
       return this.origin.total;
+    },
+    pageSize: {
+      get() {
+        return this.doctor.limit;
+      },
+      set(limit) {
+        this.setDoctor({ limit });
+        this.$nextTick(() => {
+          this.innerSearchDoctors();
+        });
+      },
+    },
+    currentPage: {
+      get() {
+        return this.doctor.skip;
+      },
+      set(skip) {
+        this.setDoctor({ skip });
+        this.$nextTick(() => {
+          this.innerSearchDoctors();
+        });
+      },
+    },
+  },
+  methods: {
+    ...mapMutations('moduleHealth/doctor', ['setDoctor']),
+    ...mapActions('moduleHealth/doctor', ['searchDoctors']),
+
+    innerSearchDoctors() {
+      this.loading = true;
+      this.searchDoctors()
+        .finally(() => {
+          this.loading = false;
+        });
     },
   },
 };
