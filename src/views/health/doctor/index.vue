@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="heal-doctor">
     <divider-collapse :data="dividerCollapse[0]"></divider-collapse>
     <doctor-info></doctor-info>
   </div>

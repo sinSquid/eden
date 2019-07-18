@@ -24,7 +24,11 @@
       <el-table-column
         label="Info"
         width="100">
-        <i class="el-icon-user cus-icon-16"></i>
+        <template slot-scope="{ row: { uid } }">
+          <i class="el-icon-user cus-icon-16"
+            @click="innerSetDetail(uid)">
+          </i>
+        </template>
       </el-table-column>
     </el-table>
     <el-pagination
@@ -59,7 +63,7 @@ export default {
     };
   },
   computed: {
-    ...mapState('moduleHealth/doctor', ['origin', 'doctor', 'limits']),
+    ...mapState('moduleHealth/doctor', ['origin', 'doctor', 'limits', 'detail']),
 
     displayData() {
       const data = [];
@@ -79,9 +83,7 @@ export default {
       },
       set(limit) {
         this.setDoctor({ limit });
-        this.$nextTick(() => {
-          this.innerSearchDoctors();
-        });
+        this.innerSearchDoctors();
       },
     },
     currentPage: {
@@ -89,15 +91,16 @@ export default {
         return this.doctor.skip;
       },
       set(skip) {
+        if (skip === this.doctor.skip) {
+          return;
+        }
         this.setDoctor({ skip });
-        this.$nextTick(() => {
-          this.innerSearchDoctors();
-        });
+        this.innerSearchDoctors();
       },
     },
   },
   methods: {
-    ...mapMutations('moduleHealth/doctor', ['setDoctor']),
+    ...mapMutations('moduleHealth/doctor', ['setDoctor', 'setDetail']),
     ...mapActions('moduleHealth/doctor', ['searchDoctors']),
 
     innerSearchDoctors() {
@@ -106,6 +109,11 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+    innerSetDetail(id) {
+      const index = this.origin.data.findIndex(e => e.uid === id);
+      const detail = _.pick(this.origin.data[index], _.keys(this.detail));
+      this.setDetail(detail);
     },
   },
 };

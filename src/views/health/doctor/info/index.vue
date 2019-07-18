@@ -6,7 +6,8 @@
     <el-col :span="8" class="left">
       <info-table></info-table>
     </el-col>
-    <el-col :span="11" class="right">
+    <el-col :span="10" :offset="1" class="right">
+      <info-detail></info-detail>
     </el-col>
   </el-row>
 </template>
@@ -14,12 +15,14 @@
 <script>
 import infoForm from './info-form.vue';
 import infoTable from './info-table.vue';
+import infoDetail from './info-detail.vue';
 
 export default {
   name: 'doctor-info',
   components: {
     infoForm,
     infoTable,
+    infoDetail,
   },
 };
 </script>

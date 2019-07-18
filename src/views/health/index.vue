@@ -1,5 +1,5 @@
 <template>
-  <div id="health">
+  <div class="health">
     <eden-tabs :tabs="heaTabs"></eden-tabs>
     <keep-alive>
       <router-view></router-view>

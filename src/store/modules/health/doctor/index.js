@@ -21,6 +21,17 @@ export default {
       data: [],
       total: 0,
     },
+    detail: {
+      educations: [],
+      insurances: [],
+      licenses: [],
+      npi: '',
+      practices: [],
+      profile: [],
+      ratings: [],
+      specialties: [],
+      uid: '',
+    },
   },
   actions: {
     async searchDoctors({ state, commit }) {
@@ -42,6 +53,9 @@ export default {
     },
     setOriginData(state, payload) {
       _.assign(state.origin, payload);
+    },
+    setDetail(state, payload) {
+      state.detail = payload;
     },
   },
 };
