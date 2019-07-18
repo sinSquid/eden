@@ -113,7 +113,7 @@ export default {
         });
     },
     resetForm() {
-      this.$refs.doctorForm.resetForm();
+      this.$refs.doctorForm.resetFields();
     },
   },
 };
