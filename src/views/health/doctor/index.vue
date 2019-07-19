@@ -2,18 +2,21 @@
   <div class="heal-doctor">
     <divider-collapse :data="dividerCollapse[0]"></divider-collapse>
     <doctor-info></doctor-info>
+    <doctor-practice></doctor-practice>
   </div>
 </template>
 
 <script>
 import dividerCollapse from '@/components/divider-collapse/index.vue';
 import doctorInfo from './info/index.vue';
+import doctorPractice from './practice/index.vue';
 
 export default {
   name: 'hea-doctor',
   components: {
     dividerCollapse,
     doctorInfo,
+    doctorPractice,
   },
   data() {
     return {
