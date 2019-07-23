@@ -59,8 +59,8 @@ const mainRoute = [
         value: 'doctor',
         label: 'doctor',
       }, {
-        value: 'clinical',
-        label: 'clinical',
+        value: 'fda',
+        label: 'fda',
       },
     ],
   },

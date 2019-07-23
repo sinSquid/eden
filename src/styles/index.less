@@ -63,6 +63,14 @@ li {
   position: relative;
 }
 
+.ui-dis-flex {
+  display: flex;
+  flex: 1;
+  &.end {
+    justify-content: flex-end;
+  }
+}
+
 // 生成 margin/padding 各个方面的各种常用间距
 each(@spaces, {
   .ui-mt-@{value} {

@@ -7,9 +7,14 @@ const doctor = {
   state: 'live',
 };
 
+const fda = {
+  api_key: 'ykaTsTExSf6YZbuzvtYdWNjyG4RrAp8WWBB2MGPe',
+};
+
 const clinical = {};
 
 export {
   doctor,
   clinical,
+  fda,
 };

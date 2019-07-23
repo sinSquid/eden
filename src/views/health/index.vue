@@ -17,9 +17,9 @@ const heaTabs = [{
   label: 'doctor',
   path: '/health/doctor',
 }, {
-  value: 'clinical',
-  label: 'clinical',
-  path: '/health/clinical',
+  value: 'fda',
+  label: 'FDA',
+  path: '/health/fda',
 }];
 
 export default {

@@ -2,8 +2,7 @@
   <div>
     <el-table
       ref="doctorInfoTable"
-      :max-height="420"
-      :height="420"
+      :height="640"
       v-loading="loading"
       element-loading-text="loading"
       element-loading-spinner="el-icon-loading"

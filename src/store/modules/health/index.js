@@ -1,4 +1,5 @@
 import doctor from './doctor';
+import fda from './fda';
 
 export default {
   name: 'moduleHealth',
@@ -15,5 +16,6 @@ export default {
   },
   modules: {
     doctor,
+    fda,
   },
 };
