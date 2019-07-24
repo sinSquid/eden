@@ -99,7 +99,7 @@ export default {
           scheduler[gp.index] = yield this.genLoadRender(scheduler[gp.index - 1], gp);
         }
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       }
     },
     schedulerLoad(task) {
