@@ -9,6 +9,7 @@ const params = {
 export default {
   namespaced: true,
   state: {
+    activeTab: 'description',
     food: {
       params,
       meta: {},
@@ -43,6 +44,9 @@ export default {
     setFDAEvent(state, paylaod) {
       const data = _.cloneDeep(paylaod);
       _.assign(state[paylaod.type], _.omit(data, ['type']));
+    },
+    setActiveTab(state, payload) {
+      state.activeTab = payload.tab;
     },
   },
 };
