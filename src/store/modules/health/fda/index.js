@@ -3,7 +3,10 @@ import proCall from '@/utils/standard/action-util';
 
 const params = {
   skip: 1, // 当前页
-  limit: 0, // 获取数量
+  limit: 5, // 获取数量
+  search: '', // 过滤参数
+  // count: 0, // 计数某个关键字
+  sort: '', // 按字段排序 asc、desc
 };
 
 export default {
@@ -25,7 +28,8 @@ export default {
   },
   actions: {
     // 食品与药品区分枚举，type:food、drug
-    async getFDAEvent({ state, commit }, type) {
+    async getFDAEvent({ state, commit }, sourceType) {
+      const type = sourceType || state.activeTab;
       const param = { type };
       for (const [key, value] of _.toPairs(state[type].params)) {
         if (value !== '') {
@@ -47,6 +51,10 @@ export default {
     },
     setActiveTab(state, payload) {
       state.activeTab = payload.tab;
+    },
+    setFDAParams(state, payload) {
+      const sourceParams = _.omit(payload, ['type']);
+      _.assign(state[payload.type].params, sourceParams);
     },
   },
 };

@@ -10,7 +10,7 @@
 import { mapState } from 'vuex';
 import summBdage from './summ-bdage.vue';
 import summDescription from './summ-description.vue';
-import summDetail from './summ-detail.vue';
+import summDetail from './detail/index.vue';
 
 export default {
   name: 'index',
