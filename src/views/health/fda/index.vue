@@ -6,7 +6,6 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import dividerCollapse from '@/components/divider-collapse/index.vue';
 import fdaSummary from './summary/index.vue';
 
@@ -29,13 +28,6 @@ export default {
         }],
       }],
     };
-  },
-  methods: {
-    ...mapActions('moduleHealth/fda', ['getFDAEvent']),
-  },
-  created() {
-    this.getFDAEvent('drug');
-    this.getFDAEvent('food');
   },
 };
 </script>

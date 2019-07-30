@@ -7,8 +7,8 @@
 */
 import dayjs from 'dayjs';
 
-function getToday() {
-  return dayjs().format('YYYY:MM:DD');
+function formatData(date, format) {
+  return dayjs(date).format(format);
 }
 
 function getTimestamp() {
@@ -16,6 +16,6 @@ function getTimestamp() {
 }
 
 export {
-  getToday,
+  formatData,
   getTimestamp,
 };

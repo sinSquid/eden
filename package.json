@@ -1,10 +1,11 @@
 {
-  "name": "takeaway-platform",
+  "name": "eden",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-watch": "vue-cli-service build --watch",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },

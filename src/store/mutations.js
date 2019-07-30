@@ -1,4 +1,4 @@
-import { getTimestamp } from '@/utils/date/extend-dayjs';
+import { getTimestamp } from '@/utils/date/dayjs';
 
 const mutations = {
   setGlobalMessage(state, payload) {
