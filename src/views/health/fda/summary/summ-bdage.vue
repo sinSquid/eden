@@ -63,12 +63,12 @@ export default {
     };
   },
   computed: {
-    ...mapState('moduleHealth/fda', ['food', 'drug', 'activeTab']),
+    ...mapState('moduleHealth/fda', ['fda', 'activeTab']),
 
     displayBadge() {
       const result = badge;
-      _.assign(result[0], _.pick(this.food, ['total', 'meta']));
-      _.assign(result[1], _.pick(this.drug, ['total', 'meta']));
+      _.assign(result[0], _.pick(this.fda.food, ['total', 'meta']));
+      _.assign(result[1], _.pick(this.fda.drug, ['total', 'meta']));
       return result;
     },
     innerActiveTab: {

@@ -35,7 +35,33 @@ const ruleData = [
   { id: 4, filter: 'search=field:term&count=another_field', content: '搜索匹配的记录。然后在该组记录中，计算字段的唯一值出现的次数。' },
 ];
 
+const foodCols = [
+  {
+    key: 'date_created', label: '创建日期', width: 120, sort: true, fixed: true,
+  },
+  { key: 'report_number', label: '报备编号', width: 120 },
+  { key: 'age_unit', label: '计时单元', width: 120 },
+  { key: 'age', label: '年限', width: 100 },
+  { key: 'gender', label: '性别', width: 100 },
+];
+
+const drugCols = [
+  { key: 'companynumb', label: '公司编号', width: 180 },
+  { key: 'fulfillexpeditecriteria', label: '安全等级', width: 100 },
+  { key: 'receiptdate', label: '发票日期', width: 120 },
+  { key: 'safetyreportid', label: '安全报告编号', width: 120 },
+  { key: 'serious', label: '危险性', width: 100 },
+];
+
+const detail = {
+  food: foodCols,
+  drug: drugCols,
+};
+
 export {
   ruleData,
   examples,
+  foodCols,
+  drugCols,
+  detail,
 };

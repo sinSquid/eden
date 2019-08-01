@@ -13,7 +13,7 @@ import summDescription from './summ-description.vue';
 import summDetail from './detail/index.vue';
 
 export default {
-  name: 'index',
+  name: 'summary',
   components: {
     summBdage,
     summDescription,

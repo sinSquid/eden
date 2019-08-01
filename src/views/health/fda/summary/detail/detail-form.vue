@@ -88,13 +88,15 @@
 </template>
 
 <script>
-import { mapActions, mapMutations, mapState } from 'vuex';
+import {
+  mapActions, mapMutations, mapState, mapGetters,
+} from 'vuex';
 import { formatData } from '@/utils/date/dayjs';
 import { elTagTypes } from '@/lib/element/config';
 
 const queryParams = {
   search: '',
-  limit: 3,
+  limit: 6,
   dateType: '',
   start: '',
   end: '',
@@ -102,7 +104,10 @@ const queryParams = {
 };
 
 const queryDate = {
-  food: [{ value: 'date_created', label: 'date_created' }],
+  food: [
+    { value: 'date_created', label: 'date_created' },
+    { value: 'date_started', label: 'date_started' },
+  ],
   drug: [
     { value: 'receiptdate', label: 'receiptdate' },
     { value: 'receivedate', label: 'receivedate' },
@@ -128,15 +133,13 @@ export default {
   },
   computed: {
     ...mapState('moduleHealth/fda', ['activeTab']),
+    ...mapGetters('moduleHealth/fda', ['detailTab']),
 
-    badgeType() {
-      return this.activeTab === 'food' ? 'food' : 'drug';
-    },
     queryForm() {
-      return this.ruleForm[this.badgeType];
+      return this.ruleForm[this.detailTab];
     },
     dateType() {
-      return queryDate[this.badgeType];
+      return queryDate[this.detailTab];
     },
   },
   methods: {
@@ -149,9 +152,12 @@ export default {
     },
     formatParams() {
       const aims = this.queryForm;
-      const start = formatData(aims.start, 'YYYY-MM-DD');
-      const end = formatData(aims.end, 'YYYY-MM-DD');
-      let search = `${aims.dateType}:[${start} TO ${end}]`;
+      let search = '';
+      if (aims.dateType) {
+        const start = formatData(aims.start, 'YYYY-MM-DD');
+        const end = formatData(aims.end, 'YYYY-MM-DD');
+        search += `${aims.dateType}:[${start} TO ${end}]`;
+      }
       for (const tag of this.queryForm.tags) {
         const hyphen = tag.calculate === 'both' ? ' AND ' : ' ';
         search += hyphen + tag.name;
@@ -162,12 +168,18 @@ export default {
       };
     },
     innerGetFDAEvent() {
+      if (this.queryForm.dateType) {
+        if (!(this.queryForm.start && this.queryForm.end)) {
+          this.setGlobalMessage({ message: '请选择过滤日期', type: 'info' });
+          return;
+        }
+      }
       const params = this.formatParams();
       this.setFDAParams(params);
       this.getFDAEvent()
         .catch((error) => {
-          const { response: { data: { message } } } = error;
-          this.setGlobalMessage({ message, type: 'error' });
+          const { response: { data: { error: { code, message } } } } = error;
+          this.setGlobalMessage({ message: `${code}: ${message}`, type: 'error' });
         });
     },
     addNewTag() {

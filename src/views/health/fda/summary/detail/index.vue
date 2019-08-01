@@ -3,7 +3,7 @@
     <el-col :span="6">
       <detail-form></detail-form>
     </el-col>
-    <el-col :offset="2" :span="12">
+    <el-col :offset="1" :span="12">
       <detail-table></detail-table>
     </el-col>
   </el-row>
@@ -14,7 +14,7 @@ import detailForm from './detail-form.vue';
 import detailTable from './detail-table.vue';
 
 export default {
-  name: 'index',
+  name: 'summDetail',
   components: {
     detailForm,
     detailTable,
