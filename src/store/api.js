@@ -3,6 +3,6 @@ import qs from 'qs';
 import axios from '@/lib/axios/index';
 
 export default {
-  signIn: data => axios.post('/login', qs.stringify(data)),
+  signIn: data => axios.post('/koa2/login', qs.stringify(data)),
   signOut: () => axios.post(''),
 };

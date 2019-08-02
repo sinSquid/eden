@@ -3,7 +3,7 @@ import store from '@/store/store';
 
 // 创建axios实例
 const instance = axios.create({
-  baseURL: 'http://localhost:3000/', // api的base_url
+  baseURL: 'http://97.64.33.161:3000/', // 服务器api的base_url
   timeout: 6000, // 请求超时时间
   headers: {
     'Content-Type': 'application/x-www-form-urlencoded',

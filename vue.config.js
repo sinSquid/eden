@@ -12,11 +12,12 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/api': {
-        target: 'http://localhost:3000/', // koa2默认启动3000
+      '/koa2': {
+        target: 'http://97.64.33.161:3000/', // koa2默认启动3000
         changeOrigin: true,
+        ws: true,
         pathRewrite: {
-          '^/api': '/',
+          '^/koa2': '/',
         },
       },
     },
