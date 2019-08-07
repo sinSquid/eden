@@ -13,7 +13,7 @@ import summDescription from './summ-description.vue';
 import summDetail from './detail/index.vue';
 
 export default {
-  name: 'summary',
+  name: 'fdaSummary',
   components: {
     summBdage,
     summDescription,

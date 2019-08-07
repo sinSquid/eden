@@ -19,11 +19,11 @@
       <el-table-column
         label="操作"
         width="200">
-        <template slot-scope="{ row }">
+        <template slot-scope="{ row: { report_number } }">
           <el-button
             size="mini"
             type="success"
-            @click="checkDetail(row)">
+            @click="checkDetail(report_number)">
             详情
           </el-button>
         </template>
@@ -38,6 +38,10 @@
       :total="fda[detailTab].total"
       :page-sizes="pageScale">
     </el-pagination>
+    <json-viewer
+      :visible.sync="visible"
+      :json-data="jsonViewData">
+    </json-viewer>
   </div>
 </template>
 
@@ -46,14 +50,20 @@ import {
   mapState, mapMutations, mapActions, mapGetters,
 } from 'vuex';
 import { detail } from '../../lib/data';
+import jsonViewer from '@/components/json-viewer/index.vue';
 
 export default {
   name: 'detail-table',
+  components: {
+    jsonViewer,
+  },
   data() {
     return {
       layout: 'total, sizes, prev, pager, next, jumper',
       pageScale: [6, 12, 18, 24],
       loading: false,
+      visible: false,
+      jsonViewData: {},
     };
   },
   computed: {
@@ -93,7 +103,11 @@ export default {
     ...mapMutations('moduleHealth/fda', ['setFDAParams']),
     ...mapActions('moduleHealth/fda', ['getFDAEvent']),
 
-    checkDetail() {
+    checkDetail(id) {
+      const aims = this.fda[this.detailTab].results;
+      const index = aims.findIndex(e => e.report_number === id);
+      this.jsonViewData = aims[index];
+      this.visible = true;
     },
     innerGetFDAEvent() {
       this.loading = true;
