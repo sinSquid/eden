@@ -15,7 +15,14 @@ function getTimestamp() {
   return dayjs().unix();
 }
 
+// 返回今日与距离今日前几个月
+function dateBeforeMon(before) {
+  const date = dayjs();
+  return [date.subtract(before, 'month').toDate(), date.toDate()];
+}
+
 export {
   formatData,
   getTimestamp,
+  dateBeforeMon,
 };

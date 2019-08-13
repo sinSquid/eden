@@ -18,6 +18,17 @@ const structure = {
   data: [], // 展示使用数据
 };
 
+const originDown = {
+  meta: {},
+  results: {
+    food: [],
+    drug: [],
+    device: [],
+    animalandveterinary: [],
+    other: [],
+  },
+};
+
 export default {
   namespaced: true,
   state: {
@@ -26,6 +37,7 @@ export default {
       food: _.cloneDeep(structure),
       drug: _.cloneDeep(structure),
     },
+    down: _.cloneDeep(originDown),
   },
   getters: {
     detailTab(state) {
@@ -43,25 +55,44 @@ export default {
         }
       }
       const result = await api.getFDAEvent(param);
-      const { data: { meta, results } } = result;
-      // 处理展示数据
-      const aims = _.cloneDeep(results);
-      const data = [];
-      const keys = detail[type].map(e => e.key);
-      if (type === 'food') {
-        for (const re of aims) {
-          _.assign(re, re.consumer);
-          data.push(_.pick(re, keys));
+      const { status, data: { meta, results } } = result;
+      if (status === 200) {
+        // 处理展示数据
+        const aims = _.cloneDeep(results);
+        const data = [];
+        const keys = detail[type].map(e => e.key);
+        if (type === 'food') {
+          for (const re of aims) {
+            _.assign(re, re.consumer);
+            data.push(_.pick(re, keys));
+          }
+        } else {
+          for (const re of aims) {
+            data.push(_.pick(re, keys));
+          }
         }
-      } else {
-        for (const re of aims) {
-          data.push(_.pick(re, keys));
+
+        commit('setFDAEvent', {
+          meta, results, total: meta.results.total, type, data,
+        });
+      }
+      return proCall(result);
+    },
+    async getDownList({ state }) {
+      const result = await api.getDownList();
+      const { status, data: { meta, results } } = result;
+      if (status === 200) {
+        state.down = _.cloneDeep(originDown);
+        state.down.meta = meta;
+        for (const [key, grant] of _.toPairs(results)) {
+          for (const [category, son] of _.toPairs(grant)) {
+            for (const child of son.partitions) {
+              const aims = _.assign({ category, total_records: son.total_records }, child);
+              state.down.results[key].push(aims);
+            }
+          }
         }
       }
-
-      commit('setFDAEvent', {
-        meta, results, total: meta.results.total, type, data,
-      });
       return proCall(result);
     },
   },

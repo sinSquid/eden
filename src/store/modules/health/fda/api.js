@@ -15,4 +15,6 @@ const auth = params => ({ params: _.assign(_.omit(params, ['type']), { api_key: 
 export default {
   // 获取food、drug数据：
   getFDAEvent: params => axios.get(`https://api.fda.gov/${params.type}/event.json`, auth(params)),
+  // 获取下载列表信息
+  getDownList: () => axios.get('https://api.fda.gov/download.json', auth({})),
 };

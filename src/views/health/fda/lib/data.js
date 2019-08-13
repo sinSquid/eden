@@ -53,6 +53,20 @@ const drugCols = [
   { key: 'serious', label: '危险性', width: 100 },
 ];
 
+const downCols = [
+  { key: 'category', label: '类别', width: 160 },
+  {
+    key: 'total_records', label: '总记录数', count: true, width: 160,
+  },
+  { key: 'display_name', label: '文件名', width: 240 },
+  {
+    key: 'records', label: '模块记录', count: true, width: 160,
+  },
+  {
+    key: 'size_mb', label: '文件大小', count: true, width: 160,
+  },
+];
+
 const detail = {
   food: foodCols,
   drug: drugCols,
@@ -61,7 +75,6 @@ const detail = {
 export {
   ruleData,
   examples,
-  foodCols,
-  drugCols,
   detail,
+  downCols,
 };
