@@ -16,22 +16,34 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 import { removeUserToken } from '@/lib/store/cookie';
 
 export default {
   name: 'eden-header',
   computed: {
-    ...mapState(['userInfo', 'vuexKey']),
+    ...mapState(['userInfo']),
   },
   data() {
     return {};
   },
   methods: {
-    async signOut() {
-      await removeUserToken();
-      await this.removeStorage();
-      this.$router.push({ path: '/login' });
+    ...mapMutations(['setGlobalMessage']),
+
+    signOut() {
+      removeUserToken()
+        .then(() => {
+          this.removeStorage()
+            .then(() => {
+              this.$router.push({ path: '/login' });
+            })
+            .catch(({ message }) => {
+              this.setGlobalMessage({ message, type: 'error' });
+            });
+        })
+        .catch(({ message }) => {
+          this.setGlobalMessage({ message, type: 'error' });
+        });
     },
     removeStorage() {
       sessionStorage.removeItem(this.vuexKey);

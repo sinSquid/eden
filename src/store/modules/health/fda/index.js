@@ -1,5 +1,5 @@
 import api from './api';
-import proCall from '@/utils/standard/action-util';
+import proCall from '@/utils/xhr/procall';
 import { detail } from '@/views/health/fda/lib/data';
 
 const params = {

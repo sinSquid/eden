@@ -163,7 +163,7 @@ export default {
       this.getFilterBreeds(query)
         .then((response) => {
           this.searchable = false;
-          this.liquidData.rows[0].percent = Big(response.length / this.originData.length)
+          this.liquidData.rows[0].percent = Number(response.length / this.originData.length)
             .toFixed(2);
         })
         .catch((error) => {

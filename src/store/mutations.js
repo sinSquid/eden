@@ -17,8 +17,5 @@ const mutations = {
   setUserInfo(state, payload) {
     _.assign(state.userInfo, payload);
   },
-  setUserToken(state, payload) {
-    state.token = payload.token;
-  },
 };
 export default mutations;

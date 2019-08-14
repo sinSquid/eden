@@ -1,6 +1,6 @@
 import Cookie from 'js-cookie';
 
-const tokenKey = 'eden'; // cookie
+const tokenKey = 'eden-token'; // cookie
 /**
  * @Description: js-cookie获取、设置、移除cookie，expires不设置则默认cookie有效期为会话
  * @Author: sinSquid

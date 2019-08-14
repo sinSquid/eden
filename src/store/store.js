@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
 import getters from '@/store/getters';
 import mutations from '@/store/mutations';
 import actions from '@/store/actions';
@@ -16,27 +15,18 @@ const userStatus = { // 0未登录，1登录，2隐匿
   online: 1,
   hidden: 2,
 };
-const vuexKey = 'vuexResetSession';
-
-const netWorkError = { message: '网络错误,请稍后再试', type: 'error' };
-const config = {
-  key: vuexKey,
-  storage: window.sessionStorage,
-};
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    globalMessage: Object.assign({}, elMessageOptions), // 全局通知，基于elementUI的message
-    userInfo: Object.assign({}, originUserInfo),
+    globalMessage: elMessageOptions, // 全局通知，基于elementUI的message
+    userInfo: originUserInfo,
     userStatus,
-    netWorkError,
-    globalLoading: Object.assign({}, elLoadingOptions),
-    vuexKey,
+    netWorkError: { message: '网络错误,请稍后再试', type: 'error' },
+    globalLoading: elLoadingOptions,
   },
   getters,
   mutations,
   actions,
-  plugins: [createPersistedState(config)],
 });

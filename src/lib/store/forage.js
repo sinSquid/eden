@@ -25,7 +25,7 @@ const dbStore = localForage.createInstance({
   description: 'dbStore(INDEXEDDB) for eden',
 });
 
-const localStore = localForage.createInstance({
+const store = localForage.createInstance({
   driver: localForage.LOCALSTORAGE,
   name: 'eden-local',
   version: 1.0,
@@ -37,5 +37,5 @@ const localStore = localForage.createInstance({
 export {
   webStore,
   dbStore,
-  localStore,
+  store,
 };
