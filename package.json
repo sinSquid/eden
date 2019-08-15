@@ -43,6 +43,6 @@
     "webpack": "^4.39.2"
   },
   "gitHooks": {
-    "pre-push": "cross-env NODE_ENV=production npm run lint"
+    "pre-commit": "cross-env NODE_ENV=production npm run lint"
   }
 }

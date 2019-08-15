@@ -21,6 +21,7 @@ module.exports = {
       ],
     }],
     'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
+    'import/no-cycle': 'off',
   },
   parserOptions: {
     parser: 'babel-eslint',
