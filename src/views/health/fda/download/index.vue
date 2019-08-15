@@ -30,17 +30,30 @@
       element-loading-text="loading"
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(153, 169, 191, 0.1)"
-      :data="displayList"
+      :data="list[activeName]"
       class="down-table">
       <el-table-column
         v-for="col of downCols"
         :key="col.key"
         :prop="col.key"
         :label="col.label"
+        :sortable="col.sort"
         :width="col.width">
       </el-table-column>
+      <el-table-column
+        label="操作"
+        width="160">
+        <template slot-scope="{ row: { size_mb, file } }">
+          <el-button
+            size="mini"
+            type="primary"
+            @click="downFile(size_mb, file)">
+            下载
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
-    <div class="ui-mt-40">6666</div>
+    <div class="ui-mt-40"></div>
   </div>
 </template>
 
@@ -151,6 +164,21 @@ export default {
       this.$nextTick(() => {
         this.$refs.downTable.bodyWrapper.scrollTop = 0;
       });
+    },
+    downFile(size, file) {
+      if (Number(size) > 10) {
+        this.$confirm('此文件大于10M，继续下载将会耗费一定时间与流量，是否继续？', 'query', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          iconClass: 'el-icon-error',
+          closeOnClickModal: false,
+        })
+          .then(() => {
+            window.location.href = file;
+          });
+      } else {
+        window.location.href = file;
+      }
     },
   },
   mounted() {

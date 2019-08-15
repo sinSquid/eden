@@ -87,7 +87,8 @@ export default {
         for (const [key, grant] of _.toPairs(results)) {
           for (const [category, son] of _.toPairs(grant)) {
             for (const child of son.partitions) {
-              const aims = _.assign({ category, total_records: son.total_records }, child);
+              const aims = _.assign(child,
+                { category, total_records: son.total_records, size_mb: Number(child.size_mb) });
               state.down.results[key].push(aims);
             }
           }
