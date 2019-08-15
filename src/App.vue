@@ -6,7 +6,6 @@
 
 <script>
 import { mapState } from 'vuex';
-import { Loading } from 'element-ui';
 
 export default {
   name: 'app',
@@ -39,7 +38,7 @@ export default {
     },
     loadingShow(val) {
       if (val) {
-        this.loading = Loading.service(this.globalLoading);
+        this.loading = this.$loading(this.globalLoading);
       } else {
         this.$nextTick(() => { // 以服务的方式调用的 Loading 需要异步关闭
           this.loading.close();

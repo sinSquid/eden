@@ -12,7 +12,7 @@ const webStore = localForage.createInstance({
   name: 'eden-web',
   version: 1.0,
   size: 4980736, // Size of database, in bytes. WebSQL-only for now.
-  storeName: 'edenWebStore', // Should be alphanumeric, with underscores.
+  storeName: 'Web', // Should be alphanumeric, with underscores.
   description: 'webStore for eden',
 });
 
@@ -21,7 +21,7 @@ const dbStore = localForage.createInstance({
   name: 'eden-db',
   version: 1.0,
   size: 19922944,
-  storeName: 'edenDBStore',
+  storeName: 'DB',
   description: 'dbStore(INDEXEDDB) for eden',
 });
 
@@ -30,7 +30,7 @@ const store = localForage.createInstance({
   name: 'eden-local',
   version: 1.0,
   size: 4980736,
-  storeName: 'edenLocalStore',
+  storeName: 'Local',
   description: 'localStore for eden',
 });
 

@@ -9,7 +9,7 @@
         </div>
       </div>
       <i class="el-icon-switch-button cus-icon-24 ui-mt-15"
-        @click="signOut">
+        @click="confirmExit">
       </i>
     </div>
   </div>
@@ -18,6 +18,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex';
 import { removeUserToken } from '@/lib/store/cookie';
+import { store } from '@/lib/store/forage';
 
 export default {
   name: 'eden-header',
@@ -30,12 +31,25 @@ export default {
   methods: {
     ...mapMutations(['setGlobalMessage']),
 
+    confirmExit() {
+      this.$confirm('此操作将退至登录页?', 'exit', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        iconClass: 'el-icon-error',
+        closeOnClickModal: false,
+      })
+        .then(() => {
+          this.signOut();
+        });
+    },
     signOut() {
       removeUserToken()
         .then(() => {
-          this.removeStorage()
+          store.removeItem(this.userInfo.username)
             .then(() => {
-              this.$router.push({ path: '/login' });
+              setTimeout(() => {
+                this.$router.push({ path: '/login' });
+              }, 400);
             })
             .catch(({ message }) => {
               this.setGlobalMessage({ message, type: 'error' });
@@ -44,19 +58,6 @@ export default {
         .catch(({ message }) => {
           this.setGlobalMessage({ message, type: 'error' });
         });
-    },
-    removeStorage() {
-      sessionStorage.removeItem(this.vuexKey);
-      const vuex = sessionStorage.getItem(this.vuexKey);
-      return new Promise((resolve, reject) => {
-        if (vuex) {
-          reject(new Error('vuex preset fail'));
-        } else {
-          setTimeout(() => {
-            resolve('success');
-          }, 1500);
-        }
-      });
     },
   },
 };

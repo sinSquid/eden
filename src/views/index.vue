@@ -9,7 +9,9 @@
       </el-aside>
       <el-container>
         <el-main class="container-shell ui-bar">
-          <router-view></router-view>
+          <keep-alive>
+            <router-view></router-view>
+          </keep-alive>
         </el-main>
       </el-container>
     </el-container>
@@ -19,6 +21,8 @@
 <script>
 import edenHeader from '@/components/header/index.vue';
 import edenSideNav from '@/components/side-nav/index.vue';
+import { store } from '@/lib/store/forage';
+import { getUserToken } from '@/lib/store/cookie';
 
 export default {
   name: 'eden',
@@ -28,6 +32,22 @@ export default {
   },
   data() {
     return {};
+  },
+  // vuex内userInfo持久化
+  beforeCreate() {
+    const vuex = this.$store;
+    const token = getUserToken();
+    store.getItem(token)
+      .then((value) => {
+        if (value) {
+          vuex.commit('setUserInfo', value);
+        } else {
+          vuex.commit('setGlobalMessage', { message: 'userinfo is null', type: 'error' });
+        }
+      })
+      .catch(({ message }) => {
+        vuex.commit('setGlobalMessage', { message, type: 'error' });
+      });
   },
 };
 </script>

@@ -15,7 +15,7 @@ const actions = {
         if (code === 0) {
           commit('setUserInfo', data);
           setUserToken(token);
-          store.setItem(data.username, data)
+          store.setItem(token, data)
             .then(() => {
               router.push({ path: '/' });
             });
