@@ -4,7 +4,7 @@ const NavList = [
   {
     label: '首页',
     value: 'home',
-    url: '/',
+    url: '/home',
     icon: 'icon1',
   }, {
     label: '资讯',
@@ -33,6 +33,15 @@ const mainRoute = [
   {
     value: 'home',
     label: 'home',
+    children: [
+      {
+        value: 'intro',
+        label: 'intro',
+      }, {
+        value: 'license',
+        label: 'license',
+      },
+    ],
   }, {
     value: 'message',
     label: 'message',

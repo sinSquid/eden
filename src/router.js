@@ -10,25 +10,33 @@ export default new Router({
     {
       path: '/login',
       name: 'login',
-      hidden: true,
       component: () => import('@/views/login/index.vue'),
     },
     {
       path: '/404',
       name: '404',
-      hidden: true,
       component: () => import('@/views/404.vue'),
     },
     {
       path: '/',
-      name: 'home',
+      name: 'main',
       redirect: '/home',
       component: () => import('@/views/index.vue'),
       children: [
         {
-          path: 'home',
-          // name: 'home',
-          component: () => import('@/views/Home.vue'),
+          path: '/home',
+          name: 'home',
+          component: () => import('@/views/home/index.vue'),
+          redirect: '/home/intro',
+          children: [{
+            path: 'intro', // 简介
+            name: 'intro',
+            component: () => import('@/views/home/intro/index.vue'),
+          }, {
+            path: 'license',
+            name: 'license',
+            component: () => import('@/views/home/license/index.vue'),
+          }],
         },
         {
           path: '/message',
@@ -49,12 +57,10 @@ export default new Router({
             path: 'dog',
             name: 'dog',
             component: () => import('@/views/animals/dog/index.vue'),
-            meta: { title: 'dog', icon: 'dog', noCache: true },
           }, {
             path: 'cat',
             name: 'cat',
             component: () => import('@/views/animals/cat/index.vue'),
-            meta: { title: 'cat', icon: 'cat', noCache: true },
           }],
         },
         {
@@ -66,12 +72,10 @@ export default new Router({
             path: 'doctor',
             name: 'doctor',
             component: () => import('@/views/health/doctor/index.vue'),
-            meta: { title: 'doctor', noCache: true },
           }, {
             path: 'fda',
             name: 'fda',
             component: () => import('@/views/health/fda/index.vue'),
-            meta: { title: 'fda', noCache: true },
           }],
         },
       ],

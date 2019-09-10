@@ -9,8 +9,8 @@ import VeRadar from 'v-charts/lib/radar.common.min';
 import VeLiquidfill from 'v-charts/lib/liquidfill.common.min';
 
 const component = [VeLine, VeChart, VeHistogram, VeScatter, VeRadar, VeLiquidfill];
-(function init() {
+(() => {
   for (const com of component) {
     Vue.component(com.name, com);
   }
-}());
+})();
