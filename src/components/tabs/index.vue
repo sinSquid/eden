@@ -26,7 +26,10 @@ export default {
   },
   methods: {
     updateRoute() {
-      this.$router.push({ path: `${this.activeTab}` });
+      this.$router.push({ path: `${this.activeTab}` })
+        .catch(() => {
+          // vue-router3.1版本对相同路由的push、replace会报错，暂不处理，等待官方修复
+        });
     },
   },
   mounted() {

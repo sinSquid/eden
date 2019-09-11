@@ -13,21 +13,21 @@ export default new Router({
       component: () => import('@/views/login/index.vue'),
     },
     {
-      path: '/404',
+      path: '*',
       name: '404',
       component: () => import('@/views/404.vue'),
     },
     {
       path: '/',
       name: 'main',
-      redirect: '/home',
+      redirect: 'home',
       component: () => import('@/views/index.vue'),
       children: [
         {
-          path: '/home',
+          path: 'home',
           name: 'home',
           component: () => import('@/views/home/index.vue'),
-          redirect: '/home/intro',
+          redirect: 'home/intro',
           children: [{
             path: 'intro', // 简介
             name: 'intro',
@@ -39,20 +39,20 @@ export default new Router({
           }],
         },
         {
-          path: '/message',
+          path: 'message',
           name: 'message',
           component: () => import('@/views/message/index.vue'),
         },
         {
-          path: '/user',
+          path: 'user',
           name: 'user',
           component: () => import('@/views/user/index.vue'),
         },
         {
-          path: '/animals',
+          path: 'animals',
           name: 'animals',
           component: () => import('@/views/animals/index.vue'),
-          redirect: '/animals/dog',
+          redirect: 'animals/dog',
           children: [{
             path: 'dog',
             name: 'dog',
@@ -64,10 +64,10 @@ export default new Router({
           }],
         },
         {
-          path: '/health',
+          path: 'health',
           name: 'health',
           component: () => import('@/views/health/index.vue'),
-          redirect: '/health/doctor',
+          redirect: 'health/doctor',
           children: [{
             path: 'doctor',
             name: 'doctor',
