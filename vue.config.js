@@ -13,11 +13,11 @@ module.exports = {
   devServer: {
     proxy: {
       '/koa2': {
-        target: 'http://97.64.33.161:3000/', // koa2默认启动3000
+        target: 'http://97.64.33.74:3000/', // koa2默认启动3000
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          '^/koa2': '/',
+          '^/koa2': '',
         },
       },
     },
