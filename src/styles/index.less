@@ -74,6 +74,16 @@ div, main, section {
   }
 }
 
+.ui-dis-flex__center {
+  .ui-dis-flex();
+  align-items: center;
+}
+
+.ui-dis-flex__end {
+  .ui-dis-flex();
+  justify-content: flex-end;
+}
+
 // 生成 margin/padding 各个方面的各种常用间距
 each(@spaces, {
   .ui-mt-@{value} {
@@ -117,7 +127,7 @@ each(@over, {
     text-overflow: ellipsis;
   }
   .ui-wh-@{value} {
-    width: (@value + 0px);
+    width: (@value + 0px) !important;
   }
 });
 

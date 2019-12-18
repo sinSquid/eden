@@ -51,7 +51,9 @@
 </template>
 
 <script>
-import { keysCols, supportCols, browsers, keyMap, support } from './lib/data';
+import {
+  keysCols, supportCols, browsers, keyMap, support,
+} from './lib/data';
 
 export default {
   name: 'intro-list',

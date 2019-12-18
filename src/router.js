@@ -20,60 +20,76 @@ export default new Router({
     {
       path: '/',
       name: 'main',
-      redirect: 'home',
+      redirect: '/home',
       component: () => import('@/views/index.vue'),
       children: [
         {
-          path: 'home',
+          path: '/home',
           name: 'home',
           component: () => import('@/views/home/index.vue'),
-          redirect: 'home/intro',
+          redirect: '/home/intro',
           children: [{
-            path: 'intro', // 简介
+            path: '/home/intro', // 简介
             name: 'intro',
             component: () => import('@/views/home/intro/index.vue'),
           }, {
-            path: 'license',
+            path: '/home/license',
             name: 'license',
             component: () => import('@/views/home/license/index.vue'),
           }],
         },
         {
-          path: 'message',
+          path: '/message',
           name: 'message',
           component: () => import('@/views/message/index.vue'),
+          redirect: '/message/camp',
+          children: [{
+            path: '/message/camp',
+            name: 'camp',
+            component: () => import('@/views/message/camp/index.vue'),
+            redirect: '/message/camp/today',
+            children: [{
+              path: '/message/camp/today',
+              name: 'today',
+              component: () => import('@/views/message/camp/today/index.vue'),
+            }, {
+              path: '/message/camp/category',
+              name: 'category',
+              component: () => import('@/views/message/camp/category/index.vue'),
+            }],
+          }],
         },
         {
-          path: 'user',
+          path: '/user',
           name: 'user',
           component: () => import('@/views/user/index.vue'),
         },
         {
-          path: 'animals',
+          path: '/animals',
           name: 'animals',
           component: () => import('@/views/animals/index.vue'),
-          redirect: 'animals/dog',
+          redirect: '/animals/dog',
           children: [{
-            path: 'dog',
+            path: '/animals/dog',
             name: 'dog',
             component: () => import('@/views/animals/dog/index.vue'),
           }, {
-            path: 'cat',
+            path: '/animals/cat',
             name: 'cat',
             component: () => import('@/views/animals/cat/index.vue'),
           }],
         },
         {
-          path: 'health',
+          path: '/health',
           name: 'health',
           component: () => import('@/views/health/index.vue'),
-          redirect: 'health/doctor',
+          redirect: '/health/doctor',
           children: [{
-            path: 'doctor',
+            path: '/health/doctor',
             name: 'doctor',
             component: () => import('@/views/health/doctor/index.vue'),
           }, {
-            path: 'fda',
+            path: '/health/fda',
             name: 'fda',
             component: () => import('@/views/health/fda/index.vue'),
           }],

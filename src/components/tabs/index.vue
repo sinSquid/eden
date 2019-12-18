@@ -1,11 +1,10 @@
 <template>
   <el-tabs v-model="activeTab"
     @tab-click="updateRoute">
-    <el-tab-pane v-for="tab in tabs"
-      :key="tab.value"
-      :label="tab.label"
-      :name="tab.value">
-    </el-tab-pane>
+    <el-tab-pane v-for="{value, label, path} of tabs"
+      :key="value"
+      :label="label"
+      :name="path" />
   </el-tabs>
 </template>
 
@@ -33,7 +32,7 @@ export default {
     },
   },
   mounted() {
-    this.activeTab = this.tabs.find(e => e.path === this.$route.path).value;
+    this.activeTab = this.tabs.find(e => this.$route.path.includes(e.path)).path;
   },
 };
 </script>
