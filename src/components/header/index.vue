@@ -1,12 +1,21 @@
 <template>
   <div class="eden-header">
-    <div class="logo"></div>
+    <div class="logo" />
     <div class="content">
       <div class="user">
-        <div :class="userInfo.avatar"></div>
-        <div class="username">
-          <span>{{ userInfo.username }}</span>
-        </div>
+        <div :class="userInfo.avatar" />
+        <el-dropdown
+          class="username"
+          @command="handleCommand">
+          <span class="el-dropdown-link">
+            userInfo.username
+            <i class="el-icon-arrow-down el-icon--right" />
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item command="/user/me">个人信息</el-dropdown-item>
+            <el-dropdown-item command="/user/more">更多</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
       <i class="el-icon-switch-button cus-icon-24 ui-mt-15"
         @click="confirmExit">
@@ -40,7 +49,8 @@ export default {
       })
         .then(() => {
           this.signOut();
-        });
+        })
+        .catch(() => {});
     },
     signOut() {
       removeUserToken()
@@ -58,6 +68,13 @@ export default {
         .catch(({ message }) => {
           this.setGlobalMessage({ message, type: 'error' });
         });
+    },
+    handleCommand(command) {
+      const { path } = this.$route;
+      if (path === command) {
+        return;
+      }
+      this.$router.push(command);
     },
   },
 };
@@ -92,7 +109,6 @@ export default {
       justify-content: flex-end;
       .user {
         margin-left: 10px;
-        width: 100px;
         display: flex;
         each(@index, {
           .avatar@{value} {
@@ -103,16 +119,12 @@ export default {
           }
         })
         .username {
-          margin-left: 10px;
-          cursor: pointer;
-          span {
-            position: absolute;
-            bottom: 0;
-            padding: 0;
-            margin: 0;
-            &:hover {
-              color: #2db7f5;
-            }
+          margin: 0 10px 5px 10px;
+          display: flex;
+          flex-direction: column-reverse;
+          .el-dropdown-link {
+            cursor: pointer;
+            color: #409EFF;
           }
         }
       }

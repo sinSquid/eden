@@ -23,6 +23,16 @@ export default {
       activeTab: '',
     };
   },
+  watch: {
+    '$route.path': {
+      deep: true,
+      handler(val) {
+        if (!val.includes(this.activeTab)) {
+          this.chgActiveTab();
+        }
+      },
+    },
+  },
   methods: {
     updateRoute() {
       this.$router.push({ path: `${this.activeTab}` })
@@ -30,9 +40,12 @@ export default {
           // vue-router3.1版本对相同路由的push、replace会报错，暂不处理，等待官方修复
         });
     },
+    chgActiveTab() {
+      this.activeTab = this.tabs.find(e => this.$route.path.includes(e.path)).path;
+    },
   },
   mounted() {
-    this.activeTab = this.tabs.find(e => this.$route.path.includes(e.path)).path;
+    this.chgActiveTab();
   },
 };
 </script>

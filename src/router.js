@@ -11,13 +11,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: () => import('@/views/login/index.vue'),
-    },
-    {
+    }, {
       path: '*',
       name: '404',
       component: () => import('@/views/404.vue'),
-    },
-    {
+    }, {
       path: '/',
       name: 'main',
       redirect: '/home',
@@ -37,8 +35,7 @@ export default new Router({
             name: 'license',
             component: () => import('@/views/home/license/index.vue'),
           }],
-        },
-        {
+        }, {
           path: '/message',
           name: 'message',
           component: () => import('@/views/message/index.vue'),
@@ -58,13 +55,21 @@ export default new Router({
               component: () => import('@/views/message/camp/category/index.vue'),
             }],
           }],
-        },
-        {
+        }, {
           path: '/user',
           name: 'user',
           component: () => import('@/views/user/index.vue'),
-        },
-        {
+          redirect: '/user/me',
+          children: [{
+            path: '/user/me',
+            name: 'me',
+            component: () => import('@/views/user/me/index.vue'),
+          }, {
+            path: '/user/more',
+            name: 'more',
+            component: () => import('@/views/user/more/index.vue'),
+          }],
+        }, {
           path: '/animals',
           name: 'animals',
           component: () => import('@/views/animals/index.vue'),
@@ -78,8 +83,7 @@ export default new Router({
             name: 'cat',
             component: () => import('@/views/animals/cat/index.vue'),
           }],
-        },
-        {
+        }, {
           path: '/health',
           name: 'health',
           component: () => import('@/views/health/index.vue'),
@@ -95,8 +99,7 @@ export default new Router({
           }],
         },
       ],
-    },
-    {
+    }, {
       path: '/about',
       name: 'about',
       component: () => import('@/views/About.vue'),

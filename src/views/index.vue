@@ -1,17 +1,15 @@
 <template>
   <el-container>
     <el-header height="40px">
-      <eden-header></eden-header>
+      <eden-header />
     </el-header>
     <el-container>
       <el-aside width="150px">
-        <eden-side-nav></eden-side-nav>
+        <eden-side-nav />
       </el-aside>
       <el-container>
         <el-main class="container-shell ui-bar">
-          <keep-alive>
-            <router-view></router-view>
-          </keep-alive>
+          <router-view />
         </el-main>
       </el-container>
     </el-container>
