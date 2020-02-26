@@ -8,7 +8,7 @@
         <eden-side-nav />
       </el-aside>
       <el-container>
-        <el-main class="container-shell ui-bar">
+        <el-main class="container-shell">
           <router-view />
         </el-main>
       </el-container>

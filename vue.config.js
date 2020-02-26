@@ -11,6 +11,7 @@ module.exports = {
     },
   },
   devServer: {
+    port: 8001,
     proxy: {
       '/koa2': {
         target: 'http://97.64.33.74:3000/', // koa2默认启动3000

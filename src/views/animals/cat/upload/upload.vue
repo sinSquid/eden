@@ -70,7 +70,7 @@ export default {
           chart.columns.push(e.Name);
           aims[e.Name] = e.Confidence;
         });
-        const name = origin.labels.map(e => e.Name);
+        const name = origin.labels.map((e) => e.Name);
         Sample.forEach((s) => {
           const obj = { id: s.key };
           name.forEach((e) => { obj[e] = s.value; });

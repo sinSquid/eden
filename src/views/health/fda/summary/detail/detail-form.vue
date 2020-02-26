@@ -202,7 +202,7 @@ export default {
       this.queryForm.search = '';
     },
     removeTag(tag) {
-      const index = this.queryForm.tags.findIndex(e => e.name === tag);
+      const index = this.queryForm.tags.findIndex((e) => e.name === tag);
       this.queryForm.tags.splice(index, 1);
     },
   },

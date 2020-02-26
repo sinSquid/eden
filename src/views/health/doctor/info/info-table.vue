@@ -110,7 +110,7 @@ export default {
         });
     },
     innerSetDetail(id) {
-      const index = this.origin.data.findIndex(e => e.uid === id);
+      const index = this.origin.data.findIndex((e) => e.uid === id);
       const detail = _.pick(this.origin.data[index], _.keys(this.detail));
       this.setDetail(detail);
     },

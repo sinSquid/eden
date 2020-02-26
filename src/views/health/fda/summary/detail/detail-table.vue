@@ -49,8 +49,8 @@
 import {
   mapState, mapMutations, mapActions, mapGetters,
 } from 'vuex';
-import { detail } from '../../lib/data';
 import jsonViewer from '@/components/json-viewer/index.vue';
+import { detail } from '../../lib/data';
 
 export default {
   name: 'detail-table',
@@ -105,7 +105,7 @@ export default {
 
     checkDetail(id) {
       const aims = this.fda[this.detailTab].results;
-      const index = aims.findIndex(e => e.report_number === id);
+      const index = aims.findIndex((e) => e.report_number === id);
       this.jsonViewData = aims[index];
       this.visible = true;
     },

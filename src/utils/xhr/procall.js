@@ -5,7 +5,7 @@
  * @Params: response
  * @Return: promise
  */
-const proCall = response => new Promise((resolve, reject) => {
+const proCall = (response) => new Promise((resolve, reject) => {
   if (response.status === 200) {
     resolve(response.data);
   } else {

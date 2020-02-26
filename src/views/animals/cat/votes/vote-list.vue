@@ -101,7 +101,7 @@ export default {
       const params = { image_id: item.image_id, sub_id: item.sub_id, value };
       this.createVote(params)
         .then(() => {
-          const index = this.carousel.findIndex(e => e.id === item.id);
+          const index = this.carousel.findIndex((e) => e.id === item.id);
           this.carousel[index].value = value;
           this.setGlobalMessage({ message: '更改评分成功', type: 'success' });
         })
@@ -116,7 +116,7 @@ export default {
       this.loading = true;
       this.deleteVote(id)
         .then(() => {
-          const index = this.carousel.findIndex(e => e.id === id);
+          const index = this.carousel.findIndex((e) => e.id === id);
           this.carousel.splice(index, 1);
           this.setGlobalMessage({ message: '删除成功', type: 'success' });
         })

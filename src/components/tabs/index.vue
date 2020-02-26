@@ -41,7 +41,7 @@ export default {
         });
     },
     chgActiveTab() {
-      this.activeTab = this.tabs.find(e => this.$route.path.includes(e.path)).path;
+      this.activeTab = this.tabs.find((e) => this.$route.path.includes(e.path)).path;
     },
   },
   mounted() {

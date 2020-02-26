@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import _ from 'lodash';
+import lodash from 'lodash';
 import ElementUI from 'element-ui';
 import router from '@/router';
 import store from '@/store/store';
@@ -12,7 +12,7 @@ import '@/styles/index.less';
 
 import '@/lib/server/permission';
 
-window._ = _;
+window._ = lodash;
 
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
@@ -20,5 +20,5 @@ Vue.use(ElementUI);
 new Vue({
   router,
   store,
-  render: h => h(App),
+  render: (h) => h(App),
 }).$mount('#app');

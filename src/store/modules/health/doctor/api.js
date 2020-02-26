@@ -9,9 +9,9 @@ import { doctor } from '@/lib/auth/health';
  * @Params: 详见官网
  * @Return: jsonData
  */
-const auth = params => ({ params: _.assign(params, { user_key: doctor.user_key }) });
+const auth = (params) => ({ params: _.assign(params, { user_key: doctor.user_key }) });
 
 export default {
   // 依据信息检索医生资料
-  searchDoctors: params => axios.get('https://api.betterdoctor.com/2016-03-01/doctors', auth(params)),
+  searchDoctors: (params) => axios.get('https://api.betterdoctor.com/2016-03-01/doctors', auth(params)),
 };

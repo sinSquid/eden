@@ -228,7 +228,7 @@ export default {
       }
     },
     loadedImage(id) {
-      const index = this.data.findIndex(e => e.id === id);
+      const index = this.data.findIndex((e) => e.id === id);
       this.data[index].loaded = true;
       this.loading = false;
     },
@@ -239,7 +239,7 @@ export default {
       this.loading = true;
       const value = (row.rate - 1);
       const params = { image_id: row.id, sub_id: this.sub.id, value };
-      const index = this.data.findIndex(e => e.id === row.id);
+      const index = this.data.findIndex((e) => e.id === row.id);
       this.createVote(params)
         .then(() => {
           this.data[index].back_rate = (value + 1);
@@ -267,7 +267,7 @@ export default {
       callBack
         .then((response) => {
           if (response.message === 'SUCCESS') {
-            const index = this.data.findIndex(e => e.id === row.id);
+            const index = this.data.findIndex((e) => e.id === row.id);
             this.data[index].fav = !fav;
             if (!fav) {
               this.data[index].favid = response.id;

@@ -15,8 +15,8 @@ export default {
   // 随机获取一只狗子
   getRandomDog: () => axios.get('https://dog.ceo/api/breeds/image/random'),
   // 随机获取一只选定种类的狗子
-  getRandomDogByBreed: params => axios.get(`https://dog.ceo/api/breed/${params}/images/random`),
-  getRandomDogsLimit: params => axios({
+  getRandomDogByBreed: (params) => axios.get(`https://dog.ceo/api/breed/${params}/images/random`),
+  getRandomDogsLimit: (params) => axios({
     url: `https://dog.ceo/api/breeds/image/random/${params}`,
     loading: true,
   }),

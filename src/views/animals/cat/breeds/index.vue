@@ -50,8 +50,8 @@
 
 <script>
 import { mapActions, mapMutations, mapState } from 'vuex';
-import catTable from './cat-table.vue';
 import dividerCollapse from '@/components/divider-collapse/index.vue';
+import catTable from './cat-table.vue';
 
 const columns = ['name', 'adaptability', 'child_friendly',
   'energy_level', 'health_issues', 'intelligence',

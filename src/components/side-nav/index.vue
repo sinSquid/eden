@@ -27,7 +27,7 @@ export default {
   computed: {
     defaultMenu() {
       const { path } = this.$route;
-      return mainRoute.find(e => path.includes(e.value)).value;
+      return mainRoute.find((e) => path.includes(e.value)).value;
     },
   },
 };

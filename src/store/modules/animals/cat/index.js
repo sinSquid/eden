@@ -1,5 +1,5 @@
-import api from './api';
 import proCall from '@/utils/xhr/procall';
+import api from './api';
 
 export default {
   namespaced: true,

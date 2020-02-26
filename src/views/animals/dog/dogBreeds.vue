@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     changeType() {
-      const index = chartTypes.findIndex(e => e === this.chartSettings.type);
+      const index = chartTypes.findIndex((e) => e === this.chartSettings.type);
       this.chartSettings = { type: chartTypes[(index + 1) % 3] };
     },
   },

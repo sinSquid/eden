@@ -153,7 +153,7 @@ export default {
     deleteImage(id) {
       this.deleteUploadImage(id)
         .then(() => {
-          const index = this.data.findIndex(e => e.id === id);
+          const index = this.data.findIndex((e) => e.id === id);
           this.data.splice(index, 1);
           this.setGlobalMessage({ message: '删除上传图片成功', type: 'success' });
         })

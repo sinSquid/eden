@@ -33,8 +33,7 @@ export default {
     * @Return: null
     */
     messTimestamp() {
-      const options = _.cloneDeep(this.globalMessage);
-      this.$message(options);
+      this.$message({ ...this.globalMessage });
     },
     loadingShow(val) {
       if (val) {

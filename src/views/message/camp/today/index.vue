@@ -42,12 +42,13 @@
       <el-table-column
         label="操作"
         width="160">
-        <template slot-scope="{ row: { size_mb, file } }">
+        <template slot-scope="{ row: { url, forbidJump } }">
           <el-button
             size="mini"
             type="primary"
-            @click="downFile(size_mb, file)">
-            下载
+            :disabled="forbidJump"
+            @click="jumpSource(url)">
+            jump
           </el-button>
         </template>
       </el-table-column>
@@ -76,15 +77,15 @@ export default {
         瞎推荐: [],
         福利: [],
       },
-      List: [],
       step: 20,
       category: ['Android', 'App', 'iOS', '休息视频', '前端', '拓展资源', '瞎推荐', '福利'],
       results: {},
+      pictureSuffix: ['.bmp', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.ai', '.webp'],
     };
   },
   computed: {
     currentData() {
-      return this.results[this.active];
+      return this.results[this.active] || [];
     },
     displayList() {
       return this.list[this.active];
@@ -98,6 +99,11 @@ export default {
       const result = await api.getToday();
       const { status, message, data: { error, results } } = result;
       if (status === 200 && !error) {
+        for (const [, data] of _.toPairs(results)) {
+          data.forEach((e) => {
+            e.forbidJump = this.pictureSuffix.some((sf) => e.url.includes(sf));
+          });
+        }
         this.results = results;
         this.initList();
       } else {
@@ -135,6 +141,19 @@ export default {
       this.$nextTick(() => {
         this.$refs.todayTable.bodyWrapper.scrollTop = 0;
       });
+    },
+    jumpSource(url) {
+      this.$confirm('您将跳至资源原始网页？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        iconClass: 'el-icon-error',
+        closeOnClickModal: false,
+        type: 'success',
+      })
+        .then(() => {
+          window.open(url, 'target');
+        })
+        .catch(() => {});
     },
   },
   mounted() {

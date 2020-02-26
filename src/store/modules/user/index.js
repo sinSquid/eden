@@ -16,7 +16,7 @@ export default {
   name: 'moduleUser',
   namespaced: true,
   state: {
-    userInfo: Object.assign({}, originUserInfo),
+    userInfo: { ...originUserInfo },
     userStatus,
     status: userStatus.quit,
     token: '',
@@ -34,7 +34,7 @@ export default {
   },
   mutations: {
     setUserInfo(state, payload) {
-      state.userInfo = Object.assign({}, payload);
+      state.userInfo = { ...payload };
     },
     setUserToken(state, payload) {
       setToken(state.token, payload.token);

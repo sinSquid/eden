@@ -4,5 +4,5 @@ import axios from '@/lib/axios/index';
 
 
 export default {
-  signIn: data => axios.post('/login', qs.stringify(data)),
+  signIn: (data) => axios.post('/login', qs.stringify(data)),
 };

@@ -1,6 +1,6 @@
-import api from './api';
 import proCall from '@/utils/xhr/procall';
 import { detail } from '@/views/health/fda/lib/data';
+import api from './api';
 
 const params = {
   skip: 0, // 当前页
@@ -60,7 +60,7 @@ export default {
         // 处理展示数据
         const aims = _.cloneDeep(results);
         const data = [];
-        const keys = detail[type].map(e => e.key);
+        const keys = detail[type].map((e) => e.key);
         if (type === 'food') {
           for (const re of aims) {
             _.assign(re, re.consumer);

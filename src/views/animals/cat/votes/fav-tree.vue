@@ -121,7 +121,7 @@ export default {
     },
     loadNode(node, resolve) {
       setTimeout(() => {
-        const index = this.data.findIndex(e => e.label === node.data.label);
+        const index = this.data.findIndex((e) => e.label === node.data.label);
         const data = _.isEmpty(this.data) ? [] : this.data[index].children;
         resolve(data);
       }, 300);
@@ -134,7 +134,7 @@ export default {
           if (message === 'SUCCESS') {
             const { parent } = node;
             const children = parent.data.children || parent.data;
-            const index = children.findIndex(d => d.id === data.id);
+            const index = children.findIndex((d) => d.id === data.id);
             children.splice(index, 1);
             const arr = _.cloneDeep(children);
             this.$refs.favTree.updateKeyChildren(parent.data.id, arr);

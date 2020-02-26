@@ -71,7 +71,7 @@ export default {
       browsers,
       support,
       keyMap,
-      browsersEnable: browsers.map(e => e.key),
+      browsersEnable: browsers.map((e) => e.key),
     };
   },
   computed: {

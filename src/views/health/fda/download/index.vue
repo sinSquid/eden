@@ -125,9 +125,9 @@ export default {
         if (col.count) {
           let values;
           if (col.key === 'size_mb') {
-            values = aims.map(e => Number(e[col.key]));
+            values = aims.map((e) => Number(e[col.key]));
           } else {
-            values = aims.map(e => e[col.key]);
+            values = aims.map((e) => e[col.key]);
           }
           const sum = _.reduce(values, (prev, curr) => prev + curr, 0);
           sums.push(sum);
@@ -175,7 +175,8 @@ export default {
         })
           .then(() => {
             window.location.href = file;
-          });
+          })
+          .catch(() => {});
       } else {
         window.location.href = file;
       }
