@@ -1,13 +1,13 @@
 <template>
   <el-row type="flex" :gutter="20">
-    <el-col :span="5" class="left">
-      <info-form></info-form>
+    <el-col :span="6" class="left">
+      <info-form />
     </el-col>
     <el-col :span="8" class="left">
-      <info-table></info-table>
+      <info-table />
     </el-col>
-    <el-col :span="10" :offset="1" class="right">
-      <info-detail></info-detail>
+    <el-col :span="10" class="right">
+      <info-detail />
     </el-col>
   </el-row>
 </template>

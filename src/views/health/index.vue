@@ -1,8 +1,8 @@
 <template>
   <div class="health">
-    <eden-tabs :tabs="heaTabs"></eden-tabs>
+    <eden-tabs :tabs="heaTabs" />
     <keep-alive>
-      <router-view></router-view>
+      <router-view />
     </keep-alive>
   </div>
 </template>
@@ -14,7 +14,7 @@ import '@/styles/health/index.less';
 
 const heaTabs = [{
   value: 'doctor',
-  label: 'doctor',
+  label: 'Doctor',
   path: '/health/doctor',
 }, {
   value: 'fda',

@@ -1,17 +1,14 @@
 <template>
   <div class="http404-container">
-    <div class="pic-404">
-      <div></div>
-    </div>
     <div class="mess-404">
       <el-button
-        class="ui-mt-40"
-        icon="el-icon-top-left"
+        icon="el-icon-back"
         type="text"
         @click="goBack">
         返回上一页
       </el-button>
     </div>
+    <div class="pic-404" />
   </div>
 </template>
 
@@ -45,6 +42,7 @@ export default {
     display: flex;
     flex: auto;
     justify-content: center;
+    margin-top: 100px;
   }
 }
 </style>

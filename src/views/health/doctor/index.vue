@@ -1,8 +1,8 @@
 <template>
   <div class="heal-doctor">
-    <divider-collapse :data="dividerCollapse[0]"></divider-collapse>
-    <doctor-info></doctor-info>
-    <doctor-practice></doctor-practice>
+    <divider-collapse :data="dividerCollapse[0]" />
+    <doctor-info />
+    <doctor-practice />
   </div>
 </template>
 
@@ -22,12 +22,12 @@ export default {
     return {
       dividerCollapse: [{
         divider: {
-          title: 'cat&breeds',
+          title: 'doctor',
         },
         collapse: [{
-          title: 'breeds内容介绍',
-          content: '获取所有喵喵种类',
-          link: 'https://docs.thecatapi.com/api-reference/breeds/',
+          title: 'doctor内容介绍',
+          content: '获取doctor相关内容',
+          link: 'https://developer.betterdoctor.com/documentation15#/',
         }],
       }],
     };

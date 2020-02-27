@@ -2,7 +2,7 @@
   <div>
     <el-table
       ref="doctorInfoTable"
-      :height="640"
+      :height="480"
       v-loading="loading"
       element-loading-text="loading"
       element-loading-spinner="el-icon-loading"
@@ -12,19 +12,19 @@
       size="small"
       :data="displayData">
       <el-table-column
-        v-for="col in columns"
-        :prop="col.key"
-        :key="col.key"
-        :fixed="col.fixed"
-        :sortable="col.sort"
-        :label="col.label"
-        :width="col.width">
+        v-for="{key, fixed, sort, label, width} of columns"
+        :prop="key"
+        :key="key"
+        :fixed="fixed"
+        :sortable="sort"
+        :label="label"
+        :width="width">
       </el-table-column>
       <el-table-column
         label="Info"
         width="100">
-        <template slot-scope="{ row: { uid } }">
-          <i class="el-icon-user cus-icon-16"
+        <template slot-scope="{ row: { profile: { gender }, uid } }">
+          <i :class="['cus-icon-16', gender === 'male' ? 'el-icon-male' : 'el-icon-female']"
             @click="innerSetDetail(uid)">
           </i>
         </template>
