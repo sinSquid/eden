@@ -44,12 +44,8 @@ export default new Router({
             path: '/message/camp',
             name: 'camp',
             component: () => import('@/views/message/camp/index.vue'),
-            redirect: '/message/camp/today',
+            redirect: '/message/camp/recall',
             children: [{
-              path: '/message/camp/today',
-              name: 'today',
-              component: () => import('@/views/message/camp/today/index.vue'),
-            }, {
               path: '/message/camp/category',
               name: 'category',
               component: () => import('@/views/message/camp/category/index.vue'),

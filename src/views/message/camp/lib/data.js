@@ -54,7 +54,6 @@ const drugCols = [
 ];
 
 const todayCols = [
-  { key: '_id', label: '编号', width: 240 },
   { key: 'desc', label: '描述', width: 240 },
   { key: 'source', label: '来源', width: 120 },
   { key: 'who', label: '作者', width: 120 },

@@ -6,13 +6,13 @@
         type="date"
         size="small"
         :picker-options="pickerOptions"
+        :clearable="false"
         @change="getToday"
         placeholder="选择日期">
       </el-date-picker>
       <el-radio-group
         class="ui-ml-20"
-        v-model="active"
-        @change="changeTab">
+        v-model="active">
         <el-radio
           v-for="cg of category"
           :key="cg"
@@ -32,7 +32,7 @@
       element-loading-text="loading"
       element-loading-spinner="el-icon-loading"
       element-loading-background="rgba(153, 169, 191, 0.1)"
-      :data="displayList">
+      :data="currentData">
       <el-table-column
         v-for="{ key, label, width } of todayCols"
         :key="key"
@@ -77,18 +77,7 @@ export default {
       active: null,
       loading: false,
       todayCols,
-      list: {
-        Android: [],
-        App: [],
-        iOS: [],
-        休息视频: [],
-        前端: [],
-        拓展资源: [],
-        瞎推荐: [],
-        福利: [],
-      },
-      step: 20,
-      category: ['Android', 'App', 'iOS', '休息视频', '前端', '拓展资源', '瞎推荐', '福利'],
+      category: [],
       results: {},
       pictureSuffix: ['.bmp', '.jpg', '.jpeg', '.png', '.gif', '.svg', '.ai', '.webp'],
     };
@@ -97,61 +86,27 @@ export default {
     currentData() {
       return this.results[this.active] || [];
     },
-    displayList() {
-      return this.list[this.active];
-    },
-    noMore() {
-      return this.displayList.length >= this.currentData.length;
-    },
   },
   methods: {
     async getToday() {
       const date = this.date || lastUpdateDate;
       const result = await getDay(formatDate('YYYY/MM/DD', date));
-      const { status, message, data: { error, results } } = result;
+      const { status, message, data: { error, results, category } } = result;
       if (status === 200 && !error) {
-        for (const [, data] of _.toPairs(results)) {
-          data.forEach((e) => {
+        for (const item of Object.values(results)) {
+          item.forEach((e) => {
             e.forbidJump = this.pictureSuffix.some((sf) => e.url.includes(sf));
           });
         }
+        if (category && Array.isArray(category) && !category.includes(this.active)) {
+          const [first] = category;
+          this.active = first;
+        }
         this.results = results;
-        this.initList();
+        this.category = category;
       } else {
         this.$Message.error(message || 'something is wrong');
       }
-    },
-    loadData() {
-      const len = this.currentData.length;
-      const now = this.displayList.length;
-      if (len === now) { return; }
-      this.loading = true;
-      setTimeout(() => {
-        const end = now < (len - this.step) ? (now + this.step) : len;
-        this.list[this.active] = _.slice(this.currentData, 0, end);
-        this.loading = false;
-      }, 1000);
-    },
-    lazyLoad() {
-      const dom = this.$refs.todayTable.bodyWrapper;
-      const lazy = _.debounce(() => {
-        const { clientHeight, scrollHeight, scrollTop } = dom;
-        if ((clientHeight + scrollTop) < scrollHeight) { return; }
-        this.loadData();
-      }, 200);
-      dom.addEventListener('scroll', lazy);
-    },
-    initList() {
-      const len = this.currentData.length;
-      const end = (len - this.step) >= 0 ? this.step : len;
-      this.list[this.active] = _.slice(this.currentData, 0, end);
-    },
-    changeTab() {
-      if (this.displayList.length) { return; }
-      this.initList();
-      this.$nextTick(() => {
-        this.$refs.todayTable.bodyWrapper.scrollTop = 0;
-      });
     },
     jumpSource(url) {
       this.$confirm('您将跳至资源原始网页？', '提示', {
@@ -168,7 +123,6 @@ export default {
     },
   },
   mounted() {
-    this.lazyLoad();
     this.getToday();
   },
 };
