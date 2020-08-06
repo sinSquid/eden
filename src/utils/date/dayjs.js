@@ -11,8 +11,24 @@ function formatData(date, format) {
   return dayjs(date).format(format);
 }
 
-function getTimestamp() {
-  return dayjs().unix();
+// 时间格式化，默认当天
+function formatDate(format, date) {
+  return dayjs(date || undefined).format(format);
+}
+
+// 获取时间戳
+function getTimestamp(dateTime) {
+  return dayjs(dateTime || undefined).unix();
+}
+
+// Unix 时间戳 (秒)
+function getSecond(dateTime) {
+  return dayjs(dateTime || undefined).unix();
+}
+
+// Unix 时间戳 (毫秒)
+function getMilliSecond(dateTime) {
+  return dayjs(dateTime || undefined).valueOf();
 }
 
 // 返回今日与距离今日前几个月
@@ -25,4 +41,7 @@ export {
   formatData,
   getTimestamp,
   dateBeforeMon,
+  formatDate,
+  getSecond,
+  getMilliSecond,
 };

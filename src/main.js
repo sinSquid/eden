@@ -6,11 +6,10 @@ import store from '@/store/store';
 import App from '@/App.vue';
 // 按需引入v-charts，详见下文件
 import '@/plugins/vcharts';
+import '@/lib/server/permission';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/styles/index.less';
-
-import '@/lib/server/permission';
 
 window._ = lodash;
 

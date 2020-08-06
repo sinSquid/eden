@@ -53,6 +53,10 @@ export default new Router({
               path: '/message/camp/category',
               name: 'category',
               component: () => import('@/views/message/camp/category/index.vue'),
+            }, {
+              path: '/message/camp/recall',
+              name: 'recall',
+              component: () => import('@/views/message/camp/recall/index.vue'),
             }],
           }],
         }, {

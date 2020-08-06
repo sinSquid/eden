@@ -3,6 +3,6 @@ import qs from 'qs';
 import axios from '@/lib/axios/index';
 
 export default {
-  signIn: (data) => axios.post('http://97.64.33.74:3000/login', qs.stringify(data)),
+  signIn: (data) => axios.post('/customizeRemote/login', qs.stringify(data)),
   signOut: () => axios.post(''),
 };

@@ -13,12 +13,12 @@ module.exports = {
   devServer: {
     port: 8001,
     proxy: {
-      '/koa2': {
-        target: 'http://97.64.33.74:3000/', // koa2默认启动3000
+      '/customizeRemote': {
+        target: 'http://8.210.227.16:3000/', // koa2默认启动3000
         changeOrigin: true,
         ws: true,
         pathRewrite: {
-          '^/koa2': '',
+          '^/customizeRemote/': '/',
         },
       },
     },

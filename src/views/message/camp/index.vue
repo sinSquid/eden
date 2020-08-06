@@ -27,6 +27,7 @@ export default {
       tabs: [
         { key: 'today', label: '今日热读' },
         { key: 'category', label: '闲读百宝囊' },
+        { key: 'recall', label: '回忆' },
       ],
     };
   },
