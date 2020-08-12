@@ -1,5 +1,5 @@
 // 干货集中营、gank
-import axios from '@/lib/axios/index';
+import axios from '@/lib/axios/checkStatus';
 
 /**
  * @Description: 干货集中营，https://gank.io/api
@@ -19,7 +19,11 @@ const getDay = (params) => axios.get(`${prefix}/day/${params}`);
 post_id 可接受参数 文章id[分类数据API返回的_id字段] */
 const getArticle = (params) => axios.get(`${v2Prefix}/post${params}`);
 
+/* 首页banner轮播 */
+const getBanners = () => axios.get(`${v2Prefix}/banners`);
+
 export {
   getDay,
   getArticle,
+  getBanners,
 };

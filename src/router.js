@@ -44,7 +44,7 @@ export default new Router({
             path: '/message/camp',
             name: 'camp',
             component: () => import('@/views/message/camp/index.vue'),
-            redirect: '/message/camp/recall',
+            redirect: '/message/camp/home',
             children: [{
               path: '/message/camp/category',
               name: 'category',
@@ -53,6 +53,14 @@ export default new Router({
               path: '/message/camp/recall',
               name: 'recall',
               component: () => import('@/views/message/camp/recall/index.vue'),
+            }, {
+              path: '/message/camp/home',
+              name: 'recall',
+              component: () => import('@/views/message/camp/home/index.vue'),
+            }, {
+              path: '/message/camp/welfare',
+              name: 'welfare',
+              component: () => import('@/views/message/camp/welfare/index.vue'),
             }],
           }],
         }, {

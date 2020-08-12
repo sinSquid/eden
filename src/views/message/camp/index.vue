@@ -23,10 +23,12 @@ export default {
   data() {
     return {
       listVisible: false,
-      active: 'today',
+      active: 'home',
       tabs: [
+        { key: 'home', label: '主页' },
         { key: 'recall', label: '回忆' },
         { key: 'category', label: '闲读百宝囊' },
+        { key: 'welfare', label: '福利' },
       ],
     };
   },

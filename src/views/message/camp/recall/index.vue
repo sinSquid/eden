@@ -88,25 +88,25 @@ export default {
     },
   },
   methods: {
-    async getToday() {
+    getToday() {
       const date = this.date || lastUpdateDate;
-      const result = await getDay(formatDate('YYYY/MM/DD', date));
-      const { status, message, data: { error, results, category } } = result;
-      if (status === 200 && !error) {
-        for (const item of Object.values(results)) {
-          item.forEach((e) => {
-            e.forbidJump = this.pictureSuffix.some((sf) => e.url.includes(sf));
-          });
-        }
-        if (category && Array.isArray(category) && !category.includes(this.active)) {
-          const [first] = category;
-          this.active = first;
-        }
-        this.results = results;
-        this.category = category;
-      } else {
-        this.$Message.error(message || 'something is wrong');
-      }
+      getDay(formatDate('YYYY/MM/DD', date))
+        .then((data) => {
+          const { error, results, category } = data;
+          if (!error) {
+            for (const item of Object.values(results)) {
+              item.forEach((e) => {
+                e.forbidJump = this.pictureSuffix.some((sf) => e.url.includes(sf));
+              });
+            }
+            if (category && Array.isArray(category) && !category.includes(this.active)) {
+              const [first] = category;
+              this.active = first;
+            }
+            this.results = results;
+            this.category = category;
+          }
+        });
     },
     jumpSource(url) {
       this.$confirm('您将跳至资源原始网页？', '提示', {
