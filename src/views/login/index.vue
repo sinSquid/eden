@@ -31,6 +31,8 @@
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex';
 import { validateUserName, validatePassword } from '@/utils/validator';
+import { aesEncrypt } from '@/utils/cryptojs';
+import { getMilliSecond } from '@/utils/date/dayjs';
 
 export default {
   name: 'eden-login',
@@ -83,7 +85,12 @@ export default {
         }
         setTimeout(() => {
           this.isSignIn = false;
-          this.signIn(this.user)
+          const timestamp = getMilliSecond();
+          this.signIn({
+            ...this.user,
+            password: aesEncrypt(this.user.password, timestamp),
+            timestamp,
+          })
             .catch(() => {
               this.setGlobalMessage(this.netWorkError);
             });

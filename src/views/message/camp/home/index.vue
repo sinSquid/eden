@@ -1,15 +1,25 @@
 <template>
-  <div v-swiper:Swiper="swiperOption">
-    <div class="swiper-wrapper">
-      <div
-        v-for="{ image } of banners"
-        class="swiper-slide"
-        :key="image">
-        <img :src="image" alt="not found" />
+  <el-row type="flex">
+    <el-col :span="8">
+      <div v-swiper:Swiper="swiperOption">
+        <div class="swiper-wrapper">
+          <div
+            v-for="{ image } of banners"
+            class="swiper-slide"
+            :key="image">
+            <img
+              class="banner-area"
+              :src="image"
+              alt="not found" />
+          </div>
+        </div>
+        <div class="swiper-pagination"></div>
       </div>
-    </div>
-    <div class="swiper-pagination"></div>
-  </div>
+    </el-col>
+    <el-col :span="16">
+      456
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -44,7 +54,7 @@ export default {
         .then(({ data }) => {
           this.banners = data || [];
           if (data && Array.isArray(data) && data.length) {
-            this.Swiper.slideTo(1, 1000, false);
+            this.Swiper.slideTo(0, 1000, false);
           }
         });
     },
@@ -54,3 +64,9 @@ export default {
   },
 };
 </script>
+
+<style lang="less" scoped>
+.banner-area {
+  height: 200px;
+}
+</style>

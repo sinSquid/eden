@@ -14,7 +14,8 @@ module.exports = {
     port: 8001,
     proxy: {
       '/customizeRemote': {
-        target: 'http://8.210.227.16:3000/', // koa2默认启动3000
+        // target: 'http://121.40.184.231:3000/', // koa2默认启动3000
+        target: 'http://127.0.0.1:3000/', // koa2默认启动3000
         changeOrigin: true,
         ws: true,
         pathRewrite: {
