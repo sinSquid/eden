@@ -1,6 +1,6 @@
 import CryptoJS from 'crypto-js';
 
-const key = 'eden&for&up&every&day';
+const key = 'cvJ5V8RHWiAgDSbC'; // length = 16, utf解析不超过16
 
 /**
  * @Description: CipherOption, 加密的一些选项:
@@ -11,14 +11,14 @@ const key = 'eden&for&up&every&day';
   返回的是一个加密对象
  * @Author: sin
  * @date: 2020/9/8
- * @Params:
- * @Return:
+ * @Params: 密码
+ * @Return: 加密密码
  */
 
 // 加密
-const aesEncrypt = (password, timestamp) => {
+const aesEncrypt = (password) => {
   // 把Key转换为wordArray对象
-  const Utf8Key = CryptoJS.enc.Utf8.parse(`${key}#${timestamp}`);
+  const Utf8Key = CryptoJS.enc.Utf8.parse(key);
   const cipher = CryptoJS.AES.encrypt(password, Utf8Key, {
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.Pkcs7,
@@ -28,8 +28,8 @@ const aesEncrypt = (password, timestamp) => {
 };
 
 // 解密
-const aesDecrypt = (password, timestamp) => {
-  const Utf8Key = CryptoJS.enc.Utf8.parse(`${key}#${timestamp}`);
+const aesDecrypt = (password) => {
+  const Utf8Key = CryptoJS.enc.Utf8.parse(key);
   //  这里 mode, padding, iv 一定要跟加密的时候完全一样，返回的是一个解密后的对象
   const decipher = CryptoJS.AES.decrypt(password, Utf8Key, {
     mode: CryptoJS.mode.ECB,
