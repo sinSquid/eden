@@ -1,20 +1,23 @@
 <template>
   <el-row type="flex">
     <el-col :span="8">
-      <div v-swiper:Swiper="swiperOption">
-        <div class="swiper-wrapper">
-          <div
-            v-for="{ image } of banners"
-            class="swiper-slide"
-            :key="image">
-            <img
-              class="banner-area"
-              :src="image"
-              alt="not found" />
-          </div>
-        </div>
-        <div class="swiper-pagination"></div>
-      </div>
+      <swiper
+        ref="bannerSwiper"
+        class="swiper"
+        :options="swiperOptions">
+        <swiper-slide
+          v-for="banner of banners"
+          class="swiper-slide"
+          :key="banner.image">
+          <img
+            class="banner-area"
+            :src="banner.image"
+            alt="not found" />
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination" />
+        <div class="swiper-button-prev" slot="button-prev" @click="slideMove('Prev')" />
+        <div class="swiper-button-next" slot="button-next" @click="slideMove('Next')" />
+      </swiper>
     </el-col>
     <el-col :span="16">
       456
@@ -23,22 +26,31 @@
 </template>
 
 <script>
-import { directive } from 'vue-awesome-swiper';
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import { getBanners } from '@/apis/message/gank';
 import 'swiper/swiper-bundle.css';
 
+
 export default {
-  name: 'home',
-  // 指令模式
-  directives: {
-    swiper: directive,
+  name: 'message-camp-home',
+  title: 'what',
+  components: {
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
       banners: [],
-      swiperOption: {
+      swiperOptions: {
+        autoplay: true,
         pagination: {
           el: '.swiper-pagination',
+          type: 'fraction',
+          clickable: true,
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
         },
       },
     };
@@ -47,16 +59,19 @@ export default {
     currentData() {
       return this.results[this.active] || [];
     },
+    swiper() {
+      return this.$refs.bannerSwiper.$swiper;
+    },
   },
   methods: {
     showBanners() {
       getBanners()
         .then(({ data }) => {
           this.banners = data || [];
-          if (data && Array.isArray(data) && data.length) {
-            this.Swiper.slideTo(0, 1000, false);
-          }
         });
+    },
+    slideMove(action) {
+      this.swiper[`slide${action}`]();
     },
   },
   mounted() {
