@@ -25,6 +25,8 @@ export default new Vuex.Store({
     userStatus,
     netWorkError: { message: '网络错误,请稍后再试', type: 'error' },
     globalLoading: elLoadingOptions,
+    currentTab: undefined,
+    tabsList: [],
   },
   getters,
   mutations,

@@ -4,27 +4,27 @@ const NavList = [
   {
     label: '首页',
     value: 'home',
-    url: '/home',
+    path: '/home',
     icon: 'icon1',
   }, {
     label: '资讯',
     value: 'message',
-    url: '/message',
+    path: '/message',
     icon: 'icon2',
   }, {
     label: '用户信息',
     value: 'user',
-    url: '/user',
+    path: '/user',
     icon: 'icon3',
   }, {
     label: '动物世界',
     value: 'animals',
-    url: '/animals',
+    path: '/animals',
     icon: 'icon4',
   }, {
     label: '健康中心',
     value: 'health',
-    url: '/health',
+    path: '/health',
     icon: 'icon5',
   },
 ];
