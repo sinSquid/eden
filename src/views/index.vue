@@ -95,7 +95,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['setGlobalMessage', 'updateCurrentTab', 'updateTabsList']),
+    ...mapMutations(['setGlobalMessage', 'updateCurrentTab', 'updateTabsList', 'removeCurrentTab']),
 
     confirmExit() {
       this.$confirm('此操作将退至登录页?', 'exit', {
@@ -133,11 +133,8 @@ export default {
       }
       this.$router.push(command);
     },
-    removeTabs(targetName, action) {
-      if (action !== 'remove') {
-        return;
-      }
-      this.removeCurrentTab(this.tabsList.find((e) => e.path === targetName));
+    removeTabs(targetName) {
+      this.removeCurrentTab(targetName);
     },
     activeCurrentTab(tab) {
       if (this.currentTab !== tab.name) {

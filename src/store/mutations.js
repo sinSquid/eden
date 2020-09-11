@@ -37,7 +37,7 @@ const mutations = {
    */
   removeCurrentTab(state, payload) {
     const { tabsList } = state;
-    const list = tabsList.filter((e) => e.url !== payload);
+    const list = tabsList.filter((e) => e.path !== payload);
     const [last] = [...list].reverse();
     Object.assign(state, {
       currentTab: last.path,
