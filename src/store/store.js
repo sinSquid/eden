@@ -27,6 +27,7 @@ export default new Vuex.Store({
     globalLoading: elLoadingOptions,
     currentTab: undefined,
     tabsList: [],
+    menusList: [],
   },
   getters,
   mutations,

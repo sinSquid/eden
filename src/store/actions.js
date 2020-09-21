@@ -1,18 +1,21 @@
-import api from '@/store/api';
+import { signIn, getUserMenu } from '@/apis/system';
 import router from '@/router';
 import { setUserToken } from '@/lib/store/cookie';
-import proCall from '@/utils/xhr/procall';
 import { store } from '@/lib/store/forage';
 
 const actions = {
-  async signIn({ commit }, params) {
-    const result = await api.signIn(params);
-    const proResult = proCall(result);
-    proResult
-      .then(({
+  signIn({ commit }, params) {
+    signIn(params)
+      .then(async ({
         code, data, token, message,
       }) => {
         if (code === 0) {
+          const menuRes = await getUserMenu(data);
+          if (!menuRes || (menuRes && menuRes.length === 0)) {
+            commit('setGlobalMessage', { message: '此用户无菜单权限，请联系管理员', type: 'warning' });
+            return;
+          }
+          commit('setMenusList', menuRes);
           commit('setUserInfo', data);
           setUserToken(token);
           store.setItem(token, data)

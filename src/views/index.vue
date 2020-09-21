@@ -30,14 +30,20 @@
         <div class="eden-side-nav">
           <el-menu
             :default-active="defaultMenu">
-            <el-menu-item
-              v-for="item of NavList"
-              :key="item.path"
-              :index="item.path"
-              @click="toggleMenu(item)">
-              <i class="el-icon-menu"></i>
-              <span>{{ item.label }}</span>
-            </el-menu-item>
+            <el-submenu
+              v-for="item of menusList"
+              :key="item.code"
+              :index="item.code">
+              <span slot="title">{{ item.name }}</span>
+              <el-menu-item
+                v-for="ch of item.children"
+                :key="ch.code"
+                :index="ch.uri"
+                @click="toggleMenu(ch)">
+                <i class="el-icon-menu"></i>
+                <span>{{ ch.name }}</span>
+              </el-menu-item>
+            </el-submenu>
           </el-menu>
         </div>
       </el-aside>
@@ -50,10 +56,10 @@
             @tab-remove="removeTabs"
             @tab-click="activeCurrentTab">
             <el-tab-pane
-              v-for="{ label, path } of tabsList"
-              :key="path"
-              :label="label"
-              :name="path" />
+              v-for="tab of tabsList"
+              :key="tab.uri"
+              :label="tab.name"
+              :name="tab.uri" />
           </el-tabs>
         </el-header>
         <el-main class="container-shell">
@@ -68,24 +74,19 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-import _ from 'lodash';
+// import _ from 'lodash';
 import { store } from '@/lib/store/forage';
 import { getUserToken, removeUserToken } from '@/lib/store/cookie';
-import { NavList } from '@/lib/config/Navigation';
 
 export default {
   name: 'eden',
-  data() {
-    return {
-      NavList: [...NavList],
-    };
-  },
   computed: {
-    ...mapState(['userInfo', 'currentTab', 'tabsList']),
+    ...mapState(['userInfo', 'currentTab', 'tabsList', 'menusList']),
 
     defaultMenu() {
-      const { path } = this.$route;
-      return _.get(NavList.find((e) => path.includes(e.path)), 'path', '/home');
+      // const { path } = this.$route;
+      // return _.get(this.menusList.find((e) => path.includes(e.uri)), 'uri', '/home');
+      return '/home';
     },
     moreThanOne() {
       return this.tabsList.length > 1;
@@ -143,12 +144,12 @@ export default {
       }
     },
     toggleMenu(menu) {
-      if (menu.path === this.currentTab) {
+      if (menu.uri === this.currentTab) {
         return;
       }
-      this.updateCurrentTab(menu.path);
+      this.updateCurrentTab(menu.uri);
       this.updateTabsList(menu);
-      this.$router.push({ path: menu.path });
+      this.$router.push({ path: menu.uri });
     },
   },
   // vuex内userInfo持久化
@@ -168,9 +169,11 @@ export default {
       });
   },
   mounted() {
-    const tab = NavList.find((e) => e.path === this.defaultMenu);
-    this.updateCurrentTab(tab.path);
-    this.updateTabsList(tab);
+    this.$nextTick(() => {
+      const tab = this.menusList.find((e) => e.uri === this.defaultMenu);
+      this.updateCurrentTab(tab.uri);
+      this.updateTabsList(tab);
+    });
   },
 };
 </script>

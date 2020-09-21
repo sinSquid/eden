@@ -44,5 +44,14 @@ const mutations = {
       tabsList: list,
     });
   },
+  /**
+   * @Description: 菜单设置
+   * @Author: sin
+   * @date: 2020/9/21
+   * @Params: 菜单
+   */
+  setMenusList(state, payload) {
+    state.menusList = payload;
+  },
 };
 export default mutations;
