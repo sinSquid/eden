@@ -74,9 +74,8 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex';
-// import _ from 'lodash';
 import { store } from '@/lib/store/forage';
-import { getUserToken, removeUserToken } from '@/lib/store/cookie';
+import { removeUserToken } from '@/lib/store/cookie';
 
 export default {
   name: 'eden',
@@ -84,9 +83,8 @@ export default {
     ...mapState(['userInfo', 'currentTab', 'tabsList', 'menusList']),
 
     defaultMenu() {
-      // const { path } = this.$route;
-      // return _.get(this.menusList.find((e) => path.includes(e.uri)), 'uri', '/home');
-      return '/home';
+      const { path } = this.$route;
+      return _.get(this.menusList.find((e) => path.includes(e.uri)), 'uri', '/home');
     },
     moreThanOne() {
       return this.tabsList.length > 1;
@@ -151,22 +149,6 @@ export default {
       this.updateTabsList(menu);
       this.$router.push({ path: menu.uri });
     },
-  },
-  // vuex内userInfo持久化
-  beforeCreate() {
-    const vuex = this.$store;
-    const token = getUserToken();
-    store.getItem(token)
-      .then((value) => {
-        if (value) {
-          vuex.commit('setUserInfo', value);
-        } else {
-          vuex.commit('setGlobalMessage', { message: 'userinfo is null', type: 'error' });
-        }
-      })
-      .catch(({ message }) => {
-        vuex.commit('setGlobalMessage', { message, type: 'error' });
-      });
   },
   mounted() {
     this.$nextTick(() => {
