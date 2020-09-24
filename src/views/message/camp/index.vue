@@ -2,7 +2,6 @@
   <el-tabs
     tab-position="left"
     v-model="active"
-    @tab-click="updateRoute"
     style="height: auto;">
     <el-tab-pane
       v-for="{ key, label } of tabs"
@@ -10,9 +9,6 @@
       :name="key"
       lazy
       :label="label" />
-    <keep-alive>
-      <router-view></router-view>
-    </keep-alive>
   </el-tabs>
 </template>
 
@@ -35,12 +31,6 @@ export default {
   methods: {
     openList() {
       this.listVisible = true;
-    },
-    updateRoute() {
-      this.$router.push({ path: `/message/camp/${this.active}` })
-        .catch(() => {
-          // vue-router3.1版本对相同路由的push、replace会报错，暂不处理，等待官方修复
-        });
     },
   },
 };

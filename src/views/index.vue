@@ -83,8 +83,8 @@ export default {
     ...mapState(['userInfo', 'currentTab', 'tabsList', 'menusList']),
 
     defaultMenu() {
-      const { path } = this.$route;
-      return _.get(this.menusList.find((e) => path.includes(e.uri)), 'uri', '/home');
+      const [first] = _.get(this.menusList.find((e) => e && e.children), 'children');
+      return this.currentTab || first.uri;
     },
     moreThanOne() {
       return this.tabsList.length > 1;
@@ -152,9 +152,8 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const tab = this.menusList.find((e) => e.uri === this.defaultMenu);
-      this.updateCurrentTab(tab.uri);
-      this.updateTabsList(tab);
+      const tabs = this.menusList.reduce((acc, e) => [...acc, ...e.children], []);
+      this.updateTabsList(tabs.find((e) => e.uri === this.defaultMenu));
     });
   },
 };
