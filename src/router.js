@@ -24,7 +24,6 @@ export default new Router({
         {
           path: '/home',
           name: 'home',
-          component: () => import('@/views/home/index.vue'),
           redirect: '/home/intro',
           children: [{
             path: '/home/intro', // 简介
