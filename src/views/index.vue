@@ -73,18 +73,21 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex';
+import { mapState, mapGetters, mapMutations } from 'vuex';
 import { store } from '@/lib/store/forage';
+import modulesCollection from '@/store/modules';
 import { removeUserToken } from '@/lib/store/cookie';
+import moduleHealth from '@/store/modules/health';
 
 export default {
   name: 'eden',
   computed: {
     ...mapState(['userInfo', 'currentTab', 'tabsList', 'menusList']),
+    ...mapGetters(['sublayerRoute']),
 
     defaultMenu() {
       const { path } = this.$route;
-      return _.get(this.menusList.find((e) => path.includes(e.uri)), 'uri', '/home');
+      return _.get(this.sublayerRoute.find((e) => path.includes(e.uri)), 'uri', '/home');
     },
     moreThanOne() {
       return this.tabsList.length > 1;
@@ -132,8 +135,15 @@ export default {
       }
       this.$router.push(command);
     },
-    removeTabs(targetName) {
-      this.removeCurrentTab(targetName);
+    removeTabs(url) {
+      const item = this.sublayerRoute.find((e) => e.uri === url);
+      if (item) {
+        const module = modulesCollection[item.parent_code];
+        if (module && this.$store[module.name]) {
+          this.$store.state.unregisterModule(moduleHealth.name);
+        }
+      }
+      this.removeCurrentTab(url);
     },
     activeCurrentTab(tab) {
       if (this.currentTab !== tab.name) {
@@ -145,6 +155,13 @@ export default {
       if (menu.uri === this.currentTab) {
         return;
       }
+      /* 在当前的tabs内找不到入参菜单的parentCode，说明该菜单是第一个传入tabsList的子项，需要注册vuex模块 */
+      if (this.tabsList.findIndex((e) => e.parent_code === menu.parent_code) === -1) {
+        const module = modulesCollection[menu.parent_code];
+        if (module) {
+          this.$store.registerModule(module.name, module);
+        }
+      }
       this.updateCurrentTab(menu.uri);
       this.updateTabsList(menu);
       this.$router.push({ path: menu.uri });
@@ -152,7 +169,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const tab = this.menusList.find((e) => e.uri === this.defaultMenu);
+      const tab = this.sublayerRoute.find((e) => e.uri === this.defaultMenu);
       this.updateCurrentTab(tab.uri);
       this.updateTabsList(tab);
     });

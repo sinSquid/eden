@@ -23,11 +23,8 @@ const mutations = {
   updateTabsList(state, payload) {
     const { tabsList } = state;
     const empty = tabsList.length === 0;
-    if (empty || (!empty && tabsList.findIndex((t) => t.path === payload.path) === -1)) {
-      Object.assign(state, {
-        tabsList: tabsList.concat(payload),
-        currentTab: payload.path,
-      });
+    if (empty || (!empty && tabsList.findIndex((t) => t.uri === payload.uri) === -1)) {
+      state.tabsList = [...tabsList, payload];
     }
   },
   /**
@@ -37,10 +34,10 @@ const mutations = {
    */
   removeCurrentTab(state, payload) {
     const { tabsList } = state;
-    const list = tabsList.filter((e) => e.path !== payload);
+    const list = tabsList.filter((e) => e.uri !== payload);
     const [last] = [...list].reverse();
     Object.assign(state, {
-      currentTab: last.path,
+      currentTab: last.uri,
       tabsList: list,
     });
   },
