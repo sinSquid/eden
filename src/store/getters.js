@@ -1,8 +1,6 @@
-import router from '@/router';
-
 const getters = {
-  route() {
-    return router;
+  sublayerRoute(state) {
+    return state.menusList.reduce((acc, e) => ([...acc, ...e.children]), []);
   },
 };
 export default getters;

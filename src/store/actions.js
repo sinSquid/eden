@@ -18,9 +18,10 @@ const actions = {
           commit('setMenusList', menuRes);
           commit('setUserInfo', data);
           setUserToken(token);
+          const [first] = menuRes;
           store.setItem(token, data)
             .then(() => {
-              router.push({ path: '/' });
+              router.push({ path: first.children[0].uri });
             });
         } else {
           commit('setGlobalMessage', { message, type: 'error' });

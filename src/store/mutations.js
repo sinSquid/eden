@@ -24,10 +24,7 @@ const mutations = {
     const { tabsList } = state;
     const empty = tabsList.length === 0;
     if (empty || (!empty && tabsList.findIndex((t) => t.uri === payload.uri) === -1)) {
-      Object.assign(state, {
-        tabsList: tabsList.concat(payload),
-        currentTab: payload.uri,
-      });
+      state.tabsList = [...tabsList, payload];
     }
   },
   /**
