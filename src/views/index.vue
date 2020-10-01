@@ -77,7 +77,6 @@ import { mapState, mapGetters, mapMutations } from 'vuex';
 import { store } from '@/lib/store/forage';
 import modulesCollection from '@/store/modules';
 import { removeUserToken } from '@/lib/store/cookie';
-import moduleHealth from '@/store/modules/health';
 
 export default {
   name: 'eden',
@@ -87,7 +86,7 @@ export default {
 
     defaultMenu() {
       const { path } = this.$route;
-      return _.get(this.sublayerRoute.find((e) => path.includes(e.uri)), 'uri', '/home');
+      return _.get(this.sublayerRoute.find((e) => path.includes(e.uri)), 'uri');
     },
     moreThanOne() {
       return this.tabsList.length > 1;
@@ -136,11 +135,16 @@ export default {
       this.$router.push(command);
     },
     removeTabs(url) {
-      const item = this.sublayerRoute.find((e) => e.uri === url);
-      if (item) {
-        const module = modulesCollection[item.parent_code];
-        if (module && this.$store[module.name]) {
-          this.$store.state.unregisterModule(moduleHealth.name);
+      const { parentCode } = this.tabsList.find((e) => e.uri === url);
+      const currentModule = modulesCollection[parentCode];
+      const total = this.tabsList
+        .reduce((acc, e) => {
+          const add = e.parentCode === parentCode ? 1 : 0;
+          return acc + add;
+        }, 0);
+      if (total === 1) { // 该模块下仅余此tab，移除tab时注销module
+        if (currentModule && this.$store.state[currentModule.name]) {
+          this.$store.unregisterModule(currentModule.name);
         }
       }
       this.removeCurrentTab(url);
@@ -156,10 +160,10 @@ export default {
         return;
       }
       /* 在当前的tabs内找不到入参菜单的parentCode，说明该菜单是第一个传入tabsList的子项，需要注册vuex模块 */
-      if (this.tabsList.findIndex((e) => e.parent_code === menu.parent_code) === -1) {
-        const module = modulesCollection[menu.parent_code];
-        if (module) {
-          this.$store.registerModule(module.name, module);
+      if (this.tabsList.findIndex((e) => e.parentCode === menu.parentCode) === -1) {
+        const currentModule = modulesCollection[menu.parentCode];
+        if (currentModule) {
+          this.$store.registerModule(currentModule.name, currentModule);
         }
       }
       this.updateCurrentTab(menu.uri);
@@ -170,7 +174,13 @@ export default {
   mounted() {
     this.$nextTick(() => {
       const tab = this.sublayerRoute.find((e) => e.uri === this.defaultMenu);
-      this.updateCurrentTab(tab.uri);
+      const { parentCode, uri } = tab;
+      /* 初始化有vuex子模块的，需要注册vuex模块 */
+      const currentModule = modulesCollection[parentCode];
+      if (currentModule && !this.$store.state[currentModule.name]) {
+        this.$store.registerModule(currentModule.name, currentModule);
+      }
+      this.updateCurrentTab(uri);
       this.updateTabsList(tab);
     });
   },

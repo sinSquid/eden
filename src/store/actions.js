@@ -18,10 +18,10 @@ const actions = {
           commit('setMenusList', menuRes);
           commit('setUserInfo', data);
           setUserToken(token);
-          const [first] = menuRes;
+          const [{ children: [{ uri }] }] = menuRes; // 无子项的会过滤菜单项
           store.setItem(token, data)
             .then(() => {
-              router.push({ path: first.children[0].uri });
+              router.push({ path: uri });
             });
         } else {
           commit('setGlobalMessage', { message, type: 'error' });

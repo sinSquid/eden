@@ -1,4 +1,5 @@
 import { getTimestamp } from '@/utils/date/dayjs';
+import router from '@/router';
 
 const mutations = {
   setGlobalMessage(state, payload) {
@@ -40,6 +41,7 @@ const mutations = {
       currentTab: last.uri,
       tabsList: list,
     });
+    router.push({ path: last.uri });
   },
   /**
    * @Description: 菜单设置
