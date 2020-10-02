@@ -35,6 +35,7 @@ export default {
   },
   mounted() {
     this.player = new Plyr(this.$el.firstChild, this.opts);
+    this.player.resource = this.resource;
     this.$emit('player', this.player);
     this.emit.forEach((element) => {
       this.player.on(element, this.emitPlayerEvent);
@@ -55,14 +56,20 @@ export default {
     emitPlayerEvent(event) {
       this.$emit(event.type, event);
     },
+    resource() {
+      this.player.source = this.opts.source || {};
+      this.player.restart();
+      setTimeout(() => {
+        this.player.play();
+      }, 2 * 1000);
+    },
   },
   computed: {
     opts() {
-      const { options } = this;
-      if (_.has(this.options, 'hideYouTubeDOMError')) {
-        options.hideYouTubeDOMError = true;
+      if (Object.prototype.hasOwnProperty.call(this.options, 'hideYouTubeDOMError')) {
+        return { ...this.options, hideYouTubeDOMError: true };
       }
-      return options;
+      return this.options;
     },
   },
 };

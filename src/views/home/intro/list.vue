@@ -1,14 +1,18 @@
 <template>
   <el-drawer
-    title="Plyr"
+    :with-header="false"
     :visible="drawerVisible"
-    size="50%"
-    custom-class="ui-pl-20"
+    size="370px"
+    custom-class="home-intro-plyr"
+    :modal-append-to-body="false"
+    :modal="false"
     :show-close="false"
     direction="rtl">
-    <i class="el-icon-d-arrow-right cus-icon-24"
-      @click="hideList">
-    </i>
+    <div class="ui-dis-flex">
+      <i class="el-icon-s-unfold cus-icon-24"
+        @click="hideList">
+      </i>
+    </div>
     <el-checkbox-group
       size="mini"
       text-color="#a8e0e0"
@@ -91,3 +95,20 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.home-intro-plyr {
+  margin-top: 80px;
+  padding-left: 10px;
+  padding-top: 10px;
+  background-color: #a8e0e0;
+  .el-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    .el-checkbox__label {
+      width: 120px;
+      text-align: left;
+    }
+  }
+}
+</style>

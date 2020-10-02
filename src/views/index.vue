@@ -266,6 +266,7 @@ export default {
       height: 40px;
       .el-tabs {
         height: 38px;
+        overflow: hidden;
       }
     }
     .eden-route {

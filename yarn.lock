@@ -2451,6 +2451,11 @@ core-js@^3.6.4:
   resolved "https://registry.npm.taobao.org/core-js/download/core-js-3.6.4.tgz?cache=0&sync_timestamp=1578957006406&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcore-js%2Fdownload%2Fcore-js-3.6.4.tgz#440a83536b458114b9cb2ac1580ba377dc470647"
   integrity sha1-RAqDU2tFgRS5yyrBWAujd9xHBkc=
 
+core-js@^3.6.5:
+  version "3.6.5"
+  resolved "https://registry.npm.taobao.org/core-js/download/core-js-3.6.5.tgz?cache=0&sync_timestamp=1589682726446&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcore-js%2Fdownload%2Fcore-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
+  integrity sha1-c5XcJzrzf7LlDpvT2f6EEoUjHRo=
+
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.npm.taobao.org/core-util-is/download/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -6245,15 +6250,15 @@ pkg-dir@^4.1.0:
   dependencies:
     find-up "^4.0.0"
 
-plyr@^3.5.10:
-  version "3.5.10"
-  resolved "https://registry.npm.taobao.org/plyr/download/plyr-3.5.10.tgz#631fb379135abd17ea822817db3046b484c8166c"
-  integrity sha1-Yx+zeRNavRfqgigX2zBGtITIFmw=
+plyr@^3.6.2:
+  version "3.6.2"
+  resolved "https://registry.npm.taobao.org/plyr/download/plyr-3.6.2.tgz#5a55b608acd161262de1cc75ca843aa64355a051"
+  integrity sha1-WlW2CKzRYSYt4cx1yoQ6pkNVoFE=
   dependencies:
-    core-js "^3.6.4"
+    core-js "^3.6.5"
     custom-event-polyfill "^1.0.7"
     loadjs "^4.2.0"
-    rangetouch "^2.0.0"
+    rangetouch "^2.0.1"
     url-polyfill "^1.1.8"
 
 pnp-webpack-plugin@^1.6.0:
@@ -6805,10 +6810,10 @@ range-parser@^1.2.1, range-parser@~1.2.1:
   resolved "https://registry.npm.taobao.org/range-parser/download/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
   integrity sha1-PPNwI9GZ4cJNGlW4SADC8+ZGgDE=
 
-rangetouch@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.npm.taobao.org/rangetouch/download/rangetouch-2.0.0.tgz#5459cdb38b929326c5484ab47aac9632fbe3a896"
-  integrity sha1-VFnNs4uSkybFSEq0eqyWMvvjqJY=
+rangetouch@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/rangetouch/download/rangetouch-2.0.1.tgz#c01105110fd3afca2adcb1a580692837d883cb70"
+  integrity sha1-wBEFEQ/Tr8oq3LGlgGkoN9iDy3A=
 
 raw-body@2.4.0:
   version "2.4.0"

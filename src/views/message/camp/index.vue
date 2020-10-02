@@ -1,21 +1,39 @@
 <template>
-  <el-tabs
-    tab-position="left"
-    v-model="active"
-    style="height: auto;">
-    <el-tab-pane
-      v-for="{ key, label } of tabs"
-      :key="key"
-      :name="key"
-      lazy
-      :label="label" />
-  </el-tabs>
+  <div class="ui-dis-flex">
+    <div class="camp-tabs">
+     <el-tabs
+       tab-position="left"
+       v-model="active"
+       style="height: auto;">
+       <el-tab-pane
+         v-for="{ key, label } of tabs"
+         :key="key"
+         :name="key"
+         lazy
+         :label="label" />
+     </el-tabs>
+    </div>
+    <Category v-show="active === 'category'" />
+    <Home v-show="active === 'home'" />
+    <Recall v-show="active === 'recall'" />
+    <Welfare v-show="active === 'welfare'" />
+  </div>
 </template>
 
 <script>
+import Category from './category/index.vue';
+import Home from './home/index.vue';
+import Recall from './recall/index.vue';
+import Welfare from './welfare/index.vue';
 
 export default {
   name: 'camp',
+  components: {
+    Category,
+    Home,
+    Recall,
+    Welfare,
+  },
   data() {
     return {
       listVisible: false,
@@ -35,3 +53,11 @@ export default {
   },
 };
 </script>
+
+<style lang="less">
+.camp-tabs {
+  .el-tabs__item{
+    width: 120px;
+  }
+}
+</style>
