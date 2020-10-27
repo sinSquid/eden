@@ -2,7 +2,6 @@
   <el-form
     ref="fdaSummaryDetail"
     :model="queryForm"
-    size="small"
     label-width="80px">
     <el-form-item label="检索字段" prop="search">
       <el-row type="flex" justify="start">

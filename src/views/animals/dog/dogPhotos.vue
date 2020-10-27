@@ -5,7 +5,6 @@
         <el-input-number
           v-model="volume.value"
           controls-position="right"
-          size="small"
           :min="volume.min"
           :step="volume.step"
           :max="volume.max">

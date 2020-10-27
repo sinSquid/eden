@@ -12,7 +12,6 @@
       <el-col :span="4">
         <el-button
           type="warning"
-          size="small"
           icon="el-icon-refresh"
           @click="changeType">
           change charts

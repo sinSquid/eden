@@ -2,7 +2,6 @@
   <div>
     <el-radio-group
       v-model="innerActiveTab"
-      size="small"
       class="ui-dis-flex ui-ml-20 ui-mt-10">
       <el-radio
         v-for="tab in tabs"
@@ -29,8 +28,7 @@
               {{`&lt;${pv}&gt;: ${db.meta[pv]}`}}
             </p>
             <el-button
-              slot="reference"
-              size="small">
+              slot="reference">
               {{db.label}}
             </el-button>
           </el-popover>

@@ -8,8 +8,7 @@
       </p>
       <el-table
         :data="ruleData"
-        stripe
-        size="mini">
+        stripe>
         <el-table-column
           v-for="cl of cols"
           :key="cl.key"

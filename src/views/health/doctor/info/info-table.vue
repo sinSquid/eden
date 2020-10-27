@@ -9,7 +9,6 @@
       element-loading-background="rgba(153, 169, 191, 0.1)"
       stripe
       tooltip-effect="light"
-      size="small"
       :data="displayData">
       <el-table-column
         v-for="{key, fixed, sort, label, width} of columns"

@@ -14,7 +14,7 @@ const signIn = (params) => axios.post(`/${prefix}/login`, qs.stringify(params));
 // 获取用户菜单
 const getUserMenu = (params) => axios.post(`/${prefix}/system/menu/getUserMenu`, qs.stringify(params));
 // 获取youtube视频信息
-const getAllVideoInfo = () => axios.get(`${prefix}/system/info/getAllVideoInfo`);
+const getAllVideoInfo = () => axios.post(`${prefix}/system/info/getAllVideoInfo`);
 
 export {
   signIn,

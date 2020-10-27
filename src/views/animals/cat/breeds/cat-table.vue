@@ -10,7 +10,6 @@
       stripe
       :fit="false"
       tooltip-effect="light"
-      size="small"
       @selection-change="updateSelect"
       :data="data">
       <el-table-column

@@ -3,7 +3,6 @@
     class="info-form"
     :model="ruleForm"
     ref="doctorForm"
-    size="mini"
     label-width="100px">
     <el-form-item
       v-for="key of Object.keys(ruleForm).slice(0, 4)"

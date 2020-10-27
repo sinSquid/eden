@@ -10,8 +10,7 @@
       <el-form-item label="Order" prop="order">
         <el-radio-group
           class="item-limit"
-          v-model="ruleForm.order"
-          size="mini">
+          v-model="ruleForm.order">
           <el-radio-button
             v-for="st in order"
             :key="st"
@@ -22,26 +21,22 @@
       <el-form-item label="Sub_id" prop="sub_id">
         <el-input
           class="item-limit"
-          v-model="ruleForm.sub_id"
-          size="mini">
+          v-model="ruleForm.sub_id">
         </el-input>
       </el-form-item>
       <el-form-item label="Limit" prop="limit">
         <el-input
           class="item-limit"
-          v-model="ruleForm.limit"
-          size="mini">
+          v-model="ruleForm.limit">
         </el-input>
       </el-form-item>
       <el-form-item class="ui-mt-20">
         <el-button
           type="primary"
-          size="mini"
           @click="searchImages">
           search
         </el-button>
         <el-button
-          size="mini"
           @click="resetForm">
           reset
         </el-button>
@@ -57,7 +52,6 @@
       stripe
       :fit="false"
       tooltip-effect="light"
-      size="small"
       :row-class-name="rowClassName"
       :data="data">
       <el-table-column
@@ -74,8 +68,13 @@
         label="操作"
         :width="140">
         <template slot-scope="{ row }">
-          <el-button size="mini" @click="deleteImage(row.id)">delete</el-button>
-          <i class="el-icon-data-analysis cus-icon-18 ui-ml-10" @click="analysisImage(row.id)"></i>
+          <el-button
+            @click="deleteImage(row.id)">
+            delete
+          </el-button>
+          <i
+            class="el-icon-data-analysis cus-icon-18 ui-ml-10"
+            @click="analysisImage(row.id)" />
         </template>
       </el-table-column>
     </el-table>

@@ -21,7 +21,6 @@
         width="200">
         <template slot-scope="{ row: { report_number } }">
           <el-button
-            size="mini"
             type="success"
             @click="checkDetail(report_number)">
             详情

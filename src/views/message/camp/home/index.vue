@@ -1,25 +1,43 @@
 <template>
   <el-row type="flex">
-    <el-col :span="8">
-      <swiper
-        ref="bannerSwiper"
-        class="swiper"
-        :options="swiperOptions">
-        <swiper-slide
-          v-for="banner of banners"
-          class="swiper-slide"
-          :key="banner.image">
-          <img
-            class="banner-area"
-            :src="banner.image"
-            alt="not found" />
-        </swiper-slide>
-        <div class="swiper-pagination" slot="pagination" />
-        <div class="swiper-button-prev" slot="button-prev" @click="slideMove('Prev')" />
-        <div class="swiper-button-next" slot="button-next" @click="slideMove('Next')" />
-      </swiper>
+    <el-col
+      :span="6">
+      <div class="girl-area">
+        <div class="desc-content">
+          {{girl.desc}}
+        </div>
+        <swiper
+          style="width: 322px"
+          ref="girlSwiper"
+          class="swiper"
+          :options="swiperOptions">
+          <swiper-slide
+            v-for="url of girl.images"
+            class="swiper-slide"
+            :key="url">
+            <img
+              class="girl-img"
+              loading="lazy"
+              :src="url"
+              alt="not found" />
+          </swiper-slide>
+          <div class="swiper-pagination" slot="pagination" />
+        </swiper>
+      </div>
+      <div class="ui-dis-flex__end ui-mt-10">
+        <el-button
+          class="ui-mr-20"
+          circle
+          icon="el-icon-refresh"
+          type="primary"
+          :disabled="remote"
+          @click="getRandomGirl" />
+      </div>
     </el-col>
-    <el-col :span="16">
+    <el-col :span="9">
+      123
+    </el-col>
+    <el-col :span="9">
       456
     </el-col>
   </el-row>
@@ -27,32 +45,29 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import { getBanners } from '@/apis/message/gank';
+import { getRandomData } from '@/apis/message/gank';
 import 'swiper/swiper-bundle.css';
 
 
 export default {
   name: 'message-camp-home',
-  title: 'what',
   components: {
     Swiper,
     SwiperSlide,
   },
   data() {
     return {
-      banners: [],
       swiperOptions: {
         autoplay: true,
         pagination: {
           el: '.swiper-pagination',
-          type: 'fraction',
-          clickable: true,
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
         },
       },
+      girl: {
+        desc: undefined,
+        images: [],
+      },
+      remote: false,
     };
   },
   computed: {
@@ -60,28 +75,40 @@ export default {
       return this.results[this.active] || [];
     },
     swiper() {
-      return this.$refs.bannerSwiper.$swiper;
+      return this.$refs.girlSwiper.$swiper;
     },
   },
   methods: {
-    showBanners() {
-      getBanners()
-        .then(({ data }) => {
-          this.banners = data || [];
+    getRandomGirl() {
+      this.remote = true;
+      getRandomData({ category: 'Girl', type: 'Girl', count: 1 })
+        .then((res) => {
+          const [first] = res.data || [];
+          this.girl = first;
+        })
+        .finally(() => {
+          setTimeout(() => {
+            this.remote = false;
+          }, 3000);
         });
-    },
-    slideMove(action) {
-      this.swiper[`slide${action}`]();
     },
   },
   mounted() {
-    this.showBanners();
+    this.getRandomGirl();
   },
 };
 </script>
 
 <style lang="less" scoped>
-.banner-area {
-  height: 200px;
+.girl-area {
+  display: flex;
+  flex: 1;
+  .desc-content {
+    height: 480px;
+    writing-mode: vertical-lr;
+  }
+  .girl-img {
+    height: 480px;
+  }
 }
 </style>

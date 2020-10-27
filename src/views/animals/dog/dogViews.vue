@@ -14,7 +14,6 @@
       </el-col>
       <el-col :span="4" :offset="8">
         <el-button
-          size="small"
           type="warning"
           @click="randomOnlyDog">Random</el-button>
       </el-col>

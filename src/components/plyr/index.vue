@@ -60,7 +60,9 @@ export default {
       this.player.source = this.opts.source || {};
       this.player.restart();
       setTimeout(() => {
-        this.player.play();
+        if (this.player.ready) {
+          this.player.play();
+        }
       }, 2 * 1000);
     },
   },

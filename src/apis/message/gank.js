@@ -22,8 +22,18 @@ const getArticle = (params) => axios.get(`${v2Prefix}/post${params}`);
 /* 首页banner轮播 */
 const getBanners = () => axios.get(`${v2Prefix}/banners`);
 
+/* 随机 API
+https://gank.io/api/v2/random/category/<category>/type/<type>/count/<count>
+请求方式: GET
+category 可接受参数 Article | GanHuo | Girl
+type 可接受参数 Android | iOS | Flutter | Girl，即分类API返回的类型数据
+count: [1, 50] */
+
+const getRandomData = (params) => axios.get(`${v2Prefix}/random/category/${params.category}/type/${params.type}/count/${params.count}`);
+
 export {
   getDay,
   getArticle,
   getBanners,
+  getRandomData,
 };

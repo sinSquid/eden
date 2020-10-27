@@ -14,7 +14,6 @@
             type="warning"
             plain
             class="ui-mb-20"
-            size="small"
             @click="drawCharts">
             analysis
           </el-button>

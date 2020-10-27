@@ -14,7 +14,7 @@ import '@/styles/index.less';
 window._ = lodash;
 
 Vue.config.productionTip = false;
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: 'small', zIndex: 2000 }); // 弹窗层级
 
 new Vue({
   router,

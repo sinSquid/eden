@@ -31,13 +31,16 @@
             v-for="item of menusList"
             :key="item.code"
             :index="item.code">
-            <span slot="title">{{ item.name }}</span>
+            <span slot="title">
+              <i class="el-icon-news" />
+              {{ item.name }}
+            </span>
             <el-menu-item
               v-for="ch of item.children"
               :key="ch.code"
               :index="ch.uri"
               @click="toggleMenu(ch)">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-menu" />
               <span>{{ ch.name }}</span>
             </el-menu-item>
           </el-submenu>
@@ -60,7 +63,6 @@
         </div>
         <div class="eden-route">
           <keep-alive
-            :include="includeList"
             :max="20">
             <router-view />
           </keep-alive>
@@ -89,9 +91,6 @@ export default {
     },
     moreThanOne() {
       return this.tabsList.length > 1;
-    },
-    includeList() {
-      return this.tabsList.map((e) => e.label);
     },
   },
   methods: {

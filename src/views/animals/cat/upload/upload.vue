@@ -5,7 +5,6 @@
       v-model="sub"
       placeholder="该用户分组"
       :maxlength="15"
-      size="small"
       suffix-icon="el-icon-folder-opened"
       clearable>
     </el-input>
@@ -22,10 +21,14 @@
       :headers="headers"
       :file-list="fileList"
       :auto-upload="false">
-      <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+      <el-button
+        slot="trigger"
+        type="primary">
+        选取文件
+      </el-button>
       <el-button
         class="ui-ml-20"
-        size="small" type="success"
+        type="success"
         @click="submitUpload">
         上传到服务器
       </el-button>

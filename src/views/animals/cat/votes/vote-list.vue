@@ -7,7 +7,6 @@
       show-word-limit
       class="search-btn ui-mb-40"
       clearable
-      size="medium"
       :disabled="loading"
       @keyup.enter.native="innerGetAllVotes">
     </el-input>

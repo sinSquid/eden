@@ -8,7 +8,6 @@
     :before-close="handleClose">
     <el-form
       ref="jsonForm"
-      size="mini"
       :model="json"
       class="json-form"
       label-width="auto">

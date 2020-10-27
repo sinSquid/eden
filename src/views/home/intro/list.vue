@@ -14,7 +14,6 @@
       </i>
     </div>
     <el-checkbox-group
-      size="mini"
       text-color="#a8e0e0"
       :value="browsersEnable">
       <el-checkbox
@@ -27,7 +26,6 @@
     <el-table
       max-height="300"
       stripe
-      size="small"
       :data="keyMap">
       <el-table-column
         v-for="{ key, label, width } of keysCols"
@@ -41,7 +39,6 @@
     <el-table
       max-height="300"
       stripe
-      size="small"
       :data="support">
       <el-table-column
         v-for="{ key, label, width } of supportCols"

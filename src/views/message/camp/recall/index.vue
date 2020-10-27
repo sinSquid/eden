@@ -4,7 +4,6 @@
       <el-date-picker
         v-model="date"
         type="date"
-        size="small"
         :picker-options="pickerOptions"
         :clearable="false"
         @change="getToday"
@@ -24,7 +23,6 @@
     <el-table
       max-height="640"
       stripe
-      size="small"
       border
       :fit="false"
       ref="todayTable"
@@ -45,7 +43,6 @@
         width="160">
         <template slot-scope="{ row: { url, forbidJump } }">
           <el-button
-            size="mini"
             type="primary"
             :disabled="forbidJump"
             @click="jumpSource(url)">

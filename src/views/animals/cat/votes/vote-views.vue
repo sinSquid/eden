@@ -10,7 +10,6 @@
         <el-select
           class="item-limit"
           v-model="ruleForm.size"
-          size="mini"
           placeholder="请选择图片尺寸">
           <el-option
             v-for="sz in size"
@@ -24,7 +23,7 @@
         <el-radio-group
           class="item-limit"
           v-model="ruleForm.sort"
-          size="mini">
+          >
           <el-radio-button
             v-for="st in sort"
             :key="st"
@@ -36,18 +35,16 @@
         <el-input
           class="item-limit"
           v-model="ruleForm.limit"
-          size="mini">
+          >
         </el-input>
       </el-form-item>
       <el-form-item class="ui-mt-20">
         <el-button
           type="primary"
-          size="mini"
           @click="searchImages">
           search
         </el-button>
         <el-button
-          size="mini"
           @click="resetForm">
           reset
         </el-button>
@@ -57,7 +54,6 @@
       <i class="sub-icon icon el-icon-folder" @click="lockSub"></i>
       <el-input
         class="sub-btn ui-ml-10"
-        size="mini"
         :maxlength="12"
         v-model="sub.id"
         :disabled="sub.lock"
@@ -80,7 +76,6 @@
       stripe
       :fit="false"
       tooltip-effect="light"
-      size="small"
       @expand-change="loadImage"
       :data="data">
       <el-table-column

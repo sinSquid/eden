@@ -13,14 +13,12 @@
     <el-button
       type="primary"
       class="ui-dis-flex ui-ml-10 ui-mt-10"
-      size="medium"
       @click="innerGetDownList">
       查询下载列表
     </el-button>
     <el-table
       height="480"
       stripe
-      size="small"
       border
       show-summary
       :fit="false"
@@ -45,7 +43,6 @@
         width="160">
         <template slot-scope="{ row: { size_mb, file } }">
           <el-button
-            size="mini"
             type="primary"
             @click="downFile(size_mb, file)">
             下载

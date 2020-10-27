@@ -7,7 +7,6 @@
       show-word-limit
       class="search-btn ui-mb-40"
       clearable
-      size="medium"
       :disabled="loading"
       @keyup.enter.native="innerGetFavourites">
     </el-input>
@@ -18,11 +17,9 @@
         :max="10"
         :type="bd.type"
         class="ui-mr-20"
-        size="small"
         effect="plain"
         :value="bd.len">
         <el-button
-          size="small"
           :type="bd.type"
           icon="el-icon-folder-opened">
           {{ bd.label }}
@@ -47,7 +44,6 @@
           <el-button
             class="ui-ml-10"
             type="text"
-            size="mini"
             v-if="data.isLeaf"
             @click="removeNode(node, data)">
             Delete
