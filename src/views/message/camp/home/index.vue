@@ -15,11 +15,15 @@
             v-for="url of girl.images"
             class="swiper-slide"
             :key="url">
-            <img
+            <!--<el-image
               class="girl-img"
-              loading="lazy"
+              lazy
               :src="url"
-              alt="not found" />
+              alt="not found">
+              <div slot="error">
+                <i class="el-icon-picture-outline" />
+              </div>
+            </el-image>-->
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination" />
         </swiper>
@@ -34,8 +38,27 @@
           @click="getRandomGirl" />
       </div>
     </el-col>
-    <el-col :span="9">
-      123
+    <el-col
+      class="week-hot"
+      :span="9">
+      <div class="ui-dis-flex">
+        <el-radio-group v-model="week.hotType">
+          <el-radio
+            v-for="{ key, label } of hotType"
+            :key="key"
+            :label="key">
+            {{`${key}${label}`}}
+          </el-radio>
+        </el-radio-group>
+      </div>
+      <div class="ui-dis-flex">
+        <el-radio-group v-model="week.category ">
+          <el-radio
+            v-for="category of hotCategory"
+            :key="category"
+            :label="category" />
+        </el-radio-group>
+      </div>
     </el-col>
     <el-col :span="9">
       456
@@ -45,7 +68,8 @@
 
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import { getRandomData } from '@/apis/message/gank';
+import { getRandomData, getHotData } from '@/apis/message/gank';
+import { hotType, hotCategory } from '@/views/message/camp/lib/data';
 import 'swiper/swiper-bundle.css';
 
 
@@ -57,6 +81,8 @@ export default {
   },
   data() {
     return {
+      hotType,
+      hotCategory,
       swiperOptions: {
         autoplay: true,
         pagination: {
@@ -66,6 +92,11 @@ export default {
       girl: {
         desc: undefined,
         images: [],
+      },
+      week: {
+        hotType: undefined,
+        category: undefined,
+        count: undefined,
       },
       remote: false,
     };
@@ -92,6 +123,12 @@ export default {
           }, 3000);
         });
     },
+    getWeekHot() {
+      getHotData(...this.week)
+        .then(() => {
+
+        });
+    },
   },
   mounted() {
     this.getRandomGirl();
@@ -109,6 +146,19 @@ export default {
   }
   .girl-img {
     height: 480px;
+  }
+}
+</style>
+
+<style lang="less">
+.week-hot {
+  .el-radio-group {
+    margin: 10px 0;
+    .el-radio {
+      margin-left: 0;
+      width: 160px;
+      text-align: left;
+    }
   }
 }
 </style>

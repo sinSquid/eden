@@ -66,9 +66,19 @@ const detail = {
   drug: drugCols,
 };
 
+const hotType = [
+  { key: 'views', label: '(浏览数)' },
+  { key: 'likes', label: '(点赞数)' },
+  { key: 'comments', label: '(评论数)' },
+];
+
+const hotCategory = ['Article', 'GanHuo', 'Girl'];
+
 export {
   ruleData,
   examples,
   detail,
   todayCols,
+  hotType,
+  hotCategory,
 };

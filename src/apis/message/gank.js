@@ -28,12 +28,20 @@ https://gank.io/api/v2/random/category/<category>/type/<type>/count/<count>
 category 可接受参数 Article | GanHuo | Girl
 type 可接受参数 Android | iOS | Flutter | Girl，即分类API返回的类型数据
 count: [1, 50] */
-
 const getRandomData = (params) => axios.get(`${v2Prefix}/random/category/${params.category}/type/${params.type}/count/${params.count}`);
+
+/* 本周最热 API GET
+https://gank.io/api/v2/hot/<hot_type>/category/<category>/count/<count>
+hot_type 可接受参数 views（浏览数） | likes（点赞数） | comments（评论数）❌
+category 可接受参数 Article | GanHuo | Girl
+count: [1, 20] */
+
+const getHotData = (params) => axios.get(`https://gank.io/api/v2/hot/${params.hotType}/category/${params.category}/count/${params.count}`);
 
 export {
   getDay,
   getArticle,
   getBanners,
   getRandomData,
+  getHotData,
 };
