@@ -120,7 +120,7 @@ export default {
     },
   },
   mounted() {
-    this.getToday();
+    // this.getToday();
   },
 };
 </script>

@@ -6,7 +6,7 @@
       <div
         class="plyr__video-embed"
         id="player"
-        style="width: 1420px;">
+        style="width: 1480px;">
         <iframe
           :src="`https://www.youtube.com/embed/${url}`"
           allowfullscreen
@@ -23,15 +23,16 @@
         </i>
         <span>more for plyr, open it!</span>
       </div>
-      <div class="recommend-list">
+      <div :class="['recommend-list', loading ? 'forbidden' : '']">
         <div
           v-for="{ id, uri, unique, play } of infoList"
           :key="id"
         >
-          <img
-            width="168px"
+          <el-image
+            style="width: 100%;"
             :src="uri"
-            :class="loading ? 'forbidden' : ''"
+            fit="fill"
+            lazy
             @click="changeVideo(unique)"
             alt="not found" />
           <span class="play-volume">
@@ -140,16 +141,16 @@ export default {
       max-height: 760px;
       overflow-y: auto;
       text-align: left;
-      img {
+      .el-image {
         cursor: pointer;
-        &.forbidden {
-          user-select: none;
-          filter: grayscale(1);
-          background: #ccc;
-          pointer-events: none;
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
+      }
+      &.forbidden {
+        user-select: none;
+        filter: grayscale(1);
+        background: #ccc;
+        pointer-events: none;
+        opacity: 0.6;
+        cursor: not-allowed;
       }
       .play-volume {
         margin-left: 10px;

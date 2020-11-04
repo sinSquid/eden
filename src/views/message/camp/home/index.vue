@@ -15,7 +15,7 @@
             v-for="url of girl.images"
             class="swiper-slide"
             :key="url">
-            <!--<el-image
+            <el-image
               class="girl-img"
               lazy
               :src="url"
@@ -23,7 +23,7 @@
               <div slot="error">
                 <i class="el-icon-picture-outline" />
               </div>
-            </el-image>-->
+            </el-image>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination" />
         </swiper>
@@ -40,9 +40,11 @@
     </el-col>
     <el-col
       class="week-hot"
-      :span="9">
+      :span="12">
       <div class="ui-dis-flex">
-        <el-radio-group v-model="week.hotType">
+        <el-radio-group
+          @change="getWeekHot"
+          v-model="week.hotType">
           <el-radio
             v-for="{ key, label } of hotType"
             :key="key"
@@ -52,16 +54,46 @@
         </el-radio-group>
       </div>
       <div class="ui-dis-flex">
-        <el-radio-group v-model="week.category ">
+        <el-radio-group
+          @change="getWeekHot"
+          v-model="week.category ">
           <el-radio
             v-for="category of hotCategory"
             :key="category"
             :label="category" />
         </el-radio-group>
       </div>
+      <el-table
+        :data="hotWeekData"
+        tooltip-effect="dark"
+        max-height="480px"
+        style="width: 100%;">
+        <el-table-column
+          v-for="{key, label, width, ellipsis} of hotWeekColumns"
+          :key="key"
+          :prop="key"
+          :label="label"
+          :width="width"
+          :show-overflow-tooltip="ellipsis"
+        />
+        <el-table-column
+          label="查看详情"
+          fixed="right"
+          width="120">
+          <template slot-scope="{ row }">
+            <el-button
+              :disabled="!row.url"
+              @click="jumpToDetail(row)">
+              跳转
+            </el-button>
+          </template>
+        </el-table-column>
+      </el-table>
     </el-col>
-    <el-col :span="9">
-      456
+    <el-col
+      class="search-area"
+      :span="6">
+      123
     </el-col>
   </el-row>
 </template>
@@ -69,7 +101,9 @@
 <script>
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import { getRandomData, getHotData } from '@/apis/message/gank';
-import { hotType, hotCategory } from '@/views/message/camp/lib/data';
+import {
+  hotType, hotCategory, hotWeekColumns, searchCategory,
+} from '@/views/message/camp/lib/data';
 import 'swiper/swiper-bundle.css';
 
 
@@ -83,6 +117,8 @@ export default {
     return {
       hotType,
       hotCategory,
+      hotWeekColumns,
+      searchCategory,
       swiperOptions: {
         autoplay: true,
         pagination: {
@@ -94,10 +130,11 @@ export default {
         images: [],
       },
       week: {
-        hotType: undefined,
-        category: undefined,
-        count: undefined,
+        hotType: 'views',
+        category: 'Article',
+        count: 20,
       },
+      hotWeekData: [],
       remote: false,
     };
   },
@@ -124,14 +161,27 @@ export default {
         });
     },
     getWeekHot() {
-      getHotData(...this.week)
-        .then(() => {
-
+      getHotData({ ...this.week })
+        .then((res) => {
+          this.hotWeekData = res.data || [];
         });
+    },
+    jumpToDetail(row) {
+      this.$confirm('此操作将离开eden，请确保网络安全', 'next', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        iconClass: 'el-icon-warning',
+        closeOnClickModal: false,
+      })
+        .then(() => {
+          window.open(row.url, 'blank');
+        })
+        .catch(() => {});
     },
   },
   mounted() {
     this.getRandomGirl();
+    this.getWeekHot();
   },
 };
 </script>
@@ -148,12 +198,15 @@ export default {
     height: 480px;
   }
 }
+.search-area {
+  margin-left: 10px;
+}
 </style>
 
 <style lang="less">
 .week-hot {
   .el-radio-group {
-    margin: 10px 0;
+    margin: 5px 0;
     .el-radio {
       margin-left: 0;
       width: 160px;

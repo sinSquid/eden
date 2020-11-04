@@ -74,6 +74,20 @@ const hotType = [
 
 const hotCategory = ['Article', 'GanHuo', 'Girl'];
 
+const hotWeekColumns = [
+  {
+    key: 'title', label: '标题', width: 140, ellipsis: true,
+  },
+  {
+    key: 'desc', label: '简述', width: 200, ellipsis: true,
+  },
+  { key: 'author', label: '作者', width: 120 },
+  { key: 'views', label: '浏览量', width: 100 },
+  { key: 'publishedAt', label: '发布时间', width: 140 },
+];
+
+const searchCategory = ['All', 'Article', 'GanHuo'];
+
 export {
   ruleData,
   examples,
@@ -81,4 +95,6 @@ export {
   todayCols,
   hotType,
   hotCategory,
+  hotWeekColumns,
+  searchCategory,
 };

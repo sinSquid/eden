@@ -10,6 +10,7 @@ import '@/lib/server/permission';
 
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/styles/index.less';
+import '@/styles/override.less';
 
 window._ = lodash;
 
