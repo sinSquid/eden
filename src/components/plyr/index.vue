@@ -1,6 +1,9 @@
 <template>
-  <div>
-    <slot/>
+  <div class="container">
+    <div
+      id="eden-player"
+      data-plyr-provider="youtube"
+      :data-plyr-embed-id="embedId" />
   </div>
 </template>
 
@@ -33,8 +36,36 @@ export default {
       player: {},
     };
   },
+  computed: {
+    opts() {
+      if (Object.prototype.hasOwnProperty.call(this.options, 'hideYouTubeDOMError')) {
+        return { ...this.options, hideYouTubeDOMError: true };
+      }
+      return this.options;
+    },
+    embedId() {
+      if (this.options.source.sources.length) {
+        return this.options.source.sources[0].src;
+      }
+      return 'IgcYZhmp_DA';
+    },
+  },
+  methods: {
+    emitPlayerEvent(event) {
+      this.$emit(event.type, event);
+    },
+    resource() {
+      this.player.source = this.opts.source || {};
+      this.player.restart();
+      setTimeout(() => {
+        if (this.player.ready) {
+          this.player.play();
+        }
+      }, 2 * 1000);
+    },
+  },
   mounted() {
-    this.player = new Plyr(this.$el.firstChild, this.opts);
+    this.player = new Plyr('#eden-player', this.opts);
     this.player.resource = this.resource;
     this.$emit('player', this.player);
     this.emit.forEach((element) => {
@@ -51,28 +82,6 @@ export default {
         this.player.restart();
       }
     }
-  },
-  methods: {
-    emitPlayerEvent(event) {
-      this.$emit(event.type, event);
-    },
-    resource() {
-      this.player.source = this.opts.source || {};
-      this.player.restart();
-      setTimeout(() => {
-        if (this.player.ready) {
-          this.player.play();
-        }
-      }, 2 * 1000);
-    },
-  },
-  computed: {
-    opts() {
-      if (Object.prototype.hasOwnProperty.call(this.options, 'hideYouTubeDOMError')) {
-        return { ...this.options, hideYouTubeDOMError: true };
-      }
-      return this.options;
-    },
   },
 };
 </script>

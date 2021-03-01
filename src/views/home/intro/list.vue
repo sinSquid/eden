@@ -41,7 +41,8 @@
       stripe
       :data="support">
       <el-table-column
-        v-for="{ key, label, width } of supportCols"
+        v-for="{ key, label, width, fixed } of supportCols"
+        :fixed="fixed"
         :key="key"
         :prop="key"
         :label="label"

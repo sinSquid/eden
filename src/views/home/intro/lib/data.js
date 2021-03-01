@@ -4,9 +4,11 @@ const keysCols = [
 ];
 
 const supportCols = [
-  { key: 'type', label: 'Type', width: 100 },
+  {
+    key: 'type', label: 'Type', width: 100, fixed: 'left',
+  },
   { key: 'maintainer', label: 'Maintainer', width: 160 },
-  { key: 'link', label: 'Link', width: 320 },
+  { key: 'link', label: 'Link', width: 260 },
 ];
 
 const browsers = [

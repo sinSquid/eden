@@ -1,20 +1,9 @@
 <template>
   <div class="home-frame">
     <Plyr
+      class="video"
       :options="options"
-      ref="plyr">
-      <div
-        class="plyr__video-embed"
-        id="player"
-        style="width: 1480px;">
-        <iframe
-          :src="`https://www.youtube.com/embed/${url}`"
-          allowfullscreen
-          allowtransparency
-          allow="autoplay">
-        </iframe>
-      </div>
-    </Plyr>
+      ref="plyr" />
     <div class="intro">
       <div class="info-plyr">
         <i
@@ -77,6 +66,7 @@ export default {
             {
               src: this.url,
               provider: 'youtube',
+              size: 1080,
             },
           ],
         },
@@ -122,12 +112,17 @@ export default {
 <style lang="less" scoped>
 .home-frame {
   display: flex;
-  flex: 1;
   margin-top: 10px;
   margin-left: 10px;
+  .video {
+    flex-grow: 1;
+    flex-shrink: 0;
+  }
   .intro {
     margin-left: 20px;
-    width: 100%;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: 240px;
     .info-plyr {
       display: flex;
       flex: 1;
@@ -138,7 +133,7 @@ export default {
       }
     }
     .recommend-list {
-      max-height: 760px;
+      max-height: 85vh;
       overflow-y: auto;
       text-align: left;
       .el-image {

@@ -34,14 +34,14 @@ const mutations = {
    * @date: 2020/9/11
    */
   removeCurrentTab(state, payload) {
-    const { tabsList } = state;
+    const { tabsList, currentTab } = state;
     const list = tabsList.filter((e) => e.uri !== payload);
-    const [last] = [...list].reverse();
-    Object.assign(state, {
-      currentTab: last.uri,
-      tabsList: list,
-    });
-    router.push({ path: last.uri });
+    const [{ uri: lastUri }] = [...list].reverse();
+    state.tabsList = list;
+    if (currentTab !== lastUri) {
+      state.currentTab = lastUri;
+      router.push({ path: lastUri });
+    }
   },
   /**
    * @Description: 菜单设置

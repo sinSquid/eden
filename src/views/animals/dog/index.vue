@@ -58,7 +58,6 @@ export default {
   },
   methods: {
     ...mapActions('moduleAnimals/dog', ['getListBreeds']),
-
   },
   created() {
     this.getListBreeds();
